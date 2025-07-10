@@ -32,14 +32,33 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">About This Microsite</h2>
-              <button
-                onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-400" />
-              </button>
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-2xl font-bold text-white">About This Microsite</h2>
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-400" />
+                </button>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium">
+                  <Package className="w-4 h-4" />
+                  Version 1.1.2
+                </span>
+                <span className="text-sm text-gray-500">Released January 10, 2025</span>
+              </div>
+            </div>
+
+            {/* Latest Changes */}
+            <div className="mb-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
+              <h4 className="text-sm font-semibold text-blue-400 mb-2">Latest Changes in v1.1.2</h4>
+              <ul className="text-xs text-gray-300 space-y-1">
+                <li>• Copy format selection: Choose between rich text or markdown</li>
+                <li>• Fixed duplicate title display issue</li>
+                <li>• Enhanced copy notifications with color coding</li>
+              </ul>
             </div>
 
             {/* Developer Info */}

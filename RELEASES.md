@@ -139,6 +139,12 @@
   - Smooth animations and backdrop blur effects
   - Color-coded notifications (green for rich text, blue for markdown)
 
+- **Version Display in About Modal**:
+  - Current version prominently displayed at the top
+  - Version badge with package icon
+  - Latest changes summary section
+  - Quick access to full release notes
+
 ### Bug Fixes
 - **Removed Duplicate Title**: Fixed issue where the document title appeared twice at the top
 
@@ -149,6 +155,11 @@
   - Descriptive text explaining each format
   - Close button and click-outside-to-close functionality
   - Responsive design for mobile devices
+
+- **Release Notes Enhancements**:
+  - Current version marked with "CURRENT" badge
+  - Better visual hierarchy for version information
+  - Consistent styling across modals
 
 ### Technical Improvements
 - Uses document.execCommand for rich text copying

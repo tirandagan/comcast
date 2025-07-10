@@ -10,6 +10,59 @@ interface ReleaseNotesModalProps {
 
 const releaseNotes = [
   {
+    version: '1.1.2',
+    date: 'January 10, 2025',
+    title: 'Copy Options Enhancement',
+    current: true,
+    sections: [
+      {
+        title: 'New Features',
+        icon: <Star className="w-5 h-5" />,
+        color: 'text-yellow-400',
+        items: [
+          'Copy Format Selection Modal: Choose between rich text and markdown',
+          'Beautiful overlay dialog with smooth animations',
+          'Color-coded notifications for different copy actions'
+        ]
+      },
+      {
+        title: 'Bug Fixes',
+        icon: <Bug className="w-5 h-5" />,
+        color: 'text-green-400',
+        items: [
+          'Fixed duplicate title display issue'
+        ]
+      }
+    ]
+  },
+  {
+    version: '1.1.1',
+    date: 'January 10, 2025',
+    title: 'mdtohtml Enhancements',
+    sections: [
+      {
+        title: 'New Features',
+        icon: <Star className="w-5 h-5" />,
+        color: 'text-yellow-400',
+        items: [
+          'Advanced Search: Real-time highlighting with navigation controls',
+          'Floating Action Buttons: Semi-transparent Print and Copy buttons',
+          'Search navigation with match counter and keyboard shortcuts'
+        ]
+      },
+      {
+        title: 'Improvements',
+        icon: <Zap className="w-5 h-5" />,
+        color: 'text-blue-400',
+        items: [
+          'Fixed dark theme styling issues',
+          'Improved content width and readability',
+          'Enhanced search performance'
+        ]
+      }
+    ]
+  },
+  {
     version: '1.1.0',
     date: 'January 10, 2025',
     title: 'Enhancements & Fixes',
@@ -148,6 +201,11 @@ export function ReleaseNotesModal({ isOpen, onClose }: ReleaseNotesModalProps) {
                       <span className="text-2xl font-bold text-white">
                         Version {release.version}
                       </span>
+                      {release.current && (
+                        <span className="text-sm bg-blue-500 text-white px-3 py-1 rounded-full font-medium">
+                          CURRENT
+                        </span>
+                      )}
                       <span className="text-sm text-gray-400 bg-white/10 px-3 py-1 rounded-full">
                         {release.date}
                       </span>
