@@ -133,6 +133,14 @@ export async function GET(request: NextRequest) {
     }
     
     // Return HTML response for better UX
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    // Ensure the URL has a protocol
+    const fullBaseUrl = baseUrl.startsWith('http') ? baseUrl : `https://${baseUrl}`;
+    const dashboardUrl = `${fullBaseUrl.replace(/\/$/, '')}/admin/dashboard`;
+    console.log('Base URL:', baseUrl);
+    console.log('Full Base URL:', fullBaseUrl);
+    console.log('Dashboard URL:', dashboardUrl);
+    
     const html = `
       <!DOCTYPE html>
       <html lang="en">
@@ -195,7 +203,7 @@ export async function GET(request: NextRequest) {
                 ? 'They have been sent a welcome email with a magic link to sign in.' 
                 : 'They have been notified of the decision.'}
             </p>
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/admin/dashboard">Go to Admin Dashboard</a>
+            <a href="${dashboardUrl}">Go to Admin Dashboard</a>
           </div>
         </body>
       </html>
