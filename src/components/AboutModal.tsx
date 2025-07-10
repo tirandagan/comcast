@@ -139,6 +139,13 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
                     <p className="text-xs text-gray-400">AI Development</p>
                   </div>
                 </div>
+                <div className="flex items-center gap-2 bg-white/5 rounded-lg p-3">
+                  <Code className="w-5 h-5 text-indigo-400" />
+                  <div>
+                    <p className="text-sm font-medium text-white">Cursor IDE</p>
+                    <p className="text-xs text-gray-400">AI-Powered Editor</p>
+                  </div>
+                </div>
               </div>
             </div>
 
