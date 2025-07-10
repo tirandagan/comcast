@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { ArrowLeft, Mail, Lock, Loader2, CheckCircle, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // Dynamic schema based on email
 const createSigninSchema = (isAdmin: boolean) => {
@@ -30,6 +30,40 @@ export default function SignInPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Handle error messages from URL parameters
+  useEffect(() => {
+    const error = searchParams.get('error');
+    if (error) {
+      let errorMessage = 'An error occurred. Please try again.';
+      
+      switch (error) {
+        case 'token-expired':
+          errorMessage = 'Your sign-in link has expired. Please request a new one.';
+          break;
+        case 'malformed-token':
+          errorMessage = 'Invalid sign-in link. Please request a new one.';
+          break;
+        case 'invalid-token':
+          errorMessage = 'Invalid or expired sign-in link. Please request a new one.';
+          break;
+        case 'missing-token':
+          errorMessage = 'No sign-in link provided. Please enter your email below.';
+          break;
+        case 'verification-failed':
+          errorMessage = 'Verification failed. Please try signing in again.';
+          break;
+      }
+      
+      toast.error(errorMessage);
+      
+      // Remove error from URL
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('error');
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+  }, [searchParams]);
   
   const {
     register,

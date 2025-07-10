@@ -18,6 +18,12 @@ export async function GET(request: NextRequest) {
     const token = searchParams.get('token');
     console.log('Token received:', token ? 'yes' : 'no');
     
+    // Log token details for debugging (only first/last few chars for security)
+    if (token && process.env.NODE_ENV === 'development') {
+      console.log('Token preview:', `${token.substring(0, 20)}...${token.substring(token.length - 10)}`);
+      console.log('Token length:', token.length);
+    }
+    
     if (!token) {
       const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
       const redirectUrl = new URL('/signin?error=missing-token', baseUrl);
@@ -37,10 +43,19 @@ export async function GET(request: NextRequest) {
         email: string;
         type?: string;
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('JWT verification error:', error);
       const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
-      const redirectUrl = new URL('/signin?error=invalid-token', baseUrl);
+      
+      // Provide more specific error messages
+      let errorParam = 'invalid-token';
+      if (error.name === 'TokenExpiredError') {
+        errorParam = 'token-expired';
+      } else if (error.name === 'JsonWebTokenError' && error.message === 'jwt malformed') {
+        errorParam = 'malformed-token';
+      }
+      
+      const redirectUrl = new URL(`/signin?error=${errorParam}`, baseUrl);
       return NextResponse.redirect(redirectUrl);
     }
     

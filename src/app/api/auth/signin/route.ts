@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '15m' }
+      { expiresIn: '30m' } // Increased to 30 minutes for better user experience
     );
     
     // Update the verification token in database
