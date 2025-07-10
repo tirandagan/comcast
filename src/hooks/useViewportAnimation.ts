@@ -12,7 +12,6 @@ export function useViewportAnimation(options: UseViewportAnimationOptions = {}) 
   const [hasAnimated, setHasAnimated] = useState(false);
   const isInView = useInView(ref, {
     amount: options.threshold || 0.3,
-    margin: options.rootMargin || "0px",
   });
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export const animationVariants = {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" as const }
     }
   },
   
@@ -51,7 +50,7 @@ export const animationVariants = {
     visible: { 
       opacity: 1, 
       scale: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.5, ease: "easeOut" as const }
     }
   },
   

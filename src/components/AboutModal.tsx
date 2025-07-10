@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Code, Database, Cloud, Sparkles, Package, Shield } from 'lucide-react';
+import { X, Code, Database, Cloud, Sparkles, Package, Shield, FileText } from 'lucide-react';
+import { ReleaseNotesModal } from './ReleaseNotesModal';
 
 interface AboutModalProps {
   isOpen: boolean;
@@ -9,8 +11,11 @@ interface AboutModalProps {
 }
 
 export function AboutModal({ isOpen, onClose }: AboutModalProps) {
+  const [releaseNotesOpen, setReleaseNotesOpen] = useState(false);
+  
   return (
-    <AnimatePresence>
+    <>
+      <AnimatePresence>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -120,6 +125,17 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
               </p>
             </div>
 
+            {/* Release Notes Button */}
+            <div className="mb-6">
+              <button
+                onClick={() => setReleaseNotesOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                <FileText className="w-5 h-5" />
+                View Release Notes
+              </button>
+            </div>
+
             {/* Footer */}
             <div className="text-center">
               <p className="text-xs text-gray-500">
@@ -129,6 +145,10 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+      </AnimatePresence>
+      
+      {/* Release Notes Modal */}
+      <ReleaseNotesModal isOpen={releaseNotesOpen} onClose={() => setReleaseNotesOpen(false)} />
+    </>
   );
 }

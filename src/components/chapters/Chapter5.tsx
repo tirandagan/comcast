@@ -361,16 +361,14 @@ export function Chapter5() {
               ))}
             </div>
           </motion.div>
-        )}
 
-        {activeView === 'talent' && (
-          <motion.div
-            key="talent"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+        <motion.div
+          style={{ display: activeView === 'talent' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* Talent Strategy Overview */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
               <h3 className="text-2xl font-bold text-white mb-6">Revenue-Focused Talent Strategy</h3>
@@ -475,16 +473,14 @@ export function Chapter5() {
               </ResponsiveContainer>
             </div>
           </motion.div>
-        )}
 
-        {activeView === 'culture' && (
-          <motion.div
-            key="culture"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+        <motion.div
+          style={{ display: activeView === 'culture' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* Cultural Transformation Roadmap */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
               <h3 className="text-2xl font-bold text-white mb-6">Cultural Transformation Journey</h3>
@@ -561,16 +557,14 @@ export function Chapter5() {
               </motion.div>
             </div>
           </motion.div>
-        )}
 
-        {activeView === 'metrics' && (
-          <motion.div
-            key="metrics"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+        <motion.div
+          style={{ display: activeView === 'metrics' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* Success Metrics Dashboard */}
             {successMetricsData.map((category, catIndex) => (
               <div key={category.category} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
@@ -599,7 +593,6 @@ export function Chapter5() {
               </div>
             ))}
           </motion.div>
-        )}
       </div>
 
       {/* Bottom CTA */}
