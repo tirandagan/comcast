@@ -1,7 +1,7 @@
 {
-  "name": "sutherland",
+  "name": "comcast-ai-vision",
   "version": "1.0.0",
-  "description": "",
+  "description": "Comcast Data & AI Leadership Vision Microsite",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -19,15 +19,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tirandagan/sutherland.git"
+    "url": "git+https://github.com/tirandagan/comcast.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["comcast", "ai", "data", "leadership", "vision"],
+  "author": "Tiran Dagan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tirandagan/sutherland/issues"
+    "url": "https://github.com/tirandagan/comcast/issues"
   },
-  "homepage": "https://github.com/tirandagan/sutherland#readme",
+  "homepage": "https://github.com/tirandagan/comcast#readme",
   "dependencies": {
     "@fullstory/browser": "^2.0.6",
     "@headlessui/react": "^2.2.4",

@@ -20,7 +20,7 @@ export interface Section {
 }
 
 export function parseReport(): Chapter[] {
-  const reportPath = path.join(process.cwd(), 'design/sutherland_report.md');
+  const reportPath = path.join(process.cwd(), 'design/comcast_ai_report.md');
   const reportContent = fs.readFileSync(reportPath, 'utf-8');
   
   // Split content by main chapter headers
@@ -31,18 +31,12 @@ export function parseReport(): Chapter[] {
   // Define the main chapters based on the table of contents
   const chapterTitles = [
     'Executive Summary',
-    'Chapter 1: Company Overview and Current Landscape',
-    'Chapter 2: SWOT Analysis for Innovation',
-    'Chapter 3: Competitive Landscape - AI Innovation Gaps',
-    'Chapter 4: Industry Vertical Deep-Dive',
-    'Chapter 5: The ISG Model Applied to Sutherland',
-    'Chapter 6: AI Rapid Prototyping Framework',
-    'Chapter 7: Strategic Implementation Roadmap',
-    'Chapter 8: Partnership Ecosystem Strategy',
-    'Chapter 9: The Role and Impact',
-    'Chapter 10: Success Metrics and KPIs',
-    'Conclusion: The Path Forward',
-    'Appendices'
+    'Chapter 1: Data & AI at Comcast - Current State and Vision',
+    'Chapter 2: Data & AI Maturity Assessment',
+    'Chapter 3: Strategic Data Platform Architecture',
+    'Chapter 4: AI Innovation Portfolio & Roadmap',
+    'Chapter 5: Building the AI-First Organization',
+    'Chapter 6: Implementation Strategy & Quick Wins'
   ];
   
   let currentChapterIndex = -1;

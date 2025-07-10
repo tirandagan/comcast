@@ -6,7 +6,6 @@ import { Menu, X, ChevronRight, Home, LogOut, Book } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { reportChapters } from '@/lib/report-data';
-import { AnalyticsDebug } from '@/components/analytics/AnalyticsDebug';
 
 export default function ReportLayout({
   children,
@@ -74,7 +73,7 @@ export default function ReportLayout({
               </span>
             )}
             <a
-              href="/design/comcast_ai_report.md"
+              href="/comcast_ai_report.html"
               target="comcast_report_window"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -183,8 +182,6 @@ export default function ReportLayout({
         </div>
       </main>
       
-      {/* Analytics Debug - Remove in production */}
-      {process.env.NODE_ENV === 'development' && <AnalyticsDebug />}
     </div>
   );
 }
