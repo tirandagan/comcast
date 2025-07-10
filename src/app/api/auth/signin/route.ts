@@ -122,7 +122,9 @@ export async function POST(request: NextRequest) {
     });
     
     // Send magic link email
-    const magicLink = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/auth/verify?token=${token}`;
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    const fullBaseUrl = baseUrl.startsWith('http') ? baseUrl : `https://${baseUrl}`;
+    const magicLink = `${fullBaseUrl}/api/auth/verify?token=${token}`;
     
     
     // Send the magic link email

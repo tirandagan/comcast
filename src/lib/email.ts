@@ -4,7 +4,12 @@ const EMAIL_ENABLED = process.env.ENABLE_EMAIL_NOTIFICATIONS?.replace(/['"]/g, '
 // Helper function to get the base URL
 function getBaseUrl() {
   // Use NEXT_PUBLIC_APP_URL which works in both client and server
-  return process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const url = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  // Ensure URL has protocol
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return `https://${url}`;
 }
 
 // Create reusable transporter

@@ -3,6 +3,14 @@ import { prisma } from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
+// Helper function to ensure URL has protocol
+function getBaseUrl(url: string): string {
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  return `https://${url}`;
+}
+
 export async function GET(request: NextRequest) {
   console.log('Magic link verification started');
   try {
@@ -11,7 +19,8 @@ export async function GET(request: NextRequest) {
     console.log('Token received:', token ? 'yes' : 'no');
     
     if (!token) {
-      const redirectUrl = new URL('/signin?error=missing-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
+      const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+      const redirectUrl = new URL('/signin?error=missing-token', baseUrl);
       return NextResponse.redirect(redirectUrl);
     }
     
@@ -30,7 +39,8 @@ export async function GET(request: NextRequest) {
       };
     } catch (error) {
       console.error('JWT verification error:', error);
-      const redirectUrl = new URL('/signin?error=invalid-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
+      const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+      const redirectUrl = new URL('/signin?error=invalid-token', baseUrl);
       return NextResponse.redirect(redirectUrl);
     }
     
@@ -41,6 +51,7 @@ export async function GET(request: NextRequest) {
     
     try {
       if (decoded.type === 'approval') {
+      console.log('Processing approval token');
       // For approval tokens, just verify the user exists and is approved
       user = await prisma.user.findFirst({
         where: { 
@@ -50,8 +61,21 @@ export async function GET(request: NextRequest) {
         },
       });
       
+      console.log('Approval token user lookup result:', user ? 'found' : 'not found');
+      
       if (!user) {
-        const redirectUrl = new URL('/signin?error=invalid-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
+        // Check why user wasn't found
+        const userCheck = await prisma.user.findUnique({
+          where: { id: decoded.userId }
+        });
+        console.log('User debug info:', userCheck ? {
+          id: userCheck.id,
+          email: userCheck.email,
+          registrationStatus: userCheck.registrationStatus
+        } : 'User not found at all');
+        
+        const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+        const redirectUrl = new URL('/signin?error=invalid-token', baseUrl);
         return NextResponse.redirect(redirectUrl);
       }
     } else {
@@ -71,7 +95,8 @@ export async function GET(request: NextRequest) {
         });
         console.log('User exists?', !!userExists, userExists ? { hasToken: !!userExists.verificationToken } : null);
         
-        const redirectUrl = new URL('/signin?error=invalid-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
+        const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+        const redirectUrl = new URL('/signin?error=invalid-token', baseUrl);
         return NextResponse.redirect(redirectUrl);
       }
     }
@@ -100,6 +125,7 @@ export async function GET(request: NextRequest) {
     }
     
     // Create session
+    console.log('Creating session for user:', user.id);
     const sessionToken = jwt.sign(
       { 
         userId: user.id, 
@@ -114,16 +140,36 @@ export async function GET(request: NextRequest) {
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
     
-    await prisma.session.create({
-      data: {
-        sessionToken,
-        userId: user.id,
-        expires: expiresAt,
-      },
-    });
+    try {
+      // First, delete any existing sessions for this user to avoid conflicts
+      await prisma.session.deleteMany({
+        where: { userId: user.id }
+      });
+      
+      await prisma.session.create({
+        data: {
+          sessionToken,
+          userId: user.id,
+          expires: expiresAt,
+        },
+      });
+      console.log('Session created successfully');
+    } catch (sessionError) {
+      console.error('Error creating session:', sessionError);
+      // Log more details about the error
+      if (sessionError instanceof Error) {
+        console.error('Error details:', {
+          message: sessionError.message,
+          name: sessionError.name,
+          stack: sessionError.stack
+        });
+      }
+      throw sessionError;
+    }
     
     // Create redirect response with cookie
-    const successUrl = new URL('/report', process.env.NEXT_PUBLIC_APP_URL || request.url);
+    const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+    const successUrl = new URL('/report', baseUrl);
     // Add auth callback parameter to bypass middleware on first load
     successUrl.searchParams.set('auth', 'callback');
     // Add user info for analytics
@@ -148,7 +194,8 @@ export async function GET(request: NextRequest) {
     return response;
   } catch (error) {
     console.error('Magic link verification error:', error);
-    const errorUrl = new URL('/signin?error=verification-failed', process.env.NEXT_PUBLIC_APP_URL || request.url);
+    const baseUrl = getBaseUrl(process.env.NEXT_PUBLIC_APP_URL || request.url);
+    const errorUrl = new URL('/signin?error=verification-failed', baseUrl);
     return NextResponse.redirect(errorUrl);
   }
 }
