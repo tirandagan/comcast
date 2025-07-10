@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, GraduationCap, Target, Building, Award, TrendingUp, Brain, Briefcase, DollarSign, Zap, Shield, Book, Code } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
+import { useViewportAnimation, animationVariants, useStableAnimation } from '@/hooks/useViewportAnimation';
 
 // Talent transformation data
 const talentMetrics = {
@@ -68,24 +69,24 @@ const organizationStructure = {
   ]
 };
 
-const successMetrics = [
+const successMetricsData = [
   { category: 'Technical', metrics: [
-    { name: 'Models in Production', value: '500+', icon: <Brain /> },
-    { name: 'Inference Latency', value: '<100ms', icon: <Zap /> },
-    { name: 'Model Accuracy', value: '>95%', icon: <Target /> },
-    { name: 'Platform Uptime', value: '99.99%', icon: <Building /> }
+    { name: 'Models in Production', value: '500+', iconType: 'Brain' },
+    { name: 'Inference Latency', value: '<100ms', iconType: 'Zap' },
+    { name: 'Model Accuracy', value: '>95%', iconType: 'Target' },
+    { name: 'Platform Uptime', value: '99.99%', iconType: 'Building' }
   ]},
   { category: 'Business', metrics: [
-    { name: 'Revenue from AI', value: '$2B+', icon: <DollarSign /> },
-    { name: 'Cost Savings', value: '$1B+', icon: <TrendingUp /> },
-    { name: 'Billable AI Practitioners', value: 'Demand-Based', icon: <Users /> },
-    { name: 'Client Self-Service Rate', value: '60%+', icon: <GraduationCap /> }
+    { name: 'Revenue from AI', value: '$2B+', iconType: 'DollarSign' },
+    { name: 'Cost Savings', value: '$1B+', iconType: 'TrendingUp' },
+    { name: 'Billable AI Practitioners', value: 'Demand-Based', iconType: 'Users' },
+    { name: 'Client Self-Service Rate', value: '60%+', iconType: 'GraduationCap' }
   ]},
   { category: 'Innovation', metrics: [
-    { name: 'Patents Filed', value: '50+/yr', icon: <Award /> },
-    { name: 'Research Papers', value: '20+/yr', icon: <Book /> },
-    { name: 'Open Source Projects', value: '10+', icon: <Code /> },
-    { name: 'University Partners', value: '10+', icon: <Building /> }
+    { name: 'Patents Filed', value: '50+/yr', iconType: 'Award' },
+    { name: 'Research Papers', value: '20+/yr', iconType: 'Book' },
+    { name: 'Open Source Projects', value: '10+', iconType: 'Code' },
+    { name: 'University Partners', value: '10+', iconType: 'Building' }
   ]}
 ];
 
@@ -93,6 +94,25 @@ const successMetrics = [
 export function Chapter5() {
   const [activeView, setActiveView] = useState<'model' | 'talent' | 'culture' | 'metrics'>('model');
   const [selectedDepartment, setSelectedDepartment] = useState<any>(null);
+
+  // Icon mapping function
+  const getIconComponent = (iconType: string) => {
+    switch (iconType) {
+      case 'Brain': return Brain;
+      case 'Zap': return Zap;
+      case 'Target': return Target;
+      case 'Building': return Building;
+      case 'DollarSign': return DollarSign;
+      case 'TrendingUp': return TrendingUp;
+      case 'Users': return Users;
+      case 'GraduationCap': return GraduationCap;
+      case 'Award': return Award;
+      case 'Book': return Book;
+      case 'Code': return Code;
+      case 'Shield': return Shield;
+      default: return Brain;
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto space-y-12">
@@ -143,16 +163,15 @@ export function Chapter5() {
         ))}
       </div>
 
-      {/* Content Views */}
-      <AnimatePresence mode="wait">
-        {activeView === 'model' && (
-          <motion.div
-            key="model"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+      {/* Content Views - Using display instead of AnimatePresence to prevent re-animation */}
+      <div className="relative">
+        <motion.div
+          style={{ display: activeView === 'model' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* ISG Model Applied to Comcast */}
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
               <h3 className="text-2xl font-bold text-white mb-6">ISG Model Applied to Comcast AI Center of Excellence</h3>
@@ -553,32 +572,35 @@ export function Chapter5() {
             className="space-y-8"
           >
             {/* Success Metrics Dashboard */}
-            {successMetrics.map((category, catIndex) => (
+            {successMetricsData.map((category, catIndex) => (
               <div key={category.category} className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
                 <h3 className="text-xl font-semibold text-white mb-6">{category.category} Metrics</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {category.metrics.map((metric, index) => (
-                    <motion.div
-                      key={metric.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: catIndex * 0.2 + index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="text-center"
-                    >
-                      <div className="w-12 h-12 mx-auto mb-3 text-blue-400">
-                        {metric.icon}
-                      </div>
-                      <p className="text-2xl font-bold text-white">{metric.value}</p>
-                      <p className="text-sm text-gray-300 mt-1">{metric.name}</p>
-                    </motion.div>
-                  ))}
+                  {category.metrics.map((metric, index) => {
+                    const IconComponent = getIconComponent(metric.iconType);
+                    return (
+                      <motion.div
+                        key={metric.name}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: catIndex * 0.2 + index * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="text-center"
+                      >
+                        <div className="w-12 h-12 mx-auto mb-3 text-blue-400">
+                          <IconComponent />
+                        </div>
+                        <p className="text-2xl font-bold text-white">{metric.value}</p>
+                        <p className="text-sm text-gray-300 mt-1">{metric.name}</p>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
           </motion.div>
         )}
-      </AnimatePresence>
+      </div>
 
       {/* Bottom CTA */}
       <motion.div

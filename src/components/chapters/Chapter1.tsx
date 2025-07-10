@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Database, Users, Wifi, DollarSign, TrendingUp, Network, Target, Zap } from 'lucide-react';
 import { PieChart, Pie, Cell, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { useViewportAnimation, animationVariants, useChartAnimation } from '@/hooks/useViewportAnimation';
 
 // Data volumes and metrics from the report
 const dataVolumeMetrics = [
@@ -79,6 +80,10 @@ const partnerships = [
 export function Chapter1() {
   const [selectedMetric, setSelectedMetric] = useState<any>(null);
   const [activeView, setActiveView] = useState<'current' | 'vision' | 'gaps'>('current');
+  
+  // Animation hooks for different sections
+  const dataGoldmineAnim = useViewportAnimation({ triggerOnce: true });
+  const chartAnim = useChartAnimation(300);
 
   return (
     <div className="max-w-7xl mx-auto space-y-12">
@@ -86,9 +91,10 @@ export function Chapter1() {
 
       {/* Data Goldmine Section */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        ref={dataGoldmineAnim.ref}
+        initial="hidden"
+        animate={dataGoldmineAnim.shouldAnimate ? "visible" : "hidden"}
+        variants={animationVariants.fadeInUp}
         className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
       >
         <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
@@ -136,16 +142,15 @@ export function Chapter1() {
         ))}
       </div>
 
-      {/* Content Views */}
-      <AnimatePresence mode="wait">
-        {activeView === 'current' && (
-          <motion.div
-            key="current"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+      {/* Content Views - Using display instead of AnimatePresence to prevent re-animation */}
+      <div className="relative">
+        <motion.div
+          style={{ display: activeView === 'current' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* Current Initiatives Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {currentInitiatives.map((initiative, index) => (
@@ -153,7 +158,7 @@ export function Chapter1() {
                   key={initiative.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                   className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
                 >
                   <div className="flex items-start justify-between mb-4">
@@ -209,16 +214,14 @@ export function Chapter1() {
               </div>
             </div>
           </motion.div>
-        )}
 
-        {activeView === 'vision' && (
-          <motion.div
-            key="vision"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-8"
-          >
+        <motion.div
+          style={{ display: activeView === 'vision' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-8"
+        >
             {/* Vision Statement */}
             <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
               <h3 className="text-2xl font-bold text-white mb-4">The Intelligent Network Company</h3>
@@ -328,16 +331,14 @@ export function Chapter1() {
               ))}
             </div>
           </motion.div>
-        )}
 
-        {activeView === 'gaps' && (
-          <motion.div
-            key="gaps"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-6"
-          >
+        <motion.div
+          style={{ display: activeView === 'gaps' ? 'block' : 'none' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="space-y-6"
+        >
             {[
               { 
                 gap: 'Data Silos', 
@@ -396,8 +397,7 @@ export function Chapter1() {
               </motion.div>
             ))}
           </motion.div>
-        )}
-      </AnimatePresence>
+      </div>
 
       {/* Bottom CTA */}
       <motion.div

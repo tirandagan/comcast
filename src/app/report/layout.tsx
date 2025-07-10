@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, Home, LogOut, Book, Shield } from 'lucide-react';
+import { Menu, X, ChevronRight, Home, LogOut, Book, Shield, HelpCircle, Code } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { reportChapters } from '@/lib/report-data';
+import { AboutModal } from '@/components/AboutModal';
 
 export default function ReportLayout({
   children,
@@ -14,6 +15,7 @@ export default function ReportLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [aboutModalOpen, setAboutModalOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -159,30 +161,30 @@ export default function ReportLayout({
                 })}
               </div>
 
-              {/* Copyright and Contact Info */}
+              {/* How This Site Was Built Link */}
+              <div className="mt-6 px-1">
+                <Link href="/how-built">
+                  <motion.div
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-white/10 text-gray-300 hover:text-white"
+                    whileHover={{ x: 4 }}
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <Code className="w-5 h-5" />
+                    <span className="flex-1 text-sm">How This Site Was Built</span>
+                    <ChevronRight className="w-4 h-4 opacity-50" />
+                  </motion.div>
+                </Link>
+              </div>
+
+              {/* Help Button */}
               <div className="mt-8 p-4 border-t border-white/10">
-                <div className="text-center space-y-2">
-                  <p className="text-sm text-gray-400">
-                    Copyright © Tiran Dagan 2025
-                  </p>
-                  <div className="space-y-1">
-                    <a 
-                      href="mailto:tiran@tirandagan.com"
-                      className="block text-sm text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      tiran@tirandagan.com
-                    </a>
-                    <p className="text-sm text-gray-400">
-                      Questions? Call{' '}
-                      <a 
-                        href="tel:9088732425"
-                        className="text-blue-400 hover:text-blue-300 transition-colors"
-                      >
-                        (908) 873-2425
-                      </a>
-                    </p>
-                  </div>
-                </div>
+                <button
+                  onClick={() => setAboutModalOpen(true)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors group"
+                >
+                  <HelpCircle className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                  <span className="text-gray-300 group-hover:text-white transition-colors">About</span>
+                </button>
               </div>
             </nav>
           </motion.aside>
@@ -221,6 +223,8 @@ export default function ReportLayout({
         </div>
       </main>
       
+      {/* About Modal */}
+      <AboutModal isOpen={aboutModalOpen} onClose={() => setAboutModalOpen(false)} />
     </div>
   );
 }
