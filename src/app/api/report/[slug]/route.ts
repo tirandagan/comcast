@@ -46,19 +46,25 @@ export async function GET(
       );
     }
 
-    // Track user activity
+    // Track user activity (only if user exists)
     try {
-      await prisma.userActivity.create({
-        data: {
-          userId: decoded.userId,
-          activityType: 'PAGE_VIEW',
-          metadata: JSON.stringify({
-            chapter: chapter.title,
-            slug: chapter.slug,
-            timestamp: new Date().toISOString(),
-          }),
-        },
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.userId }
       });
+      
+      if (user) {
+        await prisma.userActivity.create({
+          data: {
+            userId: decoded.userId,
+            activityType: 'PAGE_VIEW',
+            metadata: JSON.stringify({
+              chapter: chapter.title,
+              slug: chapter.slug,
+              timestamp: new Date().toISOString(),
+            }),
+          },
+        });
+      }
     } catch (error) {
       // Don't fail the request if activity tracking fails
       console.error('Activity tracking error:', error);

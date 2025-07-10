@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, Home, LogOut, Book } from 'lucide-react';
+import { Menu, X, ChevronRight, Home, LogOut, Book, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { reportChapters } from '@/lib/report-data';
@@ -72,6 +72,19 @@ export default function ReportLayout({
                 Welcome, {user.name}
               </span>
             )}
+            {user?.role === 'ADMIN' && (
+              <Link href="/admin/dashboard">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
+                  title="Admin Dashboard"
+                >
+                  <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Admin</span>
+                </motion.button>
+              </Link>
+            )}
             <a
               href="/comcast_ai_report.html"
               target="comcast_report_window"
@@ -135,7 +148,7 @@ export default function ReportLayout({
                         whileHover={{ x: isActive ? 0 : 4 }}
                         onClick={() => setSidebarOpen(false)}
                       >
-                        <span className="text-sm font-medium">{chapter.order - 1}.</span>
+                        <span className="text-sm font-medium">{chapter.order}.</span>
                         <span className="flex-1 text-sm">
                           {chapter.title.replace(/Chapter \d+:\s*/, '')}
                         </span>

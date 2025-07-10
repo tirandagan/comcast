@@ -10,6 +10,13 @@ export interface Chapter {
 
 export const reportChapters: Chapter[] = [
   {
+    id: 'chapter-0',
+    title: 'Executive Summary',
+    slug: 'executive-summary',
+    order: 0,
+    description: 'Strategic overview of how I will transform Comcast into a data-driven powerhouse, unlocking $2B+ in new revenue streams while reducing operational costs by 30% through AI-powered automation.',
+  },
+  {
     id: 'chapter-1',
     title: 'Data & AI at Comcast - Current State and Vision',
     slug: 'data-ai-current-state-vision',
