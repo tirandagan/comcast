@@ -16,9 +16,26 @@ export async function POST(request: NextRequest) {
     const { email, password } = signinSchema.parse(body);
     
     // Check if user exists
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    let user;
+    try {
+      user = await prisma.user.findUnique({
+        where: { email },
+      });
+    } catch (dbError: any) {
+      // Database connection error
+      if (dbError.code === 'P1001' || dbError.message?.includes("Can't reach database server")) {
+        console.error('Database connection error:', dbError);
+        return NextResponse.json(
+          { 
+            error: 'Database connection error', 
+            details: 'The database service is temporarily unavailable. Please try again in a few minutes.',
+            code: 'DB_CONNECTION_ERROR'
+          },
+          { status: 503 } // Service Unavailable
+        );
+      }
+      throw dbError; // Re-throw if it's a different error
+    }
     
     if (!user) {
       return NextResponse.json(

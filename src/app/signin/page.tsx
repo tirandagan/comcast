@@ -102,6 +102,19 @@ export default function SignInPage() {
           toast.error('Your registration is pending approval. Please check back later.');
         } else if (response.status === 401) {
           toast.error('Invalid password');
+        } else if (response.status === 503 && result.code === 'DB_CONNECTION_ERROR') {
+          // Handle database connection error
+          toast.error(
+            'The database is temporarily unavailable. Please try again in a few minutes.',
+            {
+              duration: 6000,
+              icon: '⚠️',
+              style: {
+                background: '#DC2626',
+                color: '#fff',
+              },
+            }
+          );
         } else {
           throw new Error(result.error || 'Sign in failed');
         }
