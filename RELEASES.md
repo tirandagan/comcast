@@ -205,6 +205,25 @@ The mdtohtml converter now includes:
 
 ---
 
+## Version 1.1.4 - UI Enhancements (January 10, 2025)
+
+### UI/UX Updates
+- **Technology Stack Updates**:
+  - Added Cursor IDE to the About modal technology stack
+  - Listed as "AI-Powered Editor" with indigo icon
+
+- **Navigation Improvements**:
+  - "View Complete Report" button now opens in a new tab (`target="_blank"`)
+  - Ensures interactive microsite remains open while viewing the full report
+  - Button renamed to "Text-Only Report" for clarity
+
+### Technical Changes
+- Updated AboutModal component to include Cursor IDE
+- Modified report layout to use standard new tab behavior
+- Improved user experience by preventing accidental navigation away from the interactive site
+
+---
+
 ## Version 1.2.0 - Planned Features
 
 ### Upcoming Features
