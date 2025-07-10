@@ -5,10 +5,10 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 // Disable all Prisma logging except errors
-const prismaClientOptions = process.env.DEBUG?.includes('prisma') 
-  ? { log: ['query', 'error', 'warn'] as const }
-  : { log: ['error'] as const };
-
-export const prisma = globalForPrisma.prisma ?? new PrismaClient(prismaClientOptions);
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+  log: process.env.DEBUG?.includes('prisma') 
+    ? ['query', 'error', 'warn'] 
+    : ['error'],
+});
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
