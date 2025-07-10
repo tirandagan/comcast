@@ -918,7 +918,7 @@ export function NetworkOperationsAI() {
 
 // Content & Media AI Component
 export function ContentMediaAI() {
-  const [activeTab, setActiveTab] = useState('personalization');
+  const [activeTab, setActiveTab] = useState<'personalization' | 'generation' | 'advertising'>('personalization');
 
   const contentAIFeatures = {
     personalization: {
@@ -1045,7 +1045,7 @@ export function ContentMediaAI() {
           return (
             <button
               key={key}
-              onClick={() => setActiveTab(key)}
+              onClick={() => setActiveTab(key as 'personalization' | 'generation' | 'advertising')}
               className={`px-4 py-3 rounded-lg transition-all flex items-center gap-2 ${
                 activeTab === key 
                   ? 'bg-red-600 text-white' 
@@ -1186,7 +1186,7 @@ export function ContentMediaAI() {
 
 // ROI Projection Dashboard Component
 export function ROIProjectionDashboard() {
-  const [timeframe, setTimeframe] = useState('3year');
+  const [timeframe, setTimeframe] = useState<'1year' | '3year' | '5year'>('3year');
   const [selectedInitiative, setSelectedInitiative] = useState<string | null>(null);
 
   const roiProjections = {
