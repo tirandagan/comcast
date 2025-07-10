@@ -7,7 +7,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'sutherland': {
+        'comcast': {
           'primary': '#003366',
           'secondary': '#0066CC',
           'accent': '#FF6600',

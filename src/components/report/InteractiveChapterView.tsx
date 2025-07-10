@@ -148,7 +148,7 @@ Comcast's AI transformation journey requires a fundamental shift from fragmented
     }
 
     // For ISG Model chapter - Chapter 5
-    if (chapter.slug === 'the-isg-model-applied-to-sutherland') {
+    if (chapter.slug === 'the-isg-model-applied-to-comcast') {
       const isgSection = `
 ## The ISG Transformation Journey
 

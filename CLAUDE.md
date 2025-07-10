@@ -3,7 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
-Interactive AI Innovation Microsite built with Next.js 15, showcasing Sutherland's strategic AI innovation roadmap. Features user authentication, interactive content visualization, and comprehensive analytics.
+Interactive AI Innovation Microsite built with Next.js 15, showcasing Comcast's strategic AI innovation roadmap. Features user authentication, interactive content visualization, and comprehensive analytics.
 
 ## Standard Workflow
 1. First think through the problem, read the codebase for relevant files, and write a plan to a file located in design_docs called projectplan.md.

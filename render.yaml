@@ -1,7 +1,7 @@
 services:
   # Web service for the Next.js app
   - type: web
-    name: sutherland-ai-microsite
+    name: comcast-ai-microsite
     runtime: node
     plan: free # or 'starter' for paid plan
     buildCommand: npm install && npm run build && npx prisma generate && npx prisma db push
@@ -44,7 +44,7 @@ services:
 
 # If you want to use PostgreSQL instead of SQLite (recommended for production)
 # databases:
-#   - name: sutherland-db
+#   - name: comcast-db
 #     plan: free # or 'starter' for paid plan
-#     databaseName: sutherland
-#     user: sutherland
+#     databaseName: comcast
+#     user: comcast

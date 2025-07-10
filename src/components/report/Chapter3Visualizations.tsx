@@ -301,7 +301,7 @@ export function MarketPositioningPlot() {
   }));
 
   // Comcast's target position
-  const sutherlandTarget = {
+  const comcastTarget = {
     name: 'Comcast (Target)',
     x: 9,
     y: 9,
@@ -415,7 +415,7 @@ export function MarketPositioningPlot() {
             {animationStep === 1 && (
               <Scatter
                 name="Comcast Target"
-                data={[sutherlandTarget]}
+                data={[comcastTarget]}
                 fill="#10B981"
               >
                 <Cell fill="#10B981" stroke="#fff" strokeWidth={2} />
@@ -487,7 +487,7 @@ export function StrategicGapRadar() {
       const comp = competitors.find(c => c.id === compId);
       point[comp?.name || compId] = competitorScores[compId]?.[index] || 0;
     });
-    if (selectedCompetitors.includes('sutherland_target')) {
+    if (selectedCompetitors.includes('comcast_target')) {
       point['Comcast Target'] = competitorScores.comcast_target[index];
     }
     return point;

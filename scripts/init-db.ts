@@ -273,7 +273,7 @@ async function initDatabase() {
         title: 'Executive Summary',
         slug: 'executive-summary',
         order: 1,
-        description: 'A strategic proposal for Sutherland\'s AI transformation...',
+        description: 'A strategic proposal for Comcast\'s AI transformation...',
         content: 'Content will be loaded from markdown files',
       },
       // Add more chapters as needed

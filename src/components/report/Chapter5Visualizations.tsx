@@ -283,7 +283,7 @@ export function ISGOperatingModel() {
         'Go-to-market strategy',
         'Brand identity development'
       ],
-      sutherland: [
+      comcast: [
         'Healthcare: "The Clinical Intelligence Partner"',
         'CMT: "The 5G Transformation Accelerator"',
         'BFSI: "The Financial Experience Innovator"',
@@ -302,7 +302,7 @@ export function ISGOperatingModel() {
         'IP creation and management',
         'Rapid prototyping capability'
       ],
-      sutherland: [
+      comcast: [
         'Healthcare: 5-7 AI solutions',
         'CMT: 4-6 5G/AI platforms',
         'BFSI: 5-7 FinTech solutions',
@@ -321,7 +321,7 @@ export function ISGOperatingModel() {
         'Deal qualification',
         'Executive relationships'
       ],
-      sutherland: [
+      comcast: [
         'Outcome-based pricing models',
         'Innovation-as-a-Service offerings',
         'Co-innovation frameworks',
@@ -340,7 +340,7 @@ export function ISGOperatingModel() {
         'Startup ecosystem',
         'Joint solutions'
       ],
-      sutherland: [
+      comcast: [
         'Hyperscaler alliances (AWS, Azure, GCP)',
         'AI platform partners (OpenAI, Anthropic)',
         'Industry ISVs (Zendesk, Salesforce)',
@@ -359,7 +359,7 @@ export function ISGOperatingModel() {
         'Conference leadership',
         'Content marketing'
       ],
-      sutherland: [
+      comcast: [
         'AI Innovation Summit',
         'Industry advisory boards',
         'Research publications',
@@ -490,7 +490,7 @@ export function ISGOperatingModel() {
                     <div>
                       <h5 className="font-medium mb-3">Comcast Application</h5>
                       <div className="space-y-2">
-                        {component.sutherland.map((item, idx) => (
+                        {component.comcast.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2">
                             <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: component.color }} />
                             <span className="text-sm">{item}</span>

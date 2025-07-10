@@ -65,7 +65,7 @@ export async function sendMagicLink(email: string, magicLink: string) {
     MAGIC LINK EMAIL
     ========================================
     To: ${email}
-    Subject: Your Exclusive Access to Sutherland's AI Innovation Journey
+    Subject: Your Access to Comcast's Data & AI Leadership Report
     
     Click this link to sign in:
     ${magicLink}
@@ -90,25 +90,25 @@ export async function sendMagicLink(email: string, magicLink: string) {
     if (!transporter) return;
     
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sutherland AI Innovation" <noreply@sutherland.com>',
+      from: process.env.SMTP_FROM || '"Comcast Data & AI Vision" <noreply@comcast.com>',
       to: email,
-      subject: '🚀 Your Exclusive Access to Sutherland\'s AI Innovation Journey',
+      subject: '🚀 Your Access to Comcast\'s Data & AI Leadership Report',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 20px;">
           <div style="background: #1e293b; padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
-            <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">Welcome to the Future</h1>
-            <p style="color: #94a3b8; margin: 10px 0 0 0; font-size: 18px;">Sutherland AI Innovation Microsite</p>
+            <h1 style="color: #ffffff; margin: 0; font-size: 32px; font-weight: bold;">Transform Comcast with Data & AI</h1>
+            <p style="color: #94a3b8; margin: 10px 0 0 0; font-size: 18px;">Strategic Vision for $2B+ Revenue Growth</p>
           </div>
           
           <div style="background: #ffffff; padding: 40px 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             <h2 style="color: #1e293b; margin: 0 0 20px 0; font-size: 24px;">You're One Click Away from Accessing:</h2>
             
             <ul style="color: #475569; line-height: 1.8; font-size: 16px; margin: 0 0 30px 0;">
-              <li><strong>🧠 AI-Powered Transformation Strategy</strong> - Discover how Sutherland is revolutionizing BPO with cutting-edge AI</li>
-              <li><strong>📊 Interactive Data Visualizations</strong> - Explore dynamic charts and insights about our innovation journey</li>
-              <li><strong>🚀 Industry-Specific Solutions</strong> - Deep dive into AI applications across Healthcare, BFSI, CMT, and Retail</li>
-              <li><strong>💡 Innovation Roadmap</strong> - Get exclusive access to our strategic implementation timeline</li>
-              <li><strong>🤝 Partnership Opportunities</strong> - Learn about our ecosystem approach to AI innovation</li>
+              <li><strong>🧠 Chief Data & AI Officer Vision</strong> - Transform Comcast into a data-driven powerhouse with $2B+ revenue potential</li>
+              <li><strong>📊 AI Investment Roadmap</strong> - Detailed implementation strategy with $500M investment yielding 5x ROI in 3 years</li>
+              <li><strong>🚀 100-Day Quick Wins</strong> - Immediate actions to generate $50M impact in the first quarter</li>
+              <li><strong>💡 Unified Data Platform</strong> - Build the Comcast Intelligence Platform to break down silos and enable AI at scale</li>
+              <li><strong>🤝 ISG Success Model</strong> - Apply proven approach that built $200M revenue at Cognizant</li>
             </ul>
             
             <div style="text-align: center; margin: 40px 0;">
@@ -129,7 +129,7 @@ export async function sendMagicLink(email: string, magicLink: string) {
           
           <div style="text-align: center; padding: 20px;">
             <p style="color: #94a3b8; font-size: 12px; margin: 0;">
-              © 2024 Sutherland Global Services. Transforming businesses through AI innovation.
+              © 2025 Tiran Dagan. Transforming Comcast through Data & AI leadership.
             </p>
             <p style="color: #94a3b8; font-size: 12px; margin: 5px 0 0 0;">
               If you didn't request this email, you can safely ignore it.
@@ -200,9 +200,9 @@ export async function sendAdminNotification(user: {
     const denyLink = `${baseUrl}/api/admin/approve?token=${denyToken}&action=deny`;
     
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sutherland AI Innovation" <noreply@sutherland.com>',
+      from: process.env.SMTP_FROM || '"Comcast Data & AI Vision" <noreply@comcast.com>',
       to: process.env.ADMIN_EMAIL || 'tiran@tirandagan.com',
-      subject: '👤 New Registration Pending Approval - Sutherland AI Innovation',
+      subject: '👤 New Registration Pending Approval - Comcast Data & AI Report',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 20px;">
           <div style="background: #1e293b; padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
@@ -210,7 +210,7 @@ export async function sendAdminNotification(user: {
           </div>
           
           <div style="background: #ffffff; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #475569; font-size: 16px; margin: 0 0 20px 0;">A new user has registered for the Sutherland AI Innovation Microsite:</p>
+            <p style="color: #475569; font-size: 16px; margin: 0 0 20px 0;">A new user has registered for the Comcast Data & AI Leadership Report:</p>
             
             <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <table style="width: 100%; border-collapse: collapse;">
@@ -270,7 +270,7 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
   const subject = approved ? 'Registration Approved' : 'Registration Denied';
   const message = approved 
     ? 'Great news! Your registration has been approved.'
-    : 'Thank you for your interest in the Sutherland AI Innovation Microsite.';
+    : 'Thank you for your interest in the Comcast AI Innovation Microsite.';
     
   console.log(`
     ========================================
@@ -294,9 +294,9 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
     if (!transporter) return;
     
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sutherland AI Innovation" <noreply@sutherland.com>',
+      from: process.env.SMTP_FROM || '"Comcast Data & AI Vision" <noreply@comcast.com>',
       to: email,
-      subject: approved ? '🎉 ' + subject + ' - Welcome to Sutherland AI Innovation!' : '📋 ' + subject,
+      subject: approved ? '🎉 ' + subject + ' - Welcome to Comcast\'s AI Transformation!' : '📋 ' + subject,
       html: approved ? `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 20px;">
           <div style="background: #10b981; padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
@@ -309,7 +309,7 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
             <p style="color: #1e293b; font-size: 18px; margin: 0 0 20px 0;">Dear User,</p>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
-              Congratulations! Tiran has approved your registration to access the exclusive Sutherland AI Innovation Microsite. You now have full access to explore our comprehensive AI transformation strategy.
+              Congratulations! You've been approved to access the exclusive Comcast Data & AI Leadership Report. Explore how we'll transform Comcast into a data-driven powerhouse, unlocking $2B+ in new revenue streams while reducing costs by 30%.
             </p>
             
             ${magicLink ? `
@@ -336,15 +336,15 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
             <h3 style="color: #1e293b; margin: 30px 0 20px 0;">What's waiting for you inside:</h3>
             
             <ul style="color: #475569; line-height: 1.8; margin: 0 0 30px 0;">
-              <li>📊 Interactive visualizations of AI transformation strategies</li>
-              <li>🏥 Industry-specific AI solutions for Healthcare, BFSI, CMT & Retail</li>
-              <li>🗺️ Detailed implementation roadmaps and timelines</li>
-              <li>🤝 Partnership ecosystem strategies</li>
-              <li>📈 ROI projections and success metrics</li>
+              <li>📊 Comcast Intelligence Platform architecture to unify fragmented data</li>
+              <li>🎯 AI use cases across customer experience, network operations, and content</li>
+              <li>💰 Investment strategy: $500M over 3 years yielding $2.5B+ returns</li>
+              <li>🏗️ 100-day sprint plan with immediate quick wins worth $50M</li>
+              <li>🚀 Proven ISG model that generated $200M at Cognizant</li>
             </ul>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6;">
-              We're excited to share this innovative journey with you. Dive in and explore how Sutherland is revolutionizing the BPO industry with AI!
+              Discover how Comcast's unparalleled data assets - 32M+ subscribers, 125M households, 50B+ daily network events - can be transformed into a competitive advantage through AI.
             </p>
           </div>
         </div>
@@ -356,11 +356,11 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
           
           <div style="background: #ffffff; padding: 40px 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
             <p style="color: #1e293b; font-size: 16px; margin: 0 0 20px 0;">
-              Thank you for your interest in the Sutherland AI Innovation Microsite.
+              Thank you for your interest in the Comcast Data & AI Leadership Report.
             </p>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-              After reviewing your registration, we're unable to grant access at this time. This exclusive platform is currently limited to Sutherland stakeholders and strategic partners.
+              After reviewing your registration, we're unable to grant access at this time. This exclusive report is currently limited to Comcast leadership and strategic stakeholders.
             </p>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6;">
@@ -434,9 +434,9 @@ export async function sendAdminReminderNotification(user: {
     const waitHours = Math.floor((waitTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sutherland AI Innovation" <noreply@sutherland.com>',
+      from: process.env.SMTP_FROM || '"Comcast Data & AI Vision" <noreply@comcast.com>',
       to: process.env.ADMIN_EMAIL || 'tiran@tirandagan.com',
-      subject: '⏰ Reminder: User Still Waiting for Approval - Sutherland AI Innovation',
+      subject: '⏰ Reminder: User Still Waiting for Approval - Comcast Data & AI Report',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 20px;">
           <div style="background: #f59e0b; padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
@@ -516,7 +516,7 @@ export async function sendRegistrationConfirmation(user: {
     REGISTRATION CONFIRMATION EMAIL
     ========================================
     To: ${user.email}
-    Subject: Welcome to Sutherland's AI Innovation Journey - Registration Received
+    Subject: Thank you for your interest! - Comcast Data & AI Report
     
     Thank you for registering, ${user.name}!
     Your registration is being reviewed by Tiran.
@@ -537,9 +537,9 @@ export async function sendRegistrationConfirmation(user: {
     }
     
     const info = await transporter.sendMail({
-      from: process.env.SMTP_FROM || '"Sutherland AI Innovation" <noreply@sutherland.com>',
+      from: process.env.SMTP_FROM || '"Comcast Data & AI Vision" <noreply@comcast.com>',
       to: user.email,
-      subject: '🎉 Welcome to Sutherland\'s AI Innovation Journey - Registration Received',
+      subject: '🎉 Thank you for your interest! - Comcast Data & AI Report',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fafc; padding: 20px;">
           <div style="background: #1e293b; padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
@@ -551,13 +551,13 @@ export async function sendRegistrationConfirmation(user: {
             <p style="color: #1e293b; font-size: 18px; margin: 0 0 20px 0;">Dear ${user.name},</p>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
-              Thank you for registering to access Sutherland's exclusive AI Innovation Microsite. We're thrilled about your interest in our transformative journey!
+              Thank you for registering to access the exclusive Comcast Data & AI Leadership Report. Your interest in transforming Comcast through data and AI is appreciated!
             </p>
             
             <div style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 20px; margin: 30px 0;">
               <h3 style="color: #1e293b; margin: 0 0 10px 0; font-size: 18px;">What Happens Next?</h3>
               <p style="color: #475569; margin: 0; line-height: 1.6;">
-                <strong>Tiran Dagan</strong>, our Global Head of Industry & Product Innovation, personally reviews each registration to ensure exclusive access to qualified professionals. Your registration will be reviewed shortly, typically within 24 hours.
+                <strong>Tiran Dagan</strong>, former Founder of Cognizant's Industry Solutions Group and AI thought leader, personally reviews each registration. Your registration will be reviewed shortly, typically within 24 hours.
               </p>
             </div>
             
@@ -568,13 +568,13 @@ export async function sendRegistrationConfirmation(user: {
                 <div style="display: table-cell; padding: 15px; vertical-align: top;">
                   <div style="background: #fef3c7; padding: 20px; border-radius: 8px; height: 100%;">
                     <h4 style="color: #92400e; margin: 0 0 10px 0;">🧠 AI Strategy</h4>
-                    <p style="color: #78350f; font-size: 14px; margin: 0;">Comprehensive roadmap for AI-powered transformation in BPO</p>
+                    <p style="color: #78350f; font-size: 14px; margin: 0;">Transform Comcast into the industry's first truly intelligent network company</p>
                   </div>
                 </div>
                 <div style="display: table-cell; padding: 15px; vertical-align: top;">
                   <div style="background: #dbeafe; padding: 20px; border-radius: 8px; height: 100%;">
                     <h4 style="color: #1e3a8a; margin: 0 0 10px 0;">📊 Interactive Insights</h4>
-                    <p style="color: #1e40af; font-size: 14px; margin: 0;">Dynamic visualizations of our innovation metrics and progress</p>
+                    <p style="color: #1e40af; font-size: 14px; margin: 0;">$2B+ revenue opportunity from data products and AI services by 2027</p>
                   </div>
                 </div>
               </div>
@@ -582,13 +582,13 @@ export async function sendRegistrationConfirmation(user: {
                 <div style="display: table-cell; padding: 15px; vertical-align: top;">
                   <div style="background: #d1fae5; padding: 20px; border-radius: 8px; height: 100%;">
                     <h4 style="color: #064e3b; margin: 0 0 10px 0;">🚀 Industry Solutions</h4>
-                    <p style="color: #065f46; font-size: 14px; margin: 0;">Tailored AI applications for Healthcare, BFSI, CMT, and Retail</p>
+                    <p style="color: #065f46; font-size: 14px; margin: 0;">AI solutions for customer experience, network operations, and content</p>
                   </div>
                 </div>
                 <div style="display: table-cell; padding: 15px; vertical-align: top;">
                   <div style="background: #fce7f3; padding: 20px; border-radius: 8px; height: 100%;">
                     <h4 style="color: #831843; margin: 0 0 10px 0;">🤝 Partnership Ecosystem</h4>
-                    <p style="color: #9f1239; font-size: 14px; margin: 0;">Collaboration opportunities with leading technology partners</p>
+                    <p style="color: #9f1239; font-size: 14px; margin: 0;">Strategic partnerships with Microsoft, Nokia, Mastercard, and more</p>
                   </div>
                 </div>
               </div>
@@ -630,7 +630,7 @@ export async function sendRegistrationConfirmation(user: {
           
           <div style="text-align: center; padding: 20px;">
             <p style="color: #94a3b8; font-size: 12px; margin: 0;">
-              © 2024 Sutherland Global Services. Transforming businesses through AI innovation.
+              © 2025 Tiran Dagan. Transforming Comcast through Data & AI leadership.
             </p>
           </div>
         </div>

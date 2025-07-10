@@ -645,7 +645,7 @@ export function CustomerExperienceAI() {
 
 // Network Operations AI Component
 export function NetworkOperationsAI() {
-  const [selectedMetric, setSelectedMetric] = useState('performance');
+  const [selectedMetric, setSelectedMetric] = useState<'performance' | 'predictive' | 'anomaly'>('performance');
 
   const networkMetrics = {
     performance: {
@@ -731,7 +731,7 @@ export function NetworkOperationsAI() {
         {Object.entries(networkMetrics).map(([key, metric]) => (
           <button
             key={key}
-            onClick={() => setSelectedMetric(key)}
+            onClick={() => setSelectedMetric(key as 'performance' | 'predictive' | 'anomaly')}
             className={`px-4 py-2 rounded-lg transition-colors ${
               selectedMetric === key 
                 ? 'bg-blue-600 text-white' 

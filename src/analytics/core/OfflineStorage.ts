@@ -19,7 +19,7 @@ interface AnalyticsDB extends DBSchema {
 
 export class OfflineStorage {
   private db: IDBPDatabase<AnalyticsDB> | null = null;
-  private readonly dbName = 'sutherland-analytics';
+  private readonly dbName = 'comcast-analytics';
   private readonly version = 1;
   private readonly maxEvents = 10000;
   private readonly maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days

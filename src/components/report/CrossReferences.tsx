@@ -64,7 +64,7 @@ export const chapterCrossReferences: Record<string, CrossReference[]> = {
   'executive-summary': [
     {
       type: 'chapter',
-      slug: 'the-isg-model-applied-to-sutherland',
+      slug: 'the-isg-model-applied-to-comcast',
       title: 'Chapter 5: Building the AI-First Organization',
       description: 'Detailed framework for building the innovation function'
     },
@@ -155,7 +155,7 @@ export const chapterCrossReferences: Record<string, CrossReference[]> = {
       description: 'Detailed innovation playbooks by industry'
     }
   ],
-  'the-isg-model-applied-to-sutherland': [
+  'the-isg-model-applied-to-comcast': [
     {
       type: 'chapter',
       slug: 'strategic-implementation-roadmap',
@@ -214,7 +214,7 @@ export const chapterCrossReferences: Record<string, CrossReference[]> = {
   'the-role-and-impact': [
     {
       type: 'chapter',
-      slug: 'the-isg-model-applied-to-sutherland',
+      slug: 'the-isg-model-applied-to-comcast',
       title: 'Chapter 5: ISG Model',
       description: 'Proven leadership model from Cognizant'
     },

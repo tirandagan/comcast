@@ -35,7 +35,7 @@ export function LeadershipStructure() {
       color: '#3B82F6',
       department: 'Executive Leadership',
       responsibilities: ['Strategic Vision', 'Board Relations', 'Company Culture', 'Growth Strategy'],
-      achievements: ['Founded Sutherland in 1986', '40+ years of leadership', 'Built $2.4B global enterprise'],
+      achievements: ['Founded Comcast in 1963', '60+ years of leadership', 'Built $120B global enterprise'],
       focus: 'Transforming BPO through innovation and AI'
     },
     {

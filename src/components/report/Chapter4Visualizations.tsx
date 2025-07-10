@@ -47,7 +47,7 @@ export function EnhancedIndustryVerticalChart() {
         currentRevenue: 380,
         marketSize: 359.3,
         marketGrowth: 6.5,
-        sutherland: {
+        comcast: {
           revenue: 380,
           growth: 18,
           employees: 7500,
@@ -76,7 +76,7 @@ export function EnhancedIndustryVerticalChart() {
         currentRevenue: 280,
         marketSize: 2300,
         marketGrowth: 12.5,
-        sutherland: {
+        comcast: {
           revenue: 280,
           growth: 25,
           employees: 5000,
@@ -105,7 +105,7 @@ export function EnhancedIndustryVerticalChart() {
         currentRevenue: 450,
         marketSize: 850,
         marketGrowth: 8.2,
-        sutherland: {
+        comcast: {
           revenue: 450,
           growth: 12,
           employees: 8000,
@@ -134,7 +134,7 @@ export function EnhancedIndustryVerticalChart() {
         currentRevenue: 240,
         marketSize: 680,
         marketGrowth: 9.5,
-        sutherland: {
+        comcast: {
           revenue: 240,
           growth: 15,
           employees: 4500,
@@ -163,7 +163,7 @@ export function EnhancedIndustryVerticalChart() {
         currentRevenue: 320,
         marketSize: 450,
         marketGrowth: 7.8,
-        sutherland: {
+        comcast: {
           revenue: 320,
           growth: 8,
           employees: 6000,
@@ -188,7 +188,7 @@ export function EnhancedIndustryVerticalChart() {
   // Calculate aggregate metrics
   const totalCurrentRevenue = industryData.reduce((sum, ind) => sum + ind.metrics.currentRevenue, 0);
   const totalPotentialRevenue = industryData.reduce((sum, ind) => sum + ind.metrics.potential.revenueTarget, 0);
-  const avgGrowth = industryData.reduce((sum, ind) => sum + ind.metrics.sutherland.growth, 0) / industryData.length;
+  const avgGrowth = industryData.reduce((sum, ind) => sum + ind.metrics.comcast.growth, 0) / industryData.length;
 
   return (
     <div className="my-8">
@@ -326,9 +326,9 @@ function OverviewChart({ data, metricView }: any) {
     fullName: ind.name,
     current: ind.metrics.currentRevenue,
     potential: ind.metrics.potential.revenueTarget,
-    growth: ind.metrics.sutherland.growth,
+    growth: ind.metrics.comcast.growth,
     marketSize: ind.metrics.marketSize,
-    employees: ind.metrics.sutherland.employees,
+    employees: ind.metrics.comcast.employees,
     color: ind.color
   }));
 
@@ -443,15 +443,15 @@ function OverviewChart({ data, metricView }: any) {
                 </div>
                 <div>
                   <span className="text-gray-400">Growth:</span>
-                  <span className="ml-1 font-semibold text-green-400">+{industry.metrics.sutherland.growth}%</span>
+                  <span className="ml-1 font-semibold text-green-400">+{industry.metrics.comcast.growth}%</span>
                 </div>
                 <div>
                   <span className="text-gray-400">Clients:</span>
-                  <span className="ml-1 font-semibold">{industry.metrics.sutherland.clients}</span>
+                  <span className="ml-1 font-semibold">{industry.metrics.comcast.clients}</span>
                 </div>
                 <div>
                   <span className="text-gray-400">NPS:</span>
-                  <span className="ml-1 font-semibold">{industry.metrics.sutherland.nps}</span>
+                  <span className="ml-1 font-semibold">{industry.metrics.comcast.nps}</span>
                 </div>
               </div>
 
@@ -505,7 +505,7 @@ function DetailedAnalysis({ data }: any) {
                   <div className="flex-1">
                     <div className="font-medium">{industry.name}</div>
                     <div className="text-xs text-gray-400">
-                      ${industry.metrics.currentRevenue}M • {industry.metrics.sutherland.growth}% growth
+                      ${industry.metrics.currentRevenue}M • {industry.metrics.comcast.growth}% growth
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4" />
@@ -545,15 +545,15 @@ function DetailedAnalysis({ data }: any) {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm">Employees</span>
-                    <span className="font-semibold">{selectedIndustry.metrics.sutherland.employees.toLocaleString()}</span>
+                    <span className="font-semibold">{selectedIndustry.metrics.comcast.employees.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm">Clients</span>
-                    <span className="font-semibold">{selectedIndustry.metrics.sutherland.clients}</span>
+                    <span className="font-semibold">{selectedIndustry.metrics.comcast.clients}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm">NPS Score</span>
-                    <span className="font-semibold">{selectedIndustry.metrics.sutherland.nps}</span>
+                    <span className="font-semibold">{selectedIndustry.metrics.comcast.nps}</span>
                   </div>
                 </div>
               </div>
@@ -595,7 +595,7 @@ function DetailedAnalysis({ data }: any) {
                   Key Solutions
                 </h5>
                 <div className="space-y-1">
-                  {selectedIndustry.metrics.sutherland.solutions.map((solution: string, i: number) => (
+                  {selectedIndustry.metrics.comcast.solutions.map((solution: string, i: number) => (
                     <div key={i} className="flex items-center gap-2 text-sm">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                       {solution}
@@ -743,7 +743,7 @@ function ComparisonView({ data }: any) {
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={data.map((ind: any) => ({
                 industry: ind.name.split(' ')[0],
-                growth: ind.metrics.sutherland.growth,
+                growth: ind.metrics.comcast.growth,
                 marketGrowth: ind.metrics.marketGrowth,
                 potential: parseInt(ind.metrics.potential.growth.split('-')[1]?.replace('%', '') || '0')
               }))}>
@@ -853,7 +853,7 @@ function ComparisonView({ data }: any) {
 
 // Industry Deep Dive Treemap
 export function IndustryTreemap() {
-  const [selectedView, setSelectedView] = useState<'market' | 'sutherland'>('market');
+  const [selectedView, setSelectedView] = useState<'market' | 'comcast'>('market');
 
   const marketData = [
     {
@@ -898,7 +898,7 @@ export function IndustryTreemap() {
     }
   ];
 
-  const sutherlandData = [
+  const comcastData = [
     {
       name: 'BFSI',
       value: 450,
@@ -955,9 +955,9 @@ export function IndustryTreemap() {
             Market Size
           </button>
           <button
-            onClick={() => setSelectedView('sutherland')}
+            onClick={() => setSelectedView('comcast')}
             className={`px-4 py-2 rounded-lg transition-colors ${
-              selectedView === 'sutherland' 
+              selectedView === 'comcast' 
                 ? 'bg-blue-600 text-white' 
                 : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
             }`}
@@ -971,7 +971,7 @@ export function IndustryTreemap() {
         <div className="h-96">
           <ResponsiveContainer width="100%" height="100%">
             <Treemap
-              data={selectedView === 'market' ? marketData : sutherlandData}
+              data={selectedView === 'market' ? marketData : comcastData}
               dataKey="value"
               stroke="#fff"
               fill="#8884d8"
