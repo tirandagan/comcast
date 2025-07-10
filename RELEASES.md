@@ -36,6 +36,8 @@
 - **"How This Site Was Built" Page**: Detailed documentation of the development process
 - **About Modal**: Developer information and technology stack details
 - **Animation Improvements**: Stable animations that don't restart on tab switches
+- **Release Notes Modal**: Beautiful overlay displaying version history from About dialog
+- **Claude Code Integration**: Added to technology stack with icon in About modal
 
 ### Improvements
 - Fixed Chapter 5 syntax error with JSX elements
@@ -43,6 +45,8 @@
 - Enhanced ACE (AI Center of Excellence) graphics
 - Better error handling for JWT authentication
 - Removed all Sutherland references, updated to Comcast branding
+- Refactored Chapter5 component for better performance using conditional rendering
+- Updated viewport animation settings for smoother transitions
 
 ### Bug Fixes
 - Fixed "Cell is not defined" error in Chapter 5
@@ -50,17 +54,27 @@
 - Fixed animation restart issues across all pages
 - Corrected TypeScript build errors
 - Fixed deployment issues by replacing Python dependencies with Node.js
+- Fixed TypeScript type errors for Render deployment (ease property, margin type)
 
 ### UI/UX Updates
 - Replaced inline contact info with clean About modal
 - Added help button (?) in navigation sidebar
 - Improved SWOT analysis with overlay modals
 - Enhanced talent strategy from fixed numbers to demand-based scaling
+- Added "View Release Notes" button in AboutModal for easy access
+- Implemented state management for ReleaseNotesModal visibility
 
 ### Performance
 - Optimized animation performance with display-based visibility
 - Reduced re-renders with stable animation hooks
 - Improved build times with proper TypeScript configurations
+- Converted Chapter5 talent, culture, and metrics views from AnimatePresence to style-based rendering
+
+### mdtohtml Utility Updates
+- **Copy to Clipboard Feature**: Renamed "Share" button to "Copy to Clipboard"
+- **Markdown Source Copy**: Entire markdown text can now be copied to clipboard
+- **Visual Feedback**: Added animated notification when markdown is copied successfully
+- **Improved Icons**: Updated clipboard icon for better visual clarity
 
 ---
 

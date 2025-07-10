@@ -34,6 +34,9 @@ class MarkdownToHtmlConverter:
         with open(markdown_file, 'r', encoding='utf-8') as f:
             md_content = f.read()
         
+        # Store the original markdown content for copy functionality
+        self.original_markdown = md_content
+        
         # Configure markdown extensions
         md = markdown.Markdown(extensions=[
             'extra',
@@ -74,12 +77,16 @@ class MarkdownToHtmlConverter:
         # Get code highlighting CSS
         pygments_css = HtmlFormatter(style='github-dark').get_style_defs('.highlight')
         
+        # Escape the markdown content for JavaScript
+        escaped_markdown = json.dumps(self.original_markdown)
+        
         # Build final HTML
         final_html = self.html_template.format(
             title=html.escape(title),
             content=html_content,
             toc=toc_html,
-            pygments_css=pygments_css
+            pygments_css=pygments_css,
+            markdown_content=escaped_markdown
         )
         
         # Handle output file path
@@ -675,6 +682,29 @@ class MarkdownToHtmlConverter:
             transition-duration: 0.2s;
             transition-timing-function: ease;
         }}
+        
+        /* Notification animations */
+        @keyframes slideIn {{
+            from {{
+                transform: translateX(100%);
+                opacity: 0;
+            }}
+            to {{
+                transform: translateX(0);
+                opacity: 1;
+            }}
+        }}
+        
+        @keyframes slideOut {{
+            from {{
+                transform: translateX(0);
+                opacity: 1;
+            }}
+            to {{
+                transform: translateX(100%);
+                opacity: 0;
+            }}
+        }}
     </style>
 </head>
 <body>
@@ -721,12 +751,12 @@ class MarkdownToHtmlConverter:
                         </svg>
                         <span style="margin-left: 0.5rem;">Print</span>
                     </button>
-                    <button class="action-button" onclick="copyLink()" title="Copy link to clipboard">
+                    <button class="action-button" onclick="copyMarkdown()" title="Copy markdown source to clipboard">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                        <span style="margin-left: 0.5rem;">Share</span>
+                        <span style="margin-left: 0.5rem;">Copy to Clipboard</span>
                     </button>
                 </div>
             </div>
@@ -738,6 +768,9 @@ class MarkdownToHtmlConverter:
     </div>
     
     <script>
+        // Store the original markdown content
+        const markdownContent = {markdown_content};
+        
         // Sidebar toggle
         function toggleSidebar() {{
             const sidebar = document.getElementById('sidebar');
@@ -750,10 +783,33 @@ class MarkdownToHtmlConverter:
             alert('This document uses a dark theme optimized for readability.');
         }}
         
-        // Copy link
-        function copyLink() {{
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied to clipboard!');
+        // Copy markdown content to clipboard
+        function copyMarkdown() {{
+            navigator.clipboard.writeText(markdownContent).then(() => {{
+                // Create a temporary notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Markdown copied to clipboard!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(to right, #10b981, #059669);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {{
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }}, 2000);
+            }}).catch(err => {{
+                alert('Failed to copy markdown content. Error: ' + err);
+            }});
         }}
         
         // Search functionality
