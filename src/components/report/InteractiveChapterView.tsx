@@ -36,7 +36,7 @@ export default function InteractiveChapterView({ chapter }: InteractiveChapterVi
     if (chapter.slug === 'executive-summary') {
       const keyMetricsSection = `
 
-<Callout title="⚠️ IMPORTANT DATA VALIDATION NOTICE" type="warning">The data, use cases, and financial models presented in this report are early drafts based on publicly available information. All metrics, projections, and analyses require: • Validation with Comcast Finance team for accuracy • Collaboration with business stakeholders to prioritize initiatives • Alignment with sponsor interest and engagement levels • Detailed business case development for each use case. This report represents a strategic vision that will be refined through stakeholder engagement and detailed analysis.</Callout>
+<Callout title="⚠️ IMPORTANT DATA VALIDATION NOTICE" type="warning" defaultExpanded="true">The data, use cases, and financial models presented in this report are early drafts based on publicly available information. All metrics, projections, and analyses require: • Validation with Comcast Finance team for accuracy • Collaboration with business stakeholders to prioritize initiatives • Alignment with sponsor interest and engagement levels • Detailed business case development for each use case. This report represents a strategic vision that will be refined through stakeholder engagement and detailed analysis.</Callout>
 
 <Callout title="Strategic Opportunity" type="info">
 Comcast possesses unparalleled data assets with 32M+ subscribers, 125M households reached, and petabytes of data flowing through our networks daily. Our current data monetization efforts—while successful—represent a fraction of the potential $2B+ opportunity in AI-driven transformation.

@@ -19,8 +19,8 @@ const COLORS = {
 };
 
 // Expandable Callout Component
-export function Callout({ title, children, type = 'info' }: { title: string; children: React.ReactNode; type?: 'info' | 'success' | 'warning' | 'danger' }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export function Callout({ title, children, type = 'info', defaultExpanded = false }: { title: string; children: React.ReactNode; type?: 'info' | 'success' | 'warning' | 'danger'; defaultExpanded?: boolean }) {
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   
   const colors = {
     info: 'border-blue-500 bg-blue-500/10',
