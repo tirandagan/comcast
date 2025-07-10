@@ -147,6 +147,8 @@
 
 ### Bug Fixes
 - **Removed Duplicate Title**: Fixed issue where the document title appeared twice at the top
+  - Automatically removes first H1 if it matches the extracted title
+  - Prevents duplicate display in the rendered output
 
 ### UI/UX Updates
 - **Copy Modal Design**:
@@ -166,6 +168,40 @@
 - Maintains selection range for formatted content
 - Improved notification system with dynamic colors
 - Clean modal state management
+
+---
+
+## Version 1.1.3 - mdtohtml Final Improvements (January 10, 2025)
+
+### Bug Fixes
+- **Fixed Duplicate Title Display**:
+  - Automatically removes first H1 from content if it matches the document title
+  - Prevents title from appearing twice (once in browser tab, once in content)
+  - Smart detection ensures only duplicate titles are removed
+
+- **Improved Heading Search Highlights**:
+  - Fixed contrast issue when highlighting headings (H1-H6)
+  - Search highlights in headings now use transparent backgrounds
+  - Preserves original heading colors and gradients
+  - Added text shadow for better readability
+  - Current match in headings has stronger visual indicator with outline
+
+### Technical Improvements
+- Enhanced title extraction logic
+- Uses transparency instead of solid colors for heading highlights
+- Maintains visual hierarchy while showing search results
+- Better accessibility with improved contrast ratios
+
+### mdtohtml Utility Summary
+The mdtohtml converter now includes:
+- Dark theme optimized for readability
+- Advanced search with highlighting and navigation
+- Floating Print and Copy buttons
+- Copy format selection (rich text vs markdown)
+- Smart title handling to prevent duplication
+- Improved search contrast for all text elements
+- Table of contents with configurable depth
+- Mobile-responsive design
 
 ---
 

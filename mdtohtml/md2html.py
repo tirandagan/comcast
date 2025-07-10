@@ -74,6 +74,18 @@ class MarkdownToHtmlConverter:
         # Get title from first H1 or filename
         title = self._extract_title(md_content, markdown_file)
         
+        # Remove the first H1 from content if it matches the title
+        # This prevents duplicate title display
+        import re as regex
+        h1_pattern = r'^<h1[^>]*>.*?</h1>\s*'
+        first_h1_match = regex.match(h1_pattern, html_content, regex.IGNORECASE | regex.DOTALL)
+        if first_h1_match:
+            # Extract text content from the H1 tag
+            h1_text = regex.sub(r'<[^>]+>', '', first_h1_match.group(0)).strip()
+            # If it matches our title, remove it
+            if h1_text == title:
+                html_content = html_content[first_h1_match.end():]
+        
         # Get code highlighting CSS
         pygments_css = HtmlFormatter(style='github-dark').get_style_defs('.highlight')
         
@@ -379,6 +391,24 @@ class MarkdownToHtmlConverter:
             background-color: #f97316 !important;
             color: white !important;
             box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4);
+        }}
+        
+        /* Special handling for highlighted text within headings */
+        h1 .search-highlight, h2 .search-highlight, h3 .search-highlight, 
+        h4 .search-highlight, h5 .search-highlight, h6 .search-highlight {{
+            background-color: rgba(251, 191, 36, 0.3) !important;  /* Yellow with transparency */
+            color: inherit !important;  /* Keep the heading's gradient color */
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);  /* Add shadow for contrast */
+            padding: 4px 8px;
+        }}
+        
+        h1 .search-highlight.current, h2 .search-highlight.current, h3 .search-highlight.current,
+        h4 .search-highlight.current, h5 .search-highlight.current, h6 .search-highlight.current {{
+            background-color: rgba(249, 115, 22, 0.4) !important;  /* Orange with transparency */
+            color: inherit !important;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 1);  /* Stronger shadow */
+            outline: 2px solid #f97316;
+            outline-offset: 4px;
         }}
         
         /* Table of Contents */

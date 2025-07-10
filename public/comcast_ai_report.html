@@ -179,6 +179,24 @@
             box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4);
         }
         
+        /* Special handling for highlighted text within headings */
+        h1 .search-highlight, h2 .search-highlight, h3 .search-highlight, 
+        h4 .search-highlight, h5 .search-highlight, h6 .search-highlight {
+            background-color: rgba(251, 191, 36, 0.3) !important;  /* Yellow with transparency */
+            color: inherit !important;  /* Keep the heading's gradient color */
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);  /* Add shadow for contrast */
+            padding: 4px 8px;
+        }
+        
+        h1 .search-highlight.current, h2 .search-highlight.current, h3 .search-highlight.current,
+        h4 .search-highlight.current, h5 .search-highlight.current, h6 .search-highlight.current {
+            background-color: rgba(249, 115, 22, 0.4) !important;  /* Orange with transparency */
+            color: inherit !important;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 1);  /* Stronger shadow */
+            outline: 2px solid #f97316;
+            outline-offset: 4px;
+        }
+        
         /* Table of Contents */
         .toc {
             padding: 1rem;
@@ -234,16 +252,6 @@
             min-height: 100vh;
         }
         
-        /* Header */
-        .content-header {
-            margin-bottom: 2rem;
-            padding: 1.5rem 2rem;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-lg);
-        }
         
         /* Floating action buttons */
         .floating-actions {
@@ -888,11 +896,6 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
         
         <!-- Main content -->
         <main class="main-content">
-            <div class="content-header">
-                <h1 style="margin: 0; border: none; padding: 0;">Transforming Comcast Through Data &amp; AI: A Strategic Vision</h1>
-                <p style="margin: 0.5rem 0 0 0; color: var(--text-tertiary); font-size: 0.875rem;">AI-Powered Innovation Strategy Report</p>
-            </div>
-            
             <article id="content" style="background: transparent; color: var(--text-primary);">
                 <h1 id="transforming-comcast-through-data-ai-a-strategic-vision">Transforming Comcast Through Data &amp; AI: A Strategic Vision</h1>
 <h2 id="executive-summary">Executive Summary</h2>

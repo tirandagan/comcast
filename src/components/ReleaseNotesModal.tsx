@@ -10,10 +10,37 @@ interface ReleaseNotesModalProps {
 
 const releaseNotes = [
   {
+    version: '1.1.3',
+    date: 'January 10, 2025',
+    title: 'mdtohtml Final Improvements',
+    current: true,
+    sections: [
+      {
+        title: 'Bug Fixes',
+        icon: <Bug className="w-5 h-5" />,
+        color: 'text-green-400',
+        items: [
+          'Fixed duplicate title display: Smart removal of first H1 if it matches document title',
+          'Improved heading search highlights: Better contrast with transparent backgrounds',
+          'Enhanced accessibility with improved contrast ratios'
+        ]
+      },
+      {
+        title: 'Technical Improvements',
+        icon: <Zap className="w-5 h-5" />,
+        color: 'text-blue-400',
+        items: [
+          'Enhanced title extraction logic',
+          'Transparent highlighting preserves heading colors',
+          'Maintains visual hierarchy during search'
+        ]
+      }
+    ]
+  },
+  {
     version: '1.1.2',
     date: 'January 10, 2025',
     title: 'Copy Options Enhancement',
-    current: true,
     sections: [
       {
         title: 'New Features',
