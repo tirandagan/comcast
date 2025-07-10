@@ -10,10 +10,27 @@ interface ReleaseNotesModalProps {
 
 const releaseNotes = [
   {
+    version: '1.1.4',
+    date: 'January 10, 2025',
+    title: 'UI Enhancements',
+    current: true,
+    sections: [
+      {
+        title: 'UI/UX Updates',
+        icon: <Package className="w-5 h-5" />,
+        color: 'text-purple-400',
+        items: [
+          'Added Cursor IDE to technology stack in About modal',
+          'Text-Only Report button now opens in new tab',
+          'Improved navigation to keep microsite open'
+        ]
+      }
+    ]
+  },
+  {
     version: '1.1.3',
     date: 'January 10, 2025',
     title: 'mdtohtml Final Improvements',
-    current: true,
     sections: [
       {
         title: 'Bug Fixes',

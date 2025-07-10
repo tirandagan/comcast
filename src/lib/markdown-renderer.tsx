@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { 
   Callout, 
-  MetricCard, 
+  MetricCard,
+  KeyTransformationMetrics, 
   RevenueGrowthChart, 
   GlobalPresenceMap,
   SWOTAnalysis,
@@ -90,6 +92,7 @@ import { Chapter5 } from '@/components/chapters/Chapter5';
 
 const componentMap = {
   MetricCard,
+  KeyTransformationMetrics,
   Callout,
   RevenueGrowthChart,
   GlobalPresenceMap,
@@ -167,9 +170,9 @@ export function renderInteractiveMarkdown(content: string) {
     }
   );
   
-  // Replace component tags with content
+  // Replace component tags with content (including nested components)
   processedContent = processedContent.replace(
-    /<(\w+)([^>]*?)>([^<]*)<\/\1>/g,
+    /<(\w+)([^>]*?)>([\s\S]*?)<\/\1>/g,
     (match, componentName, props, content) => {
       return `[[${componentName}${props}|${content}]]`;
     }
@@ -178,6 +181,7 @@ export function renderInteractiveMarkdown(content: string) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
       components={{
         p: ({ children }) => {
           // Check if this paragraph contains our component markers
@@ -231,13 +235,13 @@ export function renderInteractiveMarkdown(content: string) {
           <h4 className="text-lg font-semibold mt-4 mb-2 text-gray-200">{children}</h4>
         ),
         ul: ({ children }) => (
-          <ul className="list-disc list-inside mb-6 space-y-2 text-gray-300">{children}</ul>
+          <ul className="list-disc mb-6 space-y-2 text-gray-300 pl-6">{children}</ul>
         ),
         ol: ({ children }) => (
-          <ol className="list-decimal list-inside mb-6 space-y-2 text-gray-300">{children}</ol>
+          <ol className="list-decimal mb-6 space-y-2 text-gray-300 pl-6">{children}</ol>
         ),
         li: ({ children }) => (
-          <li className="ml-4">{children}</li>
+          <li className="ml-2 leading-relaxed">{children}</li>
         ),
         blockquote: ({ children }) => (
           <blockquote className="border-l-4 border-blue-400 pl-6 py-4 my-6 text-gray-400 italic">
@@ -272,6 +276,10 @@ export function renderInteractiveMarkdown(content: string) {
         hr: () => (
           <hr className="border-white/20 my-8" />
         ),
+        div: ({ children, className }) => {
+          // Support for custom div elements with Tailwind classes
+          return <div className={className}>{children}</div>;
+        },
       }}
     >
       {processedContent}

@@ -74,6 +74,42 @@ export function Callout({ title, children, type = 'info' }: { title: string; chi
   );
 }
 
+// Key Transformation Metrics Component
+export function KeyTransformationMetrics() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+      <MetricCard 
+        title="Revenue Opportunity" 
+        value="$2B+" 
+        change="+500%" 
+        trend="up" 
+        detail="New annual revenue from data products and AI services by 2027" 
+      />
+      <MetricCard 
+        title="Cost Reduction" 
+        value="30%" 
+        change="-$1B+" 
+        trend="down" 
+        detail="Operational cost savings through AI-powered automation" 
+      />
+      <MetricCard 
+        title="Network Efficiency" 
+        value="90%" 
+        change="-90%" 
+        trend="down" 
+        detail="Reduction in network incidents through predictive AI" 
+      />
+      <MetricCard 
+        title="Customer Satisfaction" 
+        value="50%" 
+        change="+50%" 
+        trend="up" 
+        detail="Improvement in NPS through hyper-personalization" 
+      />
+    </div>
+  );
+}
+
 // Interactive Metric Card
 export function MetricCard({ 
   title, 

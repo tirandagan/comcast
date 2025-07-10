@@ -24,12 +24,7 @@ During my tenure at NBCU, I led several groundbreaking initiatives that demonstr
 
 - **Cross-Platform Data Integration**: Led efforts to unify data across NBCU's diverse portfolio, from broadcast networks to theme parks, creating the blueprint for enterprise-wide data strategies that I would later perfect at Cognizant's Industry Solutions Group.
 
-- **FDU AI Rapid Prototyping Program**: Launched an innovative academic-industry partnership with Fairleigh Dickinson University that transforms students into AI practitioners in months, not years. This groundbreaking program upskills students with the latest AI development tools and requires them to build WORKING prototypes within 2 months using AI technologies (both custom-developed and LLM-based solutions). Our success stories include:
-  - **Paramount EVP Research Solution**: Built cutting-edge analytics platform using Nielsen data for Paramount's Executive Vice President of Research
-  - **RSG Contract Intelligence**: Developed AI-powered contract ingestion solution automating legal document processing
-  - **WaterTech Knowledge Management**: Created technical support AI system for a global CPG manufacturer, dramatically reducing resolution times
-
-This unique combination of Comcast insider knowledge, proven AI implementation experience, academic innovation leadership, and enterprise-scale transformation expertise positions me to lead Comcast's evolution into a data-driven powerhouse. I understand not just the technical challenges, but the cultural and organizational dynamics that will determine success. My FDU program demonstrates exactly how to rapidly build AI talent at scale - a model we can replicate internally at Comcast.
+This unique combination of Comcast insider knowledge, proven AI implementation experience, and enterprise-scale transformation expertise positions me to lead Comcast's evolution into a data-driven powerhouse. I understand not just the technical challenges, but the cultural and organizational dynamics that will determine success.
 
 ## Chapter 1: Data & AI at Comcast - Current State and Vision
 
