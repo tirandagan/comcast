@@ -127,9 +127,9 @@ export async function GET(request: NextRequest) {
       
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
       const magicLink = `${baseUrl}/api/auth/verify?token=${signInToken}`;
-      await sendApprovalEmail(user.email, true, magicLink);
+      await sendApprovalEmail(user.email, true, magicLink, user.name);
     } else {
-      await sendApprovalEmail(user.email, false);
+      await sendApprovalEmail(user.email, false, undefined, user.name);
     }
     
     // Return HTML response for better UX

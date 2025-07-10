@@ -266,7 +266,7 @@ export async function sendAdminNotification(user: {
   }
 }
 
-export async function sendApprovalEmail(email: string, approved: boolean, magicLink?: string) {
+export async function sendApprovalEmail(email: string, approved: boolean, magicLink?: string, userName?: string) {
   const subject = approved ? 'Registration Approved' : 'Registration Denied';
   const message = approved 
     ? 'Great news! Your registration has been approved.'
@@ -306,7 +306,7 @@ export async function sendApprovalEmail(email: string, approved: boolean, magicL
           </div>
           
           <div style="background: #ffffff; padding: 40px 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-            <p style="color: #1e293b; font-size: 18px; margin: 0 0 20px 0;">Dear User,</p>
+            <p style="color: #1e293b; font-size: 18px; margin: 0 0 20px 0;">Dear ${userName || 'User'},</p>
             
             <p style="color: #475569; font-size: 16px; line-height: 1.6; margin: 0 0 30px 0;">
               Congratulations! You've been approved to access the exclusive Comcast Data & AI Leadership Report. Explore how we'll transform Comcast into a data-driven powerhouse, unlocking $2B+ in new revenue streams while reducing costs by 30%.
