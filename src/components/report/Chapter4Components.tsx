@@ -96,7 +96,7 @@ export function AIPortfolioMatrix() {
     cat.items.map(item => ({ ...item, category: cat.category, color: cat.color }))
   );
 
-  const statusColors = {
+  const statusColors: Record<string, string> = {
     production: '#10B981',
     pilot: '#F59E0B',
     development: '#3B82F6',
