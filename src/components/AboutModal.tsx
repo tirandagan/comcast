@@ -45,7 +45,7 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
               <div className="flex items-center gap-3">
                 <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium">
                   <Package className="w-4 h-4" />
-                  Version 1.1.4
+                  Version 1.1.5
                 </span>
                 <span className="text-sm text-gray-500">Released January 10, 2025</span>
               </div>
@@ -53,11 +53,11 @@ export function AboutModal({ isOpen, onClose }: AboutModalProps) {
 
             {/* Latest Changes */}
             <div className="mb-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
-              <h4 className="text-sm font-semibold text-blue-400 mb-2">Latest Changes in v1.1.4</h4>
+              <h4 className="text-sm font-semibold text-blue-400 mb-2">Latest Changes in v1.1.5</h4>
               <ul className="text-xs text-gray-300 space-y-1">
-                <li>• Added Cursor IDE to technology stack</li>
-                <li>• Text-Only Report button opens in new tab</li>
-                <li>• Improved navigation experience</li>
+                <li>• Enhanced Executive Summary with biographical content</li>
+                <li>• Key metrics now display in space-saving grid</li>
+                <li>• Important notices expanded by default</li>
               </ul>
             </div>
 

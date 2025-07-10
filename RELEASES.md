@@ -224,7 +224,89 @@ The mdtohtml converter now includes:
 
 ---
 
-## Version 1.2.0 - Planned Features
+## Version 1.1.5 - Content and Layout Improvements (January 10, 2025)
+
+### Content Updates
+- **Executive Summary Enhancements**:
+  - Added "About Tiran" section highlighting NBCU experience and Comcast familiarity
+  - Documented PMI (post-merger integration) involvement
+  - Listed key initiatives: CX AI Analysis (2017), effecTV implementation, cross-platform data integration
+  - Added FDU AI Rapid Prototyping Program details with client success stories
+
+### UI/UX Improvements
+- **Key Transformation Metrics**:
+  - Redesigned to display all 4 metric cards in a single responsive grid row
+  - Saves significant vertical space while maintaining interactivity
+  - Responsive: 4 columns (desktop), 2 columns (tablet), 1 column (mobile)
+
+- **Important Data Validation Notice**:
+  - Now expanded by default for immediate visibility
+  - Ensures critical validation requirements are seen immediately
+
+### Security Enhancements
+- **Protected Report Access**:
+  - Moved comcast_ai_report.md and .html from public directory to secure location
+  - Created secure API endpoint requiring authentication to access reports
+  - Prevents unauthorized access to sensitive strategic information
+  - Added secure content directory to .gitignore
+
+### Technical Changes
+- Fixed markdown list rendering issue (bullets on separate lines)
+- Created dedicated `KeyTransformationMetrics` component for cleaner implementation
+- Added `defaultExpanded` prop to Callout component
+- Updated markdown renderer to properly handle list styling
+- Implemented secure file serving API route with proper authentication checks
+- Updated admin regenerate report function to save to secure location
+
+### Bug Fixes
+- Resolved issue where bullet points appeared on different lines from text
+- Fixed metric cards not displaying in horizontal layout
+- Corrected missing fourth metric card (Customer Satisfaction)
+
+---
+
+## Version 1.2.0 - Security & Authentication Major Release (January 10, 2025)
+
+### Breaking Changes
+- **Report Access Now Requires Authentication**: The strategic Comcast AI report is no longer publicly accessible
+- Report files moved from `/public` directory to secure location
+- All report access now requires user authentication
+
+### Security Enhancements
+- **Protected Report Access**:
+  - Implemented secure API endpoint (`/api/secure-report`) requiring JWT authentication
+  - Strategic report files (markdown and HTML) moved to protected directory
+  - Added authentication checks before serving any report content
+  - Secure content directory excluded from version control
+  
+- **Enhanced Authentication Flow**:
+  - All report requests validate JWT tokens from cookies or Authorization header
+  - Session validation ensures tokens are active and not expired
+  - Proper error handling for unauthorized access attempts
+  - Cache headers prevent unauthorized content caching
+
+### Technical Implementation
+- **Secure API Route**: Created `/api/secure-report/route.ts` with full authentication
+- **File Security**: Reports stored in `/src/content/secure/` (git-ignored)
+- **Admin Functions**: Updated report regeneration to use secure paths
+- **Client Integration**: Report viewer uses authenticated API endpoint
+
+### Migration Guide
+For existing deployments:
+1. Ensure secure content directory exists: `mkdir -p src/content/secure`
+2. Move report files from public to secure location
+3. Update any direct links to use the secure API endpoint
+4. Verify authentication is properly configured
+
+### Impact
+This major release significantly enhances the security posture of the application by:
+- Preventing unauthorized access to sensitive strategic information
+- Ensuring only authenticated users can view the full report
+- Maintaining compliance with corporate data protection policies
+
+---
+
+## Version 1.3.0 - Planned Features
 
 ### Upcoming Features
 - Export report as PDF functionality

@@ -51,10 +51,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Define paths
+    // Define paths - now saving to secure location
     const projectRoot = process.cwd();
     const markdownPath = path.join(projectRoot, 'design', 'comcast_ai_report.md');
-    const outputPath = path.join(projectRoot, 'public', 'comcast_ai_report.html');
+    const outputPath = path.join(projectRoot, 'src', 'content', 'secure', 'comcast_ai_report.html');
+    
+    // Also update the markdown copy in secure location
+    const fs = require('fs').promises;
+    const secureMarkdownPath = path.join(projectRoot, 'src', 'content', 'secure', 'comcast_ai_report.md');
+    await fs.copyFile(markdownPath, secureMarkdownPath);
 
     // Convert markdown to HTML using Node.js
     try {

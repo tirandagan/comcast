@@ -10,10 +10,37 @@ interface ReleaseNotesModalProps {
 
 const releaseNotes = [
   {
+    version: '1.1.5',
+    date: 'January 10, 2025',
+    title: 'Content and Layout Improvements',
+    current: true,
+    sections: [
+      {
+        title: 'Content Updates',
+        icon: <Package className="w-5 h-5" />,
+        color: 'text-purple-400',
+        items: [
+          'Added "About Tiran" section with NBCU experience',
+          'Documented FDU AI Rapid Prototyping Program',
+          'Listed key client success stories'
+        ]
+      },
+      {
+        title: 'UI/UX Improvements',
+        icon: <Zap className="w-5 h-5" />,
+        color: 'text-blue-400',
+        items: [
+          'Key metrics display in responsive grid layout',
+          'Important Data Validation Notice expanded by default',
+          'Fixed bullet list rendering issues'
+        ]
+      }
+    ]
+  },
+  {
     version: '1.1.4',
     date: 'January 10, 2025',
     title: 'UI Enhancements',
-    current: true,
     sections: [
       {
         title: 'UI/UX Updates',

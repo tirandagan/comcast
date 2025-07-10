@@ -16,16 +16,18 @@ This report outlines a comprehensive strategy to:
 
 My deep understanding of Comcast's culture and operations comes from firsthand experience. As a former member of NBCUniversal's strategy team, I was directly involved in the post-merger integration (PMI) following Comcast's acquisition, working closely with executives from both organizations to align strategic initiatives and drive synergies.
 
-During my tenure at NBCU, I led several groundbreaking initiatives that demonstrated the power of AI and data-driven transformation:
+Before joining Cognizant, I pioneered one of the industry's first comprehensive CX AI implementations, analyzing millions of customer interactions to identify pain points and optimization opportunities. This early work laid the foundation for what would become industry best practices in AI-driven customer service. 
 
-- **Customer Experience AI Analysis (2017)**: Pioneered one of the industry's first comprehensive CX AI implementations, analyzing millions of customer interactions to identify pain points and optimization opportunities. This early work laid the foundation for what would become industry best practices in AI-driven customer service.
+As CDO and head of Global Industry Solutions for CMT my team covered 11 industry segments. We led several groundbreaking initiatives at Comcast that demonstrated the power of AI and data-driven transformation with Comcast:
+
 
 - **effecTV Implementation for Spectrum Reach**: My team drove the implementation of effecTV, an innovative addressable TV advertising platform that revolutionized how local advertisers could target audiences. [Watch our implementation showcase](https://www.youtube.com/watch?v=JCN45rtHckA&t=31s) to see how we transformed traditional TV advertising into a data-driven, measurable medium.
 
-- **Cross-Platform Data Integration**: Led efforts to unify data across NBCU's diverse portfolio, from broadcast networks to theme parks, creating the blueprint for enterprise-wide data strategies that I would later perfect at Cognizant's Industry Solutions Group.
+This unique combination of Comcast insider knowledge, proven AI implementation experience, and enterprise-scale transformation expertise positions me to lead Comcast's evolution into a data-driven powerhouse. I understand not just the technical challenges, but the cultural and organizational dynamics that will determine success.
 
-- **FDU AI Rapid Prototyping Program**: Launched an innovative academic-industry partnership with Fairleigh Dickinson University that transforms students into AI practitioners in months, not years. This groundbreaking program upskills students with the latest AI development tools and requires them to build WORKING prototypes within 2 months using AI technologies (both custom-developed and LLM-based solutions). Our success stories include:
-  - **Paramount EVP Research Solution**: Built cutting-edge analytics platform using Nielsen data for Paramount's Executive Vice President of Research
+### **FDU AI Rapid Prototyping Program**
+I launched an innovative academic-industry partnership with Fairleigh Dickinson University that transforms students into AI practitioners in months, not years. This groundbreaking program upskills students with the latest AI development tools and requires them to build WORKING prototypes within 2 months using AI technologies (both custom-developed and LLM-based solutions). Our success stories include:
+  - **Paramount**: Built cutting-edge LLM-based insights on the drivers for patterns in  Nielsen TV viewing for Paramount's Executive Vice President of Research
   - **RSG Contract Intelligence**: Developed AI-powered contract ingestion solution automating legal document processing
   - **WaterTech Knowledge Management**: Created technical support AI system for a global CPG manufacturer, dramatically reducing resolution times
 
