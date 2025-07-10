@@ -24,7 +24,7 @@ export interface Section {
 
 // Cache the parsed report to avoid re-parsing on every request
 export const getFullReport = cache(() => {
-  const reportPath = path.join(process.cwd(), 'design/sutherland_report.md');
+  const reportPath = path.join(process.cwd(), 'design/comcast_ai_report.md');
   const reportContent = fs.readFileSync(reportPath, 'utf-8');
   return reportContent;
 });

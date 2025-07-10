@@ -74,16 +74,16 @@ export default function LandingPage() {
           >
             <div className="flex items-center justify-center gap-2 mb-6">
               <Brain className="w-8 h-8 text-blue-400" />
-              <span className="text-blue-400 font-semibold tracking-wider">SUTHERLAND GLOBAL SERVICES</span>
+              <span className="text-blue-400 font-semibold tracking-wider">COMCAST DATA & AI TRANSFORMATION</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
-              AI Innovation Roadmap
+              Data & AI Leadership Vision
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Discover how Sutherland is transforming into an AI-powered innovation leader through rapid prototyping, 
-              strategic partnerships, and industry-centric solutions.
+              Transforming Comcast into a data-driven powerhouse. Unlocking $2B+ in new revenue streams 
+              through unified data platforms, AI at scale, and cultural transformation.
             </p>
 
             <motion.div
@@ -178,10 +178,10 @@ export default function LandingPage() {
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               {[
-                { icon: Zap, value: '2 weeks', label: 'Prototype Delivery' },
-                { icon: TrendingUp, value: '75%', label: 'Faster Development' },
-                { icon: Users, value: '40,000+', label: 'Global Employees' },
-                { icon: Sparkles, value: '200+', label: 'AI Patents' },
+                { icon: Zap, value: '$2B+', label: 'New Revenue Target' },
+                { icon: TrendingUp, value: '30%', label: 'Cost Reduction' },
+                { icon: Users, value: '32M+', label: 'Subscribers' },
+                { icon: Sparkles, value: '100TB+', label: 'Daily Data Processing' },
               ].map((metric, i) => (
                 <div key={i} className="text-center">
                   <metric.icon className="w-8 h-8 mx-auto mb-2 text-blue-400" />
@@ -219,19 +219,19 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Industry-Centric Innovation',
-                  description: 'Transform fragmented innovation efforts into a cohesive strategy aligned with vertical-specific client needs.',
-                  quote: '"Sutherland can differentiate by becoming the fastest, most client-centric AI innovation partner in the BPO space."'
+                  title: 'Unified Data Platform',
+                  description: 'Build the Comcast Intelligence Platform (CIP) to unify fragmented data assets across all business units into a single source of truth.',
+                  quote: '"Processing 100TB+ daily with sub-second latency across 50,000 edge nodes."'
                 },
                 {
-                  title: 'AI Development Accelerators',
-                  description: 'Deploy tools like Cursor AI and GitHub Copilot to achieve 50-75% productivity gains.',
-                  quote: '"Reduce prototype development cycles from months to 2-4 weeks."'
+                  title: 'AI-First Transformation',
+                  description: 'Deploy 20+ high-impact AI use cases across customer experience, network operations, and content creation.',
+                  quote: '"$500M in quick wins within 18 months, scaling to $2B+ annually."'
                 },
                 {
-                  title: 'Strategic Partnerships',
-                  description: 'Build an ecosystem with hyperscalers, AI platforms, and startups for multiplied innovation capacity.',
-                  quote: '"First-mover advantage in client capability building creates sustainable competitive advantage."'
+                  title: 'Proven Leadership',
+                  description: 'Leverage my experience building Cognizant\'s ISG from $0 to $200M, leading 400 professionals in AI transformation.',
+                  quote: '"Building a 600-person AI Center of Excellence and upskilling 5,000 employees."'
                 },
               ].map((item, i) => (
                 <motion.div
@@ -264,9 +264,9 @@ export default function LandingPage() {
           viewport={{ once: true }}
         >
           <Shield className="w-12 h-12 mx-auto mb-4 text-blue-400" />
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Innovation Strategy?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to Lead Comcast's AI Revolution?</h2>
           <p className="text-xl text-gray-300 mb-8">
-            Get exclusive access to the complete AI Innovation Roadmap and discover how Sutherland can lead the next wave of business transformation.
+            Explore the comprehensive strategy to transform Comcast into the industry's first truly intelligent network company.
           </p>
           <Link href="/register">
             <motion.button

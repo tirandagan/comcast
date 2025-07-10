@@ -63,7 +63,7 @@ export default function ReportLayout({
             
             <Link href="/" className="flex items-center gap-2">
               <Book className="w-6 h-6 text-blue-400" />
-              <span className="font-semibold hidden sm:inline">Sutherland AI Innovation</span>
+              <span className="font-semibold hidden sm:inline">Comcast Data & AI Vision</span>
             </Link>
           </div>
 
@@ -74,8 +74,8 @@ export default function ReportLayout({
               </span>
             )}
             <a
-              href="/design/sutherland_report.html"
-              target="sutherland_report_window"
+              href="/design/comcast_ai_report.md"
+              target="comcast_report_window"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-md transition-all duration-200 shadow-lg hover:shadow-xl"
               title="View Complete Report"
