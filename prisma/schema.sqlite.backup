@@ -1,0 +1,226 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  name              String
+  title             String
+  phone             String
+  password          String?   // For admin accounts only
+  role              Role      @default(USER)
+  registrationStatus RegistrationStatus @default(PENDING)
+  emailVerified     DateTime?
+  verificationToken String?
+  banned            Boolean   @default(false)
+  bannedAt          DateTime?
+  bannedReason      String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  lastLoginAt       DateTime?
+  
+  // Relations
+  sessions          Session[]
+  activities        UserActivity[]
+  progress          UserProgress[]
+  annotations       UserAnnotation[]
+  bookmarks         UserBookmark[]
+  approvals         RegistrationApproval[]
+  approvedBy        RegistrationApproval[] @relation("ApprovedBy")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+}
+
+model RegistrationApproval {
+  id         String   @id @default(cuid())
+  userId     String
+  approvedBy String?
+  status     ApprovalStatus
+  reason     String?
+  createdAt  DateTime @default(now())
+  
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  approver   User?    @relation("ApprovedBy", fields: [approvedBy], references: [id])
+  
+  @@index([userId])
+  @@index([approvedBy])
+}
+
+model Chapter {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  order       Int
+  description String?
+  content     String   // This would be markdown or rich text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  sections    Section[]
+  progress    UserProgress[]
+  annotations UserAnnotation[]
+  bookmarks   UserBookmark[]
+}
+
+model Section {
+  id          String   @id @default(cuid())
+  chapterId   String
+  title       String
+  slug        String
+  order       Int
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  progress    UserProgress[]
+  annotations UserAnnotation[]
+  
+  @@unique([chapterId, slug])
+  @@index([chapterId])
+}
+
+model UserActivity {
+  id           String   @id @default(cuid())
+  userId       String
+  sessionId    String?
+  activityType ActivityType
+  metadata     String   // JSON string for flexible data
+  timestamp    DateTime @default(now())
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([timestamp])
+}
+
+model UserProgress {
+  id                String   @id @default(cuid())
+  userId            String
+  chapterId         String
+  sectionId         String?
+  progressPercentage Float   @default(0)
+  timeSpent         Int     @default(0) // in seconds
+  lastViewedAt      DateTime @default(now())
+  completedAt       DateTime?
+  
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter           Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  section           Section? @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, chapterId, sectionId])
+  @@index([userId])
+  @@index([chapterId])
+}
+
+model UserAnnotation {
+  id        String   @id @default(cuid())
+  userId    String
+  chapterId String
+  sectionId String?
+  content   String   // The highlighted text
+  annotation String? // User's note
+  position  String   // JSON with exact position data
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  section   Section? @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([chapterId])
+}
+
+model UserBookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  chapterId String
+  title     String?
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, chapterId])
+  @@index([userId])
+}
+
+// Analytics aggregation tables
+model DailyAnalytics {
+  id               String   @id @default(cuid())
+  date             DateTime @unique
+  totalUsers       Int      @default(0)
+  activeUsers      Int      @default(0)
+  newRegistrations Int      @default(0)
+  avgSessionTime   Float    @default(0)
+  totalPageViews   Int      @default(0)
+  metadata         String?  // JSON for additional metrics
+  createdAt        DateTime @default(now())
+  
+  @@index([date])
+}
+
+model ContentPerformance {
+  id               String   @id @default(cuid())
+  chapterId        String
+  date             DateTime
+  views            Int      @default(0)
+  avgTimeSpent     Float    @default(0)
+  completionRate   Float    @default(0)
+  engagementScore  Float    @default(0)
+  createdAt        DateTime @default(now())
+  
+  @@unique([chapterId, date])
+  @@index([chapterId])
+  @@index([date])
+}
+
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum ActivityType {
+  PAGE_VIEW
+  CLICK
+  SCROLL
+  INTERACTION
+  DOWNLOAD
+  ANNOTATION
+  BOOKMARK
+  SHARE
+  QUIZ_ATTEMPT
+  VIDEO_PLAY
+  CHART_INTERACTION
+}

@@ -1,0 +1,8 @@
+markdown2
+reportlab
+PyPDF2
+python-slugify
+click
+beautifulsoup4
+lxml
+pillow

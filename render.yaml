@@ -1,0 +1,50 @@
+services:
+  # Web service for the Next.js app
+  - type: web
+    name: sutherland-ai-microsite
+    runtime: node
+    plan: free # or 'starter' for paid plan
+    buildCommand: npm install && npm run build && npx prisma generate && npx prisma db push
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # Set this in Render dashboard
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false # Set this in Render dashboard (e.g., https://your-app.onrender.com)
+      - key: JWT_SECRET
+        generateValue: true # Render will generate a secure random value
+      - key: ADMIN_EMAIL
+        value: tiran@tirandagan.com
+      - key: ADMIN_NAME
+        value: Tiran Dagan
+      # Email settings - configure in Render dashboard
+      - key: ENABLE_EMAIL_NOTIFICATIONS
+        value: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_SECURE
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      # Feature flags
+      - key: REQUIRE_EMAIL_VERIFICATION
+        value: false
+      - key: AUTO_APPROVE_REGISTRATIONS
+        value: false
+      - key: ENABLE_ANALYTICS
+        value: false
+
+# If you want to use PostgreSQL instead of SQLite (recommended for production)
+# databases:
+#   - name: sutherland-db
+#     plan: free # or 'starter' for paid plan
+#     databaseName: sutherland
+#     user: sutherland

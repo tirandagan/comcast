@@ -1,0 +1,240 @@
+// This is your Prisma schema file for Supabase (PostgreSQL)
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  name              String
+  title             String
+  phone             String
+  password          String?   // For admin accounts only
+  role              Role      @default(USER)
+  registrationStatus RegistrationStatus @default(PENDING)
+  emailVerified     DateTime? @db.Timestamptz(3)
+  verificationToken String?
+  banned            Boolean   @default(false)
+  bannedAt          DateTime? @db.Timestamptz(3)
+  bannedReason      String?
+  createdAt         DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime  @updatedAt @db.Timestamptz(3)
+  lastLoginAt       DateTime? @db.Timestamptz(3)
+  
+  // Relations
+  sessions          Session[]
+  activities        UserActivity[]
+  progress          UserProgress[]
+  annotations       UserAnnotation[]
+  bookmarks         UserBookmark[]
+  approvals         RegistrationApproval[]
+  approvedBy        RegistrationApproval[] @relation("ApprovedBy")
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime @db.Timestamptz(3)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@map("sessions")
+}
+
+model RegistrationApproval {
+  id         String   @id @default(cuid())
+  userId     String
+  approvedBy String?
+  status     ApprovalStatus
+  reason     String?
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  approver   User?    @relation("ApprovedBy", fields: [approvedBy], references: [id])
+  
+  @@index([userId])
+  @@index([approvedBy])
+  @@map("registration_approvals")
+}
+
+model Chapter {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  order       Int
+  description String?
+  content     String   @db.Text // PostgreSQL text type for large content
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+  
+  sections    Section[]
+  progress    UserProgress[]
+  annotations UserAnnotation[]
+  bookmarks   UserBookmark[]
+
+  @@map("chapters")
+}
+
+model Section {
+  id          String   @id @default(cuid())
+  chapterId   String
+  title       String
+  slug        String
+  order       Int
+  content     String   @db.Text
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+  
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  progress    UserProgress[]
+  annotations UserAnnotation[]
+  
+  @@unique([chapterId, slug])
+  @@index([chapterId])
+  @@map("sections")
+}
+
+model UserActivity {
+  id           String   @id @default(cuid())
+  userId       String
+  sessionId    String?
+  activityType ActivityType
+  metadata     Json     @default("{}") // PostgreSQL JSON type
+  timestamp    DateTime @default(now()) @db.Timestamptz(3)
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([timestamp])
+  @@map("user_activities")
+}
+
+model UserProgress {
+  id                String   @id @default(cuid())
+  userId            String
+  chapterId         String
+  sectionId         String?
+  progressPercentage Float   @default(0)
+  timeSpent         Int     @default(0) // in seconds
+  lastViewedAt      DateTime @default(now()) @db.Timestamptz(3)
+  completedAt       DateTime? @db.Timestamptz(3)
+  
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter           Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  section           Section? @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, chapterId, sectionId])
+  @@index([userId])
+  @@index([chapterId])
+  @@map("user_progress")
+}
+
+model UserAnnotation {
+  id        String   @id @default(cuid())
+  userId    String
+  chapterId String
+  sectionId String?
+  content   String   @db.Text // The highlighted text
+  annotation String? @db.Text // User's note
+  position  Json     // JSON with exact position data
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  section   Section? @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([chapterId])
+  @@map("user_annotations")
+}
+
+model UserBookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  chapterId String
+  title     String?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, chapterId])
+  @@index([userId])
+  @@map("user_bookmarks")
+}
+
+// Analytics aggregation tables
+model DailyAnalytics {
+  id               String   @id @default(cuid())
+  date             DateTime @unique @db.Date
+  totalUsers       Int      @default(0)
+  activeUsers      Int      @default(0)
+  newRegistrations Int      @default(0)
+  avgSessionTime   Float    @default(0)
+  totalPageViews   Int      @default(0)
+  metadata         Json?    // JSON for additional metrics
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  
+  @@index([date])
+  @@map("daily_analytics")
+}
+
+model ContentPerformance {
+  id               String   @id @default(cuid())
+  chapterId        String
+  date             DateTime @db.Date
+  views            Int      @default(0)
+  avgTimeSpent     Float    @default(0)
+  completionRate   Float    @default(0)
+  engagementScore  Float    @default(0)
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  
+  @@unique([chapterId, date])
+  @@index([chapterId])
+  @@index([date])
+  @@map("content_performance")
+}
+
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum ActivityType {
+  PAGE_VIEW
+  CLICK
+  SCROLL
+  INTERACTION
+  DOWNLOAD
+  ANNOTATION
+  BOOKMARK
+  SHARE
+  QUIZ_ATTEMPT
+  VIDEO_PLAY
+  CHART_INTERACTION
+}
