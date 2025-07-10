@@ -3,635 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comcast Ai Report</title>
-    
-    <!-- Modern CSS Framework inspiration -->
-    <style>
-        /* CSS Variables for theming - Matching Sutherland AI Innovation microsite */
-        :root {
-            --primary-color: #3b82f6;  /* blue-500 */
-            --secondary-color: #1e40af; /* blue-800 */
-            --accent-color: #60a5fa;    /* blue-400 */
-            --success-color: #10b981;   /* green-500 */
-            --warning-color: #f59e0b;   /* amber-500 */
-            --danger-color: #ef4444;    /* red-500 */
-            
-            /* Dark theme by default to match microsite */
-            --bg-primary: #0f172a;      /* slate-900 */
-            --bg-secondary: #1e293b;    /* slate-800 */
-            --bg-tertiary: #334155;     /* slate-700 */
-            --bg-gradient: linear-gradient(to bottom right, #0f172a, #1e3a8a, #0f172a);
-            
-            --text-primary: #f8fafc;    /* slate-50 */
-            --text-secondary: #cbd5e1;  /* slate-300 */
-            --text-tertiary: #94a3b8;   /* slate-400 */
-            
-            --border-color: #334155;  /* slate-700 */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-            
-            --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-            --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
-        }
-        
-        /* Remove dark mode media query - always use dark theme */
-        
-        /* Base reset and typography */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: var(--font-sans);
-            color: var(--text-primary);
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        /* Layout structure */
-        .app-container {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Sidebar navigation */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            height: 100vh;
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            overflow-y: auto;
-            transform: translateX(0);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .sidebar-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .search-container {
-            position: relative;
-            margin-top: 1rem;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 0.5rem 2.5rem 0.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            background-color: rgba(30, 41, 59, 0.5);
-            color: var(--text-primary);
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-            background-color: rgba(30, 41, 59, 0.8);
-        }
-        
-        .search-icon {
-            position: absolute;
-            right: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-        }
-        
-        /* Table of Contents */
-        .toc {
-            padding: 1rem;
-        }
-        
-        .toc ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .toc ul ul {
-            padding-left: 1.5rem;
-        }
-        
-        .toc li {
-            margin: 0.25rem 0;
-        }
-        
-        .toc a {
-            display: block;
-            padding: 0.375rem 0.75rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 0.375rem;
-            transition: all 0.2s;
-            font-size: 0.875rem;
-        }
-        
-        .toc a:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
-        }
-        
-        .toc a.active {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: var(--accent-color);
-            font-weight: 500;
-            border-left: 3px solid var(--primary-color);
-            padding-left: calc(0.75rem - 3px);
-        }
-        
-        /* Main content area */
-        .main-content {
-            flex: 1;
-            margin-left: 300px;
-            padding: 2rem 4rem;
-            max-width: 1200px;
-            margin-right: auto;
-            background: rgba(15, 23, 42, 0.3);
-            backdrop-filter: blur(5px);
-            border-radius: 1rem;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-xl);
-        }
-        
-        /* Header with actions */
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-        
-        .action-button svg {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        
-        .action-button span {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        
-        .action-button {
-            padding: 0.5rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.375rem;
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(30, 64, 175, 0.1));
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .action-button:hover {
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.2));
-            border-color: var(--primary-color);
-            color: var(--text-primary);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.3;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            scroll-margin-top: 2rem;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: var(--text-primary);
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-            padding-bottom: 0.5rem;
-        }
-        
-        h2 {
-            font-size: 2rem;
-            color: var(--text-primary);
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            color: var(--text-primary);
-        }
-        
-        h4 {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-        }
-        
-        p {
-            margin-bottom: 1.25rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Links */
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        
-        a:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        
-        /* Lists */
-        ul, ol {
-            margin-bottom: 1.25rem;
-            padding-left: 2rem;
-        }
-        
-        li {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Blockquotes */
-        blockquote {
-            margin: 1.5rem 0;
-            padding: 1rem 1.5rem;
-            border-left: 4px solid var(--primary-color);
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(30, 64, 175, 0.05));
-            border-radius: 0.375rem;
-            box-shadow: var(--shadow-md);
-        }
-        
-        blockquote p {
-            margin-bottom: 0.5rem;
-        }
-        
-        blockquote p:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Code blocks */
-        pre {
-            margin: 1.5rem 0;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            background-color: #0d1117;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        code {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            padding: 0.125rem 0.375rem;
-            background-color: rgba(51, 65, 85, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.25rem;
-            color: #60a5fa;
-        }
-        
-        pre code {
-            display: block;
-            padding: 1rem;
-            background-color: transparent;
-        }
-        
-        /* Tables */
-        table {
-            width: 100%;
-            margin: 1.5rem 0;
-            border-collapse: collapse;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            background: rgba(30, 41, 59, 0.3);
-        }
-        
-        th, td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        th {
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.1));
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            letter-spacing: 0.05em;
-        }
-        
-        tr:last-child td {
-            border-bottom: none;
-        }
-        
-        tr:hover {
-            background-color: rgba(59, 130, 246, 0.05);
-        }
-        
-        /* Horizontal rule */
-        hr {
-            margin: 2rem 0;
-            border: none;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 1001;
-            padding: 0.5rem;
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.2));
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.375rem;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
-        
-        /* Progress indicator */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: rgba(30, 41, 59, 0.5);
-            z-index: 999;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            width: 0%;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: 1rem;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-        }
-        
-        /* Print styles */
-        @media print {
-            .sidebar, .menu-toggle, .progress-bar, .header-actions {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                max-width: 100%;
-            }
-        }
-        
-        /* Syntax highlighting (Pygments) */
-        pre { line-height: 125%; }
-td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
-.highlight .hll { background-color: #6e7681 }
-.highlight { background: #0d1117; color: #E6EDF3 }
-.highlight .c { color: #8B949E; font-style: italic } /* Comment */
-.highlight .err { color: #F85149 } /* Error */
-.highlight .esc { color: #E6EDF3 } /* Escape */
-.highlight .g { color: #E6EDF3 } /* Generic */
-.highlight .k { color: #FF7B72 } /* Keyword */
-.highlight .l { color: #A5D6FF } /* Literal */
-.highlight .n { color: #E6EDF3 } /* Name */
-.highlight .o { color: #FF7B72; font-weight: bold } /* Operator */
-.highlight .x { color: #E6EDF3 } /* Other */
-.highlight .p { color: #E6EDF3 } /* Punctuation */
-.highlight .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
-.highlight .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
-.highlight .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
-.highlight .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
-.highlight .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
-.highlight .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
-.highlight .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
-.highlight .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
-.highlight .gr { color: #FFA198 } /* Generic.Error */
-.highlight .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
-.highlight .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
-.highlight .go { color: #8B949E } /* Generic.Output */
-.highlight .gp { color: #8B949E } /* Generic.Prompt */
-.highlight .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
-.highlight .gu { color: #79C0FF } /* Generic.Subheading */
-.highlight .gt { color: #FF7B72 } /* Generic.Traceback */
-.highlight .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
-.highlight .kc { color: #79C0FF } /* Keyword.Constant */
-.highlight .kd { color: #FF7B72 } /* Keyword.Declaration */
-.highlight .kn { color: #FF7B72 } /* Keyword.Namespace */
-.highlight .kp { color: #79C0FF } /* Keyword.Pseudo */
-.highlight .kr { color: #FF7B72 } /* Keyword.Reserved */
-.highlight .kt { color: #FF7B72 } /* Keyword.Type */
-.highlight .ld { color: #79C0FF } /* Literal.Date */
-.highlight .m { color: #A5D6FF } /* Literal.Number */
-.highlight .s { color: #A5D6FF } /* Literal.String */
-.highlight .na { color: #E6EDF3 } /* Name.Attribute */
-.highlight .nb { color: #E6EDF3 } /* Name.Builtin */
-.highlight .nc { color: #F0883E; font-weight: bold } /* Name.Class */
-.highlight .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
-.highlight .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
-.highlight .ni { color: #FFA657 } /* Name.Entity */
-.highlight .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
-.highlight .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
-.highlight .nn { color: #FF7B72 } /* Name.Namespace */
-.highlight .nx { color: #E6EDF3 } /* Name.Other */
-.highlight .py { color: #79C0FF } /* Name.Property */
-.highlight .nt { color: #7EE787 } /* Name.Tag */
-.highlight .nv { color: #79C0FF } /* Name.Variable */
-.highlight .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
-.highlight .pm { color: #E6EDF3 } /* Punctuation.Marker */
-.highlight .w { color: #6E7681 } /* Text.Whitespace */
-.highlight .mb { color: #A5D6FF } /* Literal.Number.Bin */
-.highlight .mf { color: #A5D6FF } /* Literal.Number.Float */
-.highlight .mh { color: #A5D6FF } /* Literal.Number.Hex */
-.highlight .mi { color: #A5D6FF } /* Literal.Number.Integer */
-.highlight .mo { color: #A5D6FF } /* Literal.Number.Oct */
-.highlight .sa { color: #79C0FF } /* Literal.String.Affix */
-.highlight .sb { color: #A5D6FF } /* Literal.String.Backtick */
-.highlight .sc { color: #A5D6FF } /* Literal.String.Char */
-.highlight .dl { color: #79C0FF } /* Literal.String.Delimiter */
-.highlight .sd { color: #A5D6FF } /* Literal.String.Doc */
-.highlight .s2 { color: #A5D6FF } /* Literal.String.Double */
-.highlight .se { color: #79C0FF } /* Literal.String.Escape */
-.highlight .sh { color: #79C0FF } /* Literal.String.Heredoc */
-.highlight .si { color: #A5D6FF } /* Literal.String.Interpol */
-.highlight .sx { color: #A5D6FF } /* Literal.String.Other */
-.highlight .sr { color: #79C0FF } /* Literal.String.Regex */
-.highlight .s1 { color: #A5D6FF } /* Literal.String.Single */
-.highlight .ss { color: #A5D6FF } /* Literal.String.Symbol */
-.highlight .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
-.highlight .vc { color: #79C0FF } /* Name.Variable.Class */
-.highlight .vg { color: #79C0FF } /* Name.Variable.Global */
-.highlight .vi { color: #79C0FF } /* Name.Variable.Instance */
-.highlight .vm { color: #79C0FF } /* Name.Variable.Magic */
-.highlight .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(30, 41, 59, 0.5);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--text-tertiary);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-secondary);
-        }
-        
-        /* Smooth transitions */
-        * {
-            transition-property: background-color, border-color, color;
-            transition-duration: 0.2s;
-            transition-timing-function: ease;
-        }
-    </style>
-</head>
-<body>
-    <!-- Progress bar -->
-    <div class="progress-bar">
-        <div class="progress-fill"></div>
-    </div>
-    
-    <!-- Mobile menu toggle -->
-    <button class="menu-toggle" onclick="toggleSidebar()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 12h18M3 6h18M3 18h18"></path>
-        </svg>
-    </button>
-    
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-title">Table of Contents</div>
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search..." id="searchInput" onkeyup="performSearch()">
-                    <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                    </svg>
-                </div>
-            </div>
-            <nav class="toc">
-                <div class="toc">
-<ul></ul>
-</div>
-
-            </nav>
-        </aside>
-        
-        <!-- Main content -->
-        <main class="main-content">
-            <div class="content-header">
-                <div>
-                    <h1 style="margin: 0; border: none; padding: 0;">Comcast Ai Report</h1>
-                    <p style="margin: 0.5rem 0 0 0; color: var(--text-tertiary); font-size: 0.875rem;">AI-Powered Innovation Strategy Report</p>
-                </div>
-                <div class="header-actions">
-                    <button class="action-button" onclick="window.print()" title="Print this document">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/>
-                        </svg>
-                        <span style="margin-left: 0.5rem;">Print</span>
-                    </button>
-                    <button class="action-button" onclick="copyLink()" title="Copy link to clipboard">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                        </svg>
-                        <span style="margin-left: 0.5rem;">Share</span>
-                    </button>
-                </div>
-            </div>
-            
-            <article id="content">
-                <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transforming Comcast Through Data &amp; AI: A Strategic Vision</title>
-
+    
     <!-- Modern CSS Framework inspiration -->
     <style>
         /* CSS Variables for theming - Matching Sutherland AI Innovation microsite */
@@ -642,41 +15,41 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             --success-color: #10b981;   /* green-500 */
             --warning-color: #f59e0b;   /* amber-500 */
             --danger-color: #ef4444;    /* red-500 */
-
+            
             /* Dark theme by default to match microsite */
             --bg-primary: #0f172a;      /* slate-900 */
             --bg-secondary: #1e293b;    /* slate-800 */
             --bg-tertiary: #334155;     /* slate-700 */
             --bg-gradient: linear-gradient(to bottom right, #0f172a, #1e3a8a, #0f172a);
-
+            
             --text-primary: #f8fafc;    /* slate-50 */
             --text-secondary: #cbd5e1;  /* slate-300 */
             --text-tertiary: #94a3b8;   /* slate-400 */
-
+            
             --border-color: #334155;  /* slate-700 */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-
+            
             --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
             --font-mono: 'Fira Code', 'Cascadia Code', Consolas, monospace;
         }
-
+        
         /* Remove dark mode media query - always use dark theme */
-
+        
         /* Base reset and typography */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         html {
             font-size: 16px;
             scroll-behavior: smooth;
         }
-
+        
         body {
             font-family: var(--font-sans);
             color: var(--text-primary);
@@ -686,13 +59,13 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             overflow-x: hidden;
             min-height: 100vh;
         }
-
+        
         /* Layout structure */
         .app-container {
             display: flex;
             min-height: 100vh;
         }
-
+        
         /* Sidebar navigation */
         .sidebar {
             position: fixed;
@@ -708,24 +81,24 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             transition: transform 0.3s ease;
             z-index: 1000;
         }
-
+        
         .sidebar-header {
             padding: 1.5rem;
             border-bottom: 1px solid var(--border-color);
         }
-
+        
         .sidebar-title {
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
-
+        
         .search-container {
             position: relative;
             margin-top: 1rem;
         }
-
+        
         .search-input {
             width: 100%;
             padding: 0.5rem 2.5rem 0.5rem 1rem;
@@ -736,14 +109,14 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             font-size: 0.875rem;
             transition: all 0.2s;
         }
-
+        
         .search-input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             background-color: rgba(30, 41, 59, 0.8);
         }
-
+        
         .search-icon {
             position: absolute;
             right: 0.75rem;
@@ -751,25 +124,25 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             transform: translateY(-50%);
             color: var(--text-tertiary);
         }
-
+        
         /* Table of Contents */
         .toc {
             padding: 1rem;
         }
-
+        
         .toc ul {
             list-style: none;
             padding-left: 0;
         }
-
+        
         .toc ul ul {
             padding-left: 1.5rem;
         }
-
+        
         .toc li {
             margin: 0.25rem 0;
         }
-
+        
         .toc a {
             display: block;
             padding: 0.375rem 0.75rem;
@@ -779,12 +152,12 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             transition: all 0.2s;
             font-size: 0.875rem;
         }
-
+        
         .toc a:hover {
             background-color: rgba(59, 130, 246, 0.1);
             color: var(--accent-color);
         }
-
+        
         .toc a.active {
             background-color: rgba(59, 130, 246, 0.2);
             color: var(--accent-color);
@@ -792,7 +165,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border-left: 3px solid var(--primary-color);
             padding-left: calc(0.75rem - 3px);
         }
-
+        
         /* Main content area */
         .main-content {
             flex: 1;
@@ -807,7 +180,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             margin-bottom: 1rem;
             box-shadow: var(--shadow-xl);
         }
-
+        
         /* Header with actions */
         .content-header {
             display: flex;
@@ -821,23 +194,23 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border-radius: 0.75rem;
             box-shadow: var(--shadow-lg);
         }
-
+        
         .header-actions {
             display: flex;
             gap: 0.75rem;
             align-items: center;
         }
-
+        
         .action-button svg {
             display: inline-block;
             vertical-align: middle;
         }
-
+        
         .action-button span {
             display: inline-block;
             vertical-align: middle;
         }
-
+        
         .action-button {
             padding: 0.5rem 1rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -848,7 +221,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             cursor: pointer;
             transition: all 0.2s;
         }
-
+        
         .action-button:hover {
             background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.2));
             border-color: var(--primary-color);
@@ -856,7 +229,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
-
+        
         /* Typography */
         h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
@@ -865,7 +238,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             margin-bottom: 1rem;
             scroll-margin-top: 2rem;
         }
-
+        
         h1 {
             font-size: 2.5rem;
             color: var(--text-primary);
@@ -876,50 +249,50 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border-bottom: 2px solid rgba(59, 130, 246, 0.3);
             padding-bottom: 0.5rem;
         }
-
+        
         h2 {
             font-size: 2rem;
             color: var(--text-primary);
         }
-
+        
         h3 {
             font-size: 1.5rem;
             color: var(--text-primary);
         }
-
+        
         h4 {
             font-size: 1.25rem;
             color: var(--text-secondary);
         }
-
+        
         p {
             margin-bottom: 1.25rem;
             color: var(--text-secondary);
         }
-
+        
         /* Links */
         a {
             color: var(--accent-color);
             text-decoration: none;
             transition: all 0.2s;
         }
-
+        
         a:hover {
             color: var(--primary-color);
             text-decoration: underline;
             text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
-
+        
         /* Lists */
         ul, ol {
             margin-bottom: 1.25rem;
             padding-left: 2rem;
         }
-
+        
         li {
             margin-bottom: 0.5rem;
         }
-
+        
         /* Blockquotes */
         blockquote {
             margin: 1.5rem 0;
@@ -929,15 +302,15 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border-radius: 0.375rem;
             box-shadow: var(--shadow-md);
         }
-
+        
         blockquote p {
             margin-bottom: 0.5rem;
         }
-
+        
         blockquote p:last-child {
             margin-bottom: 0;
         }
-
+        
         /* Code blocks */
         pre {
             margin: 1.5rem 0;
@@ -947,7 +320,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: var(--shadow-lg);
         }
-
+        
         code {
             font-family: var(--font-mono);
             font-size: 0.875rem;
@@ -957,13 +330,13 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             border-radius: 0.25rem;
             color: #60a5fa;
         }
-
+        
         pre code {
             display: block;
             padding: 1rem;
             background-color: transparent;
         }
-
+        
         /* Tables */
         table {
             width: 100%;
@@ -974,13 +347,13 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             box-shadow: var(--shadow-md);
             background: rgba(30, 41, 59, 0.3);
         }
-
+        
         th, td {
             padding: 0.75rem 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
-
+        
         th {
             background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.1));
             font-weight: 600;
@@ -989,22 +362,22 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             font-size: 0.875rem;
             letter-spacing: 0.05em;
         }
-
+        
         tr:last-child td {
             border-bottom: none;
         }
-
+        
         tr:hover {
             background-color: rgba(59, 130, 246, 0.05);
         }
-
+        
         /* Horizontal rule */
         hr {
             margin: 2rem 0;
             border: none;
             border-top: 1px solid var(--border-color);
         }
-
+        
         /* Mobile menu toggle */
         .menu-toggle {
             display: none;
@@ -1019,7 +392,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             cursor: pointer;
             backdrop-filter: blur(10px);
         }
-
+        
         /* Progress indicator */
         .progress-bar {
             position: fixed;
@@ -1030,7 +403,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             background-color: rgba(30, 41, 59, 0.5);
             z-index: 999;
         }
-
+        
         .progress-fill {
             height: 100%;
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
@@ -1038,154 +411,153 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             transition: width 0.3s ease;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
         }
-
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
             }
-
+            
             .sidebar.open {
                 transform: translateX(0);
             }
-
+            
             .main-content {
                 margin-left: 0;
                 padding: 1rem;
             }
-
+            
             .menu-toggle {
                 display: block;
             }
-
+            
             h1 {
                 font-size: 2rem;
             }
-
+            
             h2 {
                 font-size: 1.5rem;
             }
         }
-
+        
         /* Print styles */
         @media print {
             .sidebar, .menu-toggle, .progress-bar, .header-actions {
                 display: none;
             }
-
+            
             .main-content {
                 margin-left: 0;
                 max-width: 100%;
             }
         }
-
+        
         /* Syntax highlighting (Pygments) */
         pre { line-height: 125%; }
 td.linenos .normal { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: #6e7681; background-color: #0d1117; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #c9d1d9; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #c9d1d9; background-color: #6e7681; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: #6e7681 }
-.highlight { background: #0d1117; color: #E6EDF3 }
-.highlight .c { color: #8B949E; font-style: italic } /* Comment */
-.highlight .err { color: #F85149 } /* Error */
-.highlight .esc { color: #E6EDF3 } /* Escape */
-.highlight .g { color: #E6EDF3 } /* Generic */
-.highlight .k { color: #FF7B72 } /* Keyword */
-.highlight .l { color: #A5D6FF } /* Literal */
-.highlight .n { color: #E6EDF3 } /* Name */
-.highlight .o { color: #FF7B72; font-weight: bold } /* Operator */
-.highlight .x { color: #E6EDF3 } /* Other */
-.highlight .p { color: #E6EDF3 } /* Punctuation */
-.highlight .ch { color: #8B949E; font-style: italic } /* Comment.Hashbang */
-.highlight .cm { color: #8B949E; font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Preproc */
-.highlight .cpf { color: #8B949E; font-style: italic } /* Comment.PreprocFile */
-.highlight .c1 { color: #8B949E; font-style: italic } /* Comment.Single */
-.highlight .cs { color: #8B949E; font-weight: bold; font-style: italic } /* Comment.Special */
-.highlight .gd { color: #FFA198; background-color: #490202 } /* Generic.Deleted */
-.highlight .ge { color: #E6EDF3; font-style: italic } /* Generic.Emph */
-.highlight .ges { color: #E6EDF3; font-weight: bold; font-style: italic } /* Generic.EmphStrong */
-.highlight .gr { color: #FFA198 } /* Generic.Error */
-.highlight .gh { color: #79C0FF; font-weight: bold } /* Generic.Heading */
-.highlight .gi { color: #56D364; background-color: #0F5323 } /* Generic.Inserted */
-.highlight .go { color: #8B949E } /* Generic.Output */
-.highlight .gp { color: #8B949E } /* Generic.Prompt */
-.highlight .gs { color: #E6EDF3; font-weight: bold } /* Generic.Strong */
-.highlight .gu { color: #79C0FF } /* Generic.Subheading */
-.highlight .gt { color: #FF7B72 } /* Generic.Traceback */
-.highlight .g-Underline { color: #E6EDF3; text-decoration: underline } /* Generic.Underline */
-.highlight .kc { color: #79C0FF } /* Keyword.Constant */
-.highlight .kd { color: #FF7B72 } /* Keyword.Declaration */
-.highlight .kn { color: #FF7B72 } /* Keyword.Namespace */
-.highlight .kp { color: #79C0FF } /* Keyword.Pseudo */
-.highlight .kr { color: #FF7B72 } /* Keyword.Reserved */
-.highlight .kt { color: #FF7B72 } /* Keyword.Type */
-.highlight .ld { color: #79C0FF } /* Literal.Date */
-.highlight .m { color: #A5D6FF } /* Literal.Number */
-.highlight .s { color: #A5D6FF } /* Literal.String */
-.highlight .na { color: #E6EDF3 } /* Name.Attribute */
-.highlight .nb { color: #E6EDF3 } /* Name.Builtin */
-.highlight .nc { color: #F0883E; font-weight: bold } /* Name.Class */
-.highlight .no { color: #79C0FF; font-weight: bold } /* Name.Constant */
-.highlight .nd { color: #D2A8FF; font-weight: bold } /* Name.Decorator */
-.highlight .ni { color: #FFA657 } /* Name.Entity */
-.highlight .ne { color: #F0883E; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #D2A8FF; font-weight: bold } /* Name.Function */
-.highlight .nl { color: #79C0FF; font-weight: bold } /* Name.Label */
-.highlight .nn { color: #FF7B72 } /* Name.Namespace */
-.highlight .nx { color: #E6EDF3 } /* Name.Other */
-.highlight .py { color: #79C0FF } /* Name.Property */
-.highlight .nt { color: #7EE787 } /* Name.Tag */
-.highlight .nv { color: #79C0FF } /* Name.Variable */
-.highlight .ow { color: #FF7B72; font-weight: bold } /* Operator.Word */
-.highlight .pm { color: #E6EDF3 } /* Punctuation.Marker */
-.highlight .w { color: #6E7681 } /* Text.Whitespace */
-.highlight .mb { color: #A5D6FF } /* Literal.Number.Bin */
-.highlight .mf { color: #A5D6FF } /* Literal.Number.Float */
-.highlight .mh { color: #A5D6FF } /* Literal.Number.Hex */
-.highlight .mi { color: #A5D6FF } /* Literal.Number.Integer */
-.highlight .mo { color: #A5D6FF } /* Literal.Number.Oct */
-.highlight .sa { color: #79C0FF } /* Literal.String.Affix */
-.highlight .sb { color: #A5D6FF } /* Literal.String.Backtick */
-.highlight .sc { color: #A5D6FF } /* Literal.String.Char */
-.highlight .dl { color: #79C0FF } /* Literal.String.Delimiter */
-.highlight .sd { color: #A5D6FF } /* Literal.String.Doc */
-.highlight .s2 { color: #A5D6FF } /* Literal.String.Double */
-.highlight .se { color: #79C0FF } /* Literal.String.Escape */
-.highlight .sh { color: #79C0FF } /* Literal.String.Heredoc */
-.highlight .si { color: #A5D6FF } /* Literal.String.Interpol */
-.highlight .sx { color: #A5D6FF } /* Literal.String.Other */
-.highlight .sr { color: #79C0FF } /* Literal.String.Regex */
-.highlight .s1 { color: #A5D6FF } /* Literal.String.Single */
-.highlight .ss { color: #A5D6FF } /* Literal.String.Symbol */
-.highlight .bp { color: #E6EDF3 } /* Name.Builtin.Pseudo */
-.highlight .fm { color: #D2A8FF; font-weight: bold } /* Name.Function.Magic */
-.highlight .vc { color: #79C0FF } /* Name.Variable.Class */
-.highlight .vg { color: #79C0FF } /* Name.Variable.Global */
-.highlight .vi { color: #79C0FF } /* Name.Variable.Instance */
-.highlight .vm { color: #79C0FF } /* Name.Variable.Magic */
-.highlight .il { color: #A5D6FF } /* Literal.Number.Integer.Long */
-
+.highlight { background: #0d1117; color: #c9d1d9 }
+.highlight .c { color: #8b949e; font-style: italic } /* Comment */
+.highlight .err { color: #f85149 } /* Error */
+.highlight .esc { color: #c9d1d9 } /* Escape */
+.highlight .g { color: #c9d1d9 } /* Generic */
+.highlight .k { color: #ff7b72 } /* Keyword */
+.highlight .l { color: #a5d6ff } /* Literal */
+.highlight .n { color: #c9d1d9 } /* Name */
+.highlight .o { color: #ff7b72; font-weight: bold } /* Operator */
+.highlight .x { color: #c9d1d9 } /* Other */
+.highlight .p { color: #c9d1d9 } /* Punctuation */
+.highlight .ch { color: #8b949e; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #8b949e; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #8b949e; font-weight: bold; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #8b949e; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #8b949e; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #8b949e; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #ffa198; background-color: #490202 } /* Generic.Deleted */
+.highlight .ge { color: #c9d1d9; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #ffa198 } /* Generic.Error */
+.highlight .gh { color: #79c0ff; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #56d364; background-color: #0f5323 } /* Generic.Inserted */
+.highlight .go { color: #8b949e } /* Generic.Output */
+.highlight .gp { color: #8b949e } /* Generic.Prompt */
+.highlight .gs { color: #c9d1d9; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #79c0ff } /* Generic.Subheading */
+.highlight .gt { color: #ff7b72 } /* Generic.Traceback */
+.highlight .g-Underline { color: #c9d1d9; text-decoration: underline } /* Generic.Underline */
+.highlight .kc { color: #79c0ff } /* Keyword.Constant */
+.highlight .kd { color: #ff7b72 } /* Keyword.Declaration */
+.highlight .kn { color: #ff7b72 } /* Keyword.Namespace */
+.highlight .kp { color: #79c0ff } /* Keyword.Pseudo */
+.highlight .kr { color: #ff7b72 } /* Keyword.Reserved */
+.highlight .kt { color: #ff7b72 } /* Keyword.Type */
+.highlight .ld { color: #79c0ff } /* Literal.Date */
+.highlight .m { color: #a5d6ff } /* Literal.Number */
+.highlight .s { color: #a5d6ff } /* Literal.String */
+.highlight .na { color: #c9d1d9 } /* Name.Attribute */
+.highlight .nb { color: #c9d1d9 } /* Name.Builtin */
+.highlight .nc { color: #f0883e; font-weight: bold } /* Name.Class */
+.highlight .no { color: #79c0ff; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #d2a8ff; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #ffa657 } /* Name.Entity */
+.highlight .ne { color: #f0883e; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #d2a8ff; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #79c0ff; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #ff7b72 } /* Name.Namespace */
+.highlight .nx { color: #c9d1d9 } /* Name.Other */
+.highlight .py { color: #79c0ff } /* Name.Property */
+.highlight .nt { color: #7ee787 } /* Name.Tag */
+.highlight .nv { color: #79c0ff } /* Name.Variable */
+.highlight .ow { color: #ff7b72; font-weight: bold } /* Operator.Word */
+.highlight .pm { color: #c9d1d9 } /* Punctuation.Marker */
+.highlight .w { color: #6e7681 } /* Text.Whitespace */
+.highlight .mb { color: #a5d6ff } /* Literal.Number.Bin */
+.highlight .mf { color: #a5d6ff } /* Literal.Number.Float */
+.highlight .mh { color: #a5d6ff } /* Literal.Number.Hex */
+.highlight .mi { color: #a5d6ff } /* Literal.Number.Integer */
+.highlight .mo { color: #a5d6ff } /* Literal.Number.Oct */
+.highlight .sa { color: #79c0ff } /* Literal.String.Affix */
+.highlight .sb { color: #a5d6ff } /* Literal.String.Backtick */
+.highlight .sc { color: #a5d6ff } /* Literal.String.Char */
+.highlight .dl { color: #79c0ff } /* Literal.String.Delimiter */
+.highlight .sd { color: #a5d6ff } /* Literal.String.Doc */
+.highlight .s2 { color: #a5d6ff } /* Literal.String.Double */
+.highlight .se { color: #79c0ff } /* Literal.String.Escape */
+.highlight .sh { color: #79c0ff } /* Literal.String.Heredoc */
+.highlight .si { color: #a5d6ff } /* Literal.String.Interpol */
+.highlight .sx { color: #a5d6ff } /* Literal.String.Other */
+.highlight .sr { color: #79c0ff } /* Literal.String.Regex */
+.highlight .s1 { color: #a5d6ff } /* Literal.String.Single */
+.highlight .ss { color: #a5d6ff } /* Literal.String.Symbol */
+.highlight .bp { color: #c9d1d9 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #d2a8ff; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #79c0ff } /* Name.Variable.Class */
+.highlight .vg { color: #79c0ff } /* Name.Variable.Global */
+.highlight .vi { color: #79c0ff } /* Name.Variable.Instance */
+.highlight .vm { color: #79c0ff } /* Name.Variable.Magic */
+.highlight .il { color: #a5d6ff } /* Literal.Number.Integer.Long */
+        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
-
+        
         ::-webkit-scrollbar-track {
             background: rgba(30, 41, 59, 0.5);
         }
-
+        
         ::-webkit-scrollbar-thumb {
             background: var(--text-tertiary);
             border-radius: 4px;
         }
-
+        
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-secondary);
         }
-
+        
         /* Smooth transitions */
         * {
             transition-property: background-color, border-color, color;
@@ -1199,14 +571,14 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
     <div class="progress-bar">
         <div class="progress-fill"></div>
     </div>
-
+    
     <!-- Mobile menu toggle -->
     <button class="menu-toggle" onclick="toggleSidebar()">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12h18M3 6h18M3 18h18"></path>
         </svg>
     </button>
-
+    
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
@@ -1222,13 +594,22 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             <nav class="toc">
                 <div class="toc">
 <ul>
-<li><a href="#transforming-comcast-through-data-ai-a-strategic-vision">Transforming Comcast Through Data &amp; AI: A Strategic Vision</a></li>
+<li><a href="#transforming-comcast-through-data-ai-a-strategic-vision">Transforming Comcast Through Data &amp; AI: A Strategic Vision</a><ul>
+<li><a href="#executive-summary">Executive Summary</a></li>
+<li><a href="#chapter-1-data-ai-at-comcast-current-state-and-vision">Chapter 1: Data &amp; AI at Comcast - Current State and Vision</a></li>
+<li><a href="#chapter-2-data-ai-maturity-assessment">Chapter 2: Data &amp; AI Maturity Assessment</a></li>
+<li><a href="#chapter-3-strategic-data-platform-architecture">Chapter 3: Strategic Data Platform Architecture</a></li>
+<li><a href="#chapter-4-ai-innovation-portfolio-roadmap">Chapter 4: AI Innovation Portfolio &amp; Roadmap</a></li>
+<li><a href="#chapter-5-building-the-ai-first-organization">Chapter 5: Building the AI-First Organization</a></li>
+<li><a href="#chapter-6-implementation-strategy-quick-wins">Chapter 6: Implementation Strategy &amp; Quick Wins</a></li>
+</ul>
+</li>
 </ul>
 </div>
 
             </nav>
         </aside>
-
+        
         <!-- Main content -->
         <main class="main-content">
             <div class="content-header">
@@ -1252,7 +633,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
                     </button>
                 </div>
             </div>
-
+            
             <article id="content">
                 <h1 id="transforming-comcast-through-data-ai-a-strategic-vision">Transforming Comcast Through Data &amp; AI: A Strategic Vision</h1>
 <h2 id="executive-summary">Executive Summary</h2>
@@ -1772,117 +1153,6 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
 <em>Former Founder, Industry Solutions Group, Cognizant</em><br />
 <em>Adjunct Professor of AI, Fairleigh Dickinson University</em><br />
 <em>Author and AI Thought Leader</em></p>
-            </article>
-        </main>
-    </div>
-
-    <script>
-        // Sidebar toggle
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
-
-        // Theme toggle - Currently disabled as we use dark theme only
-        function toggleTheme() {
-            // Dark theme is the default and only theme
-            alert('This document uses a dark theme optimized for readability.');
-        }
-
-        // Copy link
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href);
-            alert('Link copied to clipboard!');
-        }
-
-        // Search functionality
-        function performSearch() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const content = document.getElementById('content');
-            const text = content.textContent || content.innerText;
-
-            if (searchTerm.length < 2) {
-                removeHighlights();
-                return;
-            }
-
-            removeHighlights();
-            highlightSearchTerm(content, searchTerm);
-        }
-
-        function removeHighlights() {
-            const highlighted = document.querySelectorAll('.search-highlight');
-            highlighted.forEach(el => {
-                const parent = el.parentNode;
-                parent.replaceChild(document.createTextNode(el.textContent), el);
-                parent.normalize();
-            });
-        }
-
-        function highlightSearchTerm(element, term) {
-            const walker = document.createTreeWalker(
-                element,
-                NodeFilter.SHOW_TEXT,
-                null,
-                false
-            );
-
-            const nodesToReplace = [];
-            while (walker.nextNode()) {
-                const node = walker.currentNode;
-                if (node.nodeValue.toLowerCase().includes(term)) {
-                    nodesToReplace.push(node);
-                }
-            }
-
-            nodesToReplace.forEach(node => {
-                const span = document.createElement('span');
-                span.innerHTML = node.nodeValue.replace(
-                    new RegExp(term, 'gi'),
-                    match => `<span class="search-highlight" style="background-color: rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 2px 4px; border-radius: 3px; border: 1px solid rgba(59, 130, 246, 0.5);">${match}</span>`
-                );
-                node.parentNode.replaceChild(span, node);
-            });
-        }
-
-        // Active TOC tracking
-        const observerOptions = {
-            rootMargin: '-20% 0px -70% 0px'
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const id = entry.target.getAttribute('id');
-                const tocLink = document.querySelector(`.toc a[href="#${id}"]`);
-
-                if (entry.intersectionRatio > 0) {
-                    document.querySelectorAll('.toc a').forEach(a => a.classList.remove('active'));
-                    if (tocLink) tocLink.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all headings
-        document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').forEach(heading => {
-            observer.observe(heading);
-        });
-
-        // Progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.querySelector('.progress-fill').style.width = scrolled + '%';
-        });
-
-        // Initialize on load
-        window.addEventListener('DOMContentLoaded', () => {
-            // Dark theme is always active
-            console.log('Sutherland AI Innovation Report - HTML Version');
-        });
-    </script>
-</body>
-</html>
             </article>
         </main>
     </div>

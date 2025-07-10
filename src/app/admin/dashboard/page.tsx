@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { LogOut, Users, CheckCircle, XCircle, Clock, Book, Ban, Trash2, ShieldOff } from 'lucide-react';
+import { LogOut, Users, CheckCircle, XCircle, Clock, Book, Ban, Trash2, ShieldOff, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 
@@ -27,6 +27,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'denied' | 'banned'>('all');
+  const [regenerating, setRegenerating] = useState(false);
 
   useEffect(() => {
     // Check if user is authenticated and is admin
@@ -74,6 +75,31 @@ export default function AdminDashboard() {
     localStorage.removeItem('auth-token');
     localStorage.removeItem('user');
     router.push('/signin');
+  };
+
+  const handleRegenerateReport = async () => {
+    setRegenerating(true);
+    try {
+      const token = localStorage.getItem('auth-token');
+      const response = await fetch('/api/admin/regenerate-report', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to regenerate report');
+      }
+      
+      toast.success('Report regenerated successfully!');
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to regenerate report');
+    } finally {
+      setRegenerating(false);
+    }
   };
 
   const handleStatusUpdate = async (userId: string, status: 'APPROVED' | 'DENIED') => {
@@ -209,6 +235,14 @@ export default function AdminDashboard() {
               <p className="text-gray-400">Welcome back, {currentUser?.name}</p>
             </div>
             <div className="flex items-center gap-3">
+              <button
+                onClick={handleRegenerateReport}
+                disabled={regenerating}
+                className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-green-800 disabled:opacity-50 rounded-lg transition-colors"
+              >
+                <RefreshCw className={`w-4 h-4 ${regenerating ? 'animate-spin' : ''}`} />
+                {regenerating ? 'Regenerating...' : 'Regenerate Report'}
+              </button>
               <Link href="/report">
                 <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
                   <Book className="w-4 h-4" />
