@@ -300,9 +300,9 @@ export function MarketPositioningPlot() {
     z: comp.aiInvestment
   }));
 
-  // Sutherland's target position
+  // Comcast's target position
   const sutherlandTarget = {
-    name: 'Sutherland (Target)',
+    name: 'Comcast (Target)',
     x: 9,
     y: 9,
     z: 150,
@@ -414,7 +414,7 @@ export function MarketPositioningPlot() {
             </Scatter>
             {animationStep === 1 && (
               <Scatter
-                name="Sutherland Target"
+                name="Comcast Target"
                 data={[sutherlandTarget]}
                 fill="#10B981"
               >
@@ -448,7 +448,7 @@ export function MarketPositioningPlot() {
             </p>
           </div>
           <div className="bg-gray-700/50 rounded p-4">
-            <h4 className="font-semibold mb-2">Sutherland Opportunity</h4>
+            <h4 className="font-semibold mb-2">Comcast Opportunity</h4>
             <p className="text-sm text-gray-400">
               Target position combines high innovation speed with superior client empowerment
             </p>
@@ -478,7 +478,7 @@ export function StrategicGapRadar() {
     genpact: [5, 7, 6, 5, 6],
     wns: [6, 6, 7, 5, 5],
     hcl: [8, 4, 8, 7, 6],
-    sutherland_target: [10, 10, 9, 9, 10]
+    comcast_target: [10, 10, 9, 9, 10]
   };
 
   const radarData = dimensions.map((dimension, index) => {
@@ -488,7 +488,7 @@ export function StrategicGapRadar() {
       point[comp?.name || compId] = competitorScores[compId]?.[index] || 0;
     });
     if (selectedCompetitors.includes('sutherland_target')) {
-      point['Sutherland Target'] = competitorScores.sutherland_target[index];
+      point['Comcast Target'] = competitorScores.comcast_target[index];
     }
     return point;
   });
@@ -505,7 +505,7 @@ export function StrategicGapRadar() {
             Compare capabilities across key innovation dimensions. Select competitors to analyze:
           </p>
           <div className="flex flex-wrap gap-2">
-            {[...competitors, { id: 'sutherland_target', name: 'Sutherland Target', logo: '🎯' }].map((comp) => (
+            {[...competitors, { id: 'comcast_target', name: 'Comcast Target', logo: '🎯' }].map((comp) => (
               <button
                 key={comp.id}
                 onClick={() => {
@@ -535,7 +535,7 @@ export function StrategicGapRadar() {
             <PolarRadiusAxis domain={[0, 10]} stroke="#374151" />
             {selectedCompetitors.map((compId, index) => {
               const comp = competitors.find(c => c.id === compId);
-              const name = compId === 'sutherland_target' ? 'Sutherland Target' : comp?.name || compId;
+              const name = compId === 'comcast_target' ? 'Comcast Target' : comp?.name || compId;
               return (
                 <Radar
                   key={compId}
@@ -558,7 +558,7 @@ export function StrategicGapRadar() {
               <div className="text-xs font-semibold text-gray-400 mb-1">{dim}</div>
               <div className="text-xs">
                 Gap: <span className="text-yellow-400">
-                  {Math.max(...selectedCompetitors.filter(id => id !== 'sutherland_target').map(id => 10 - (competitorScores[id]?.[i] || 0)))}
+                  {Math.max(...selectedCompetitors.filter(id => id !== 'comcast_target').map(id => 10 - (competitorScores[id]?.[i] || 0)))}
                 </span>
               </div>
             </div>
@@ -595,7 +595,7 @@ export function DevelopmentSpeedComparison() {
       }
     },
     {
-      approach: 'Sutherland AI-First',
+      approach: 'Comcast AI-First',
       weeks: 3,
       color: '#10B981',
       details: {
@@ -626,7 +626,7 @@ export function DevelopmentSpeedComparison() {
                         <p className="font-semibold">{data.approach}</p>
                         <p className="text-sm">Time: {data.weeks} weeks</p>
                         <p className="text-sm text-green-400">
-                          {data.approach === 'Sutherland AI-First' && '85% faster than average'}
+                          {data.approach === 'Comcast AI-First' && '85% faster than average'}
                         </p>
                       </div>
                     );

@@ -158,6 +158,32 @@ export default function ReportLayout({
                   );
                 })}
               </div>
+
+              {/* Copyright and Contact Info */}
+              <div className="mt-8 p-4 border-t border-white/10">
+                <div className="text-center space-y-2">
+                  <p className="text-sm text-gray-400">
+                    Copyright © Tiran Dagan 2025
+                  </p>
+                  <div className="space-y-1">
+                    <a 
+                      href="mailto:tiran@tirandagan.com"
+                      className="block text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      tiran@tirandagan.com
+                    </a>
+                    <p className="text-sm text-gray-400">
+                      Questions? Call{' '}
+                      <a 
+                        href="tel:9088732425"
+                        className="text-blue-400 hover:text-blue-300 transition-colors"
+                      >
+                        (908) 873-2425
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </nav>
           </motion.aside>
         )}

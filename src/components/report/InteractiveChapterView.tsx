@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { renderInteractiveMarkdown } from '@/lib/markdown-renderer';
 import { CrossReferenceLinks, chapterCrossReferences } from '@/components/report/CrossReferences';
 
@@ -19,8 +18,6 @@ interface InteractiveChapterViewProps {
 }
 
 export default function InteractiveChapterView({ chapter }: InteractiveChapterViewProps) {
-  const [interactiveMode, setInteractiveMode] = useState(true);
-
   // Process content to inject interactive components
   const processContent = (content: string) => {
     // Remove Chapter Summary sections from the markdown
@@ -34,34 +31,31 @@ export default function InteractiveChapterView({ chapter }: InteractiveChapterVi
     // Remove Key Takeaways sections from the markdown
     // Pattern matches: ## 🎯 Key Takeaways followed by the list
     content = content.replace(/##\s*🎯\s*Key Takeaways[\s\S]*?(?=\n##|\n#|$)/g, '');
-    
-    if (!interactiveMode) return content;
 
-    // For Executive Summary, inject key metrics
+    // For Executive Summary, inject key metrics and validation warning
     if (chapter.slug === 'executive-summary') {
       const keyMetricsSection = `
 
-<Callout title="Critical Inflection Point" type="info">
-Sutherland Global Services stands at a critical inflection point. With ~$2.4 billion in revenue, 40,000 employees, and a strong foundation in customer experience and BPO services, the company has the assets needed to become a leader in AI-driven business transformation. However, current innovation efforts are fragmented across business units, limiting the company's ability to capitalize on the explosive growth in AI-enabled services.
+<Callout title="⚠️ IMPORTANT DATA VALIDATION NOTICE" type="warning">The data, use cases, and financial models presented in this report are early drafts based on publicly available information. All metrics, projections, and analyses require: • Validation with Comcast Finance team for accuracy • Collaboration with business stakeholders to prioritize initiatives • Alignment with sponsor interest and engagement levels • Detailed business case development for each use case. This report represents a strategic vision that will be refined through stakeholder engagement and detailed analysis.</Callout>
+
+<Callout title="Strategic Opportunity" type="info">
+Comcast possesses unparalleled data assets with 32M+ subscribers, 125M households reached, and petabytes of data flowing through our networks daily. Our current data monetization efforts—while successful—represent a fraction of the potential $2B+ opportunity in AI-driven transformation.
 </Callout>
 
-<Callout title="Proven Methodology" type="success">
-This comprehensive strategy document outlines a clear path forward: establishing a unified, global innovation function that leverages rapid AI prototyping to deliver industry-leading solutions. Drawing from proven methodologies I developed at Cognizant's Industry Solutions Group (ISG) – which generated $200M+ in influence revenue – and innovative approaches from my AI program at Fairleigh Dickinson University, this proposal presents a conservative yet transformative approach to innovation.
+<Callout title="Proven Leadership" type="success">
+Drawing from my experience building Cognizant's Industry Solutions Group from zero to $200M in revenue and leading 400 professionals in AI transformation, I present a comprehensive strategy to unlock Comcast's data potential through unified AI strategy and execution.
 </Callout>
 
-## Key Company Metrics
+## Key Transformation Metrics
 
-<MetricCard title="Annual Revenue" value="$2.4B" change="+8.3%" trend="up" detail="Strong growth trajectory with conservative projections showing path to $2.9B by 2025" />
+<MetricCard title="Revenue Opportunity" value="$2B+" change="+500%" trend="up" detail="New annual revenue from data products and AI services by 2027" />
 
-<MetricCard title="Global Workforce" value="40,000+" change="+15%" trend="up" detail="Highly skilled workforce across 60+ delivery centers in 144+ countries" />
+<MetricCard title="Cost Reduction" value="30%" change="-$1B+" trend="down" detail="Operational cost savings through AI-powered automation" />
 
-<MetricCard title="Innovation Portfolio" value="200+" change="+25%" trend="up" detail="Patented inventions demonstrating strong innovation capability" />
+<MetricCard title="Network Efficiency" value="90%" change="-90%" trend="down" detail="Reduction in network incidents through predictive AI" />
 
-<MetricCard title="Client Engagement" value="63%" detail="Percentage of contracts tied directly to client KPIs, demonstrating value-based partnerships" />
+<MetricCard title="Customer Satisfaction" value="50%" change="+50%" trend="up" detail="Improvement in NPS through hyper-personalization" />
 
-## Revenue Growth Trajectory
-
-<RevenueGrowthChart />
 
 `;
       // Insert at the beginning after any title
@@ -71,61 +65,16 @@ This comprehensive strategy document outlines a clear path forward: establishing
       }
     }
 
-    // For Company Overview chapter - Chapter 1
-    if (chapter.slug === 'company-overview-and-current-landscape') {
-      // Insert interactive components at specific points without removing content
-      
-      // Insert HeroDashboard after the chapter intro
-      const aboutStart = content.indexOf('## About Sutherland Global Services');
-      if (aboutStart > -1) {
-        content = content.slice(0, aboutStart) + '\n\n<HeroDashboard />\n\n' + content.slice(aboutStart);
-      }
-      
-      // Insert LeadershipStructure to replace the leadership bullet list
-      const leadershipStart = content.indexOf('### Leadership Structure');
-      if (leadershipStart > -1) {
-        const nextSectionIndex = content.indexOf('\n## ', leadershipStart);
-        if (nextSectionIndex > -1) {
-          content = content.slice(0, leadershipStart) + '### Leadership Structure\n\n<LeadershipStructure />\n\n' + content.slice(nextSectionIndex);
-        }
-      }
-      
-      // Replace Service Portfolio Architecture section with the interactive chart
-      const servicePortfolioIndex = content.indexOf('## Service Portfolio Architecture');
-      if (servicePortfolioIndex > -1) {
-        const nextSectionIndex = content.indexOf('\n## ', servicePortfolioIndex + 1);
-        if (nextSectionIndex > -1) {
-          content = content.slice(0, servicePortfolioIndex) + '## Service Portfolio Architecture\n\n<ServicePortfolioChart />\n\n' + content.slice(nextSectionIndex);
-        }
-      }
-      
-      // Insert GlobalNetworkMap after Global Presence section
-      const globalPresenceIndex = content.indexOf('### Global Presence');
-      if (globalPresenceIndex > -1) {
-        const nextSectionIndex = content.indexOf('\n### ', globalPresenceIndex + 1);
-        const insertPoint = nextSectionIndex > -1 ? nextSectionIndex : content.indexOf('\n## ', globalPresenceIndex);
-        if (insertPoint > -1) {
-          content = content.slice(0, insertPoint) + '\n\n<GlobalNetworkMap />\n\n' + content.slice(insertPoint);
-        }
-      }
-      
-      // Insert IndustryVerticalExplorer after Industry Expertise
-      const industryIndex = content.indexOf('### Industry Expertise');
-      if (industryIndex > -1) {
-        const nextSectionIndex = content.indexOf('\n### ', industryIndex + 1);
-        const insertPoint = nextSectionIndex > -1 ? nextSectionIndex : content.indexOf('\n## ', industryIndex);
-        if (insertPoint > -1) {
-          content = content.slice(0, insertPoint) + '\n\n<IndustryVerticalExplorer />\n\n' + content.slice(insertPoint);
-        }
-      }
-      
-      // Insert InnovationInfrastructure after Innovation Infrastructure heading
-      const innovationIndex = content.indexOf('### Innovation Infrastructure');
-      if (innovationIndex > -1) {
-        const nextSectionIndex = content.indexOf('\n## ', innovationIndex + 1);
-        const insertPoint = nextSectionIndex > -1 ? nextSectionIndex : content.length;
-        content = content.slice(0, insertPoint) + '\n\n<InnovationInfrastructure />\n\n' + content.slice(insertPoint);
-      }
+    // For Chapter 1: Data & AI at Comcast - Current State and Vision
+    if (chapter.slug === 'data-ai-current-state-vision' || chapter.slug === 'data-ai-at-comcast-current-state-and-vision') {
+      // Replace entire content with the interactive Chapter1 component
+      content = '<Chapter1 />';
+    }
+
+    // For Chapter 5: Building the AI-First Organization
+    if (chapter.slug === 'building-ai-first-organization' || chapter.slug === 'building-the-ai-first-organization') {
+      // Replace entire content with the interactive Chapter5 component
+      content = '<Chapter5 />';
     }
 
     // For SWOT Analysis chapter - Chapter 2
@@ -165,7 +114,7 @@ This comprehensive strategy document outlines a clear path forward: establishing
 <InnovationMetricsDashboard />
 
 <Callout title="Key Insight" type="info">
-Sutherland's innovation journey requires a fundamental shift from fragmented efforts to a unified, industry-centric approach. By leveraging existing strengths while addressing critical capability gaps, the company can capture significant opportunities in the rapidly growing AI services market.
+Comcast's AI transformation journey requires a fundamental shift from fragmented data initiatives to a unified, AI-first approach. By leveraging our unparalleled data assets while addressing critical capability gaps, we can capture significant opportunities in data monetization and AI-driven services.
 </Callout>
 
 `;
@@ -322,6 +271,43 @@ Sutherland's innovation journey requires a fundamental shift from fragmented eff
       }
     }
 
+    // For Chapter 2 - Data & AI Maturity Assessment
+    if (chapter.slug === 'data-ai-maturity-assessment') {
+      // Find the SWOT section and replace it with our component
+      const swotStart = content.indexOf('### SWOT Analysis');
+      const nextChapterStart = content.indexOf('## Chapter 3:');
+      
+      if (swotStart > -1) {
+        // Replace the entire SWOT section with our component
+        const beforeSwot = content.slice(0, swotStart);
+        const afterSwot = nextChapterStart > -1 ? content.slice(nextChapterStart) : '';
+        
+        content = beforeSwot + '\n<ComcastSWOTAnalysis />\n\n' + afterSwot;
+      }
+    }
+
+    // For Chapter 1 - Data & AI at Comcast - Current State and Vision
+    if (chapter.slug === 'data-ai-at-comcast-current-state-and-vision') {
+      const chapter1Section = `
+
+<Chapter1 />
+
+`;
+      // Replace the entire content with Chapter1 component
+      return chapter1Section;
+    }
+
+    // For Chapter 5 - Building the AI-First Organization
+    if (chapter.slug === 'building-the-ai-first-organization') {
+      const chapter5Section = `
+
+<Chapter5 />
+
+`;
+      // Replace the entire content with Chapter5 component
+      return chapter5Section;
+    }
+
     // For Partnership Strategy chapter
     if (chapter.slug === 'partnership-ecosystem-strategy') {
       const ecosystemSection = `
@@ -357,20 +343,6 @@ Sutherland's innovation journey requires a fundamental shift from fragmented eff
 
   return (
     <div>
-      {/* Interactive Mode Toggle */}
-      <div className="flex justify-end mb-6">
-        <button
-          onClick={() => setInteractiveMode(!interactiveMode)}
-          className={`px-4 py-2 rounded-lg transition-colors ${
-            interactiveMode 
-              ? 'bg-blue-600 text-white' 
-              : 'bg-white/10 text-gray-400 hover:bg-white/20'
-          }`}
-        >
-          {interactiveMode ? 'Interactive View' : 'Text Only'}
-        </button>
-      </div>
-
       {/* Chapter Content */}
       <div className="prose prose-invert prose-lg max-w-none">
         {renderInteractiveMarkdown(processedContent)}

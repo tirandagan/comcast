@@ -65,7 +65,7 @@ export const chapterCrossReferences: Record<string, CrossReference[]> = {
     {
       type: 'chapter',
       slug: 'the-isg-model-applied-to-sutherland',
-      title: 'Chapter 5: The ISG Model Applied to Sutherland',
+      title: 'Chapter 5: Building the AI-First Organization',
       description: 'Detailed framework for building the innovation function'
     },
     {

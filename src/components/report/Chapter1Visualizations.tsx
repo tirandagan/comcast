@@ -85,7 +85,7 @@ export function HeroDashboard() {
 
   return (
     <div className="my-8">
-      <h3 className="text-3xl font-bold mb-8 text-center">Sutherland at a Glance</h3>
+      <h3 className="text-3xl font-bold mb-8 text-center">Comcast at a Glance</h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {metrics.map((metric, index) => {
@@ -253,7 +253,7 @@ export function ServiceEcosystem() {
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
           >
             <div className="text-white font-bold text-center">
-              <div className="text-xs">Sutherland</div>
+              <div className="text-xs">Comcast</div>
               <div className="text-lg">360°</div>
             </div>
           </motion.div>
@@ -864,7 +864,7 @@ export function InnovationInfrastructure() {
   const facilities = [
     {
       id: 'labs',
-      name: 'Sutherland Labs',
+      name: 'Comcast AI Labs',
       icon: Brain,
       established: 2014,
       locations: ['San Francisco', 'Chennai', 'London'],

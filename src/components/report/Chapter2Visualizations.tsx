@@ -524,7 +524,7 @@ export function InnovationOrgChart() {
           <h4 className="text-lg font-semibold mb-4 text-center">Innovation Ecosystem</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: 'Sutherland Labs', icon: Lightbulb, count: '3 locations' },
+              { name: 'Comcast AI Labs', icon: Lightbulb, count: '5 locations' },
               { name: 'Digital Centers', icon: Zap, count: '5 centers' },
               { name: 'Innovation Council', icon: Users, count: '12 members' },
               { name: 'Patent Office', icon: Award, count: '200+ patents' },

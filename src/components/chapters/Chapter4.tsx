@@ -47,27 +47,14 @@ const sections = [
   }
 ];
 
-export function Chapter4() {
+function Chapter4() {
   const [activeSection, setActiveSection] = useState('portfolio');
 
   const ActiveComponent = sections.find(s => s.id === activeSection)?.component || AIPortfolioMatrix;
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* Chapter Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          AI Innovation Portfolio & Roadmap
-        </h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-          High-impact AI use cases across every business dimension, 
-          delivering $2.5B+ in new revenue and $600M+ in cost savings
-        </p>
-      </motion.div>
+      {/* Chapter Header removed - already shown by the page */}
 
       {/* Key Metrics Overview */}
       <motion.div
@@ -157,3 +144,13 @@ export function Chapter4() {
     </div>
   );
 }
+
+// Export the main component and subcomponents
+export {
+  Chapter4,
+  AIPortfolioMatrix,
+  CustomerExperienceAI,
+  NetworkOperationsAI,
+  ContentMediaAI,
+  ROIProjectionDashboard
+};

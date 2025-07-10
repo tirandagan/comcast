@@ -280,7 +280,7 @@ export function ServicePortfolioChart() {
           transition={{ duration: 2, repeat: Infinity }}
         >
           <Cpu className="w-5 h-5" />
-          <span>Sutherland 360° Integrated Platform</span>
+          <span>Comcast Intelligence Platform (CIP)</span>
         </motion.div>
         <p className="text-sm text-gray-400 mt-2">
           All services powered by AI, automation, and real-time analytics

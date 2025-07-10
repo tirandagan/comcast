@@ -228,8 +228,8 @@ export function InnovationROI() {
 // Competitive Positioning Matrix
 export function CompetitivePositioning() {
   const competitors = [
-    { name: 'Sutherland (Current)', innovation: 3.2, execution: 3.8, size: 40 },
-    { name: 'Sutherland (Target)', innovation: 4.6, execution: 4.5, size: 60 },
+    { name: 'Comcast (Current)', innovation: 3.2, execution: 3.8, size: 40 },
+    { name: 'Comcast (Target)', innovation: 4.6, execution: 4.5, size: 60 },
     { name: 'Accenture', innovation: 4.5, execution: 4.7, size: 100 },
     { name: 'TCS', innovation: 3.8, execution: 4.5, size: 80 },
     { name: 'Infosys', innovation: 4.0, execution: 4.3, size: 70 },
@@ -293,8 +293,8 @@ export function CompetitivePositioning() {
                   <Cell 
                     key={`cell-${index}`} 
                     fill={
-                      entry.name.includes('Sutherland (Target)') ? '#10B981' :
-                      entry.name.includes('Sutherland (Current)') ? '#3B82F6' :
+                      entry.name.includes('Comcast (Target)') ? '#10B981' :
+                      entry.name.includes('Comcast (Current)') ? '#3B82F6' :
                       '#6B7280'
                     }
                     fillOpacity={hoveredCompetitor === entry.name ? 1 : 0.7}
@@ -450,7 +450,7 @@ export function EcosystemNetwork() {
   const [activeNode, setActiveNode] = useState<string | null>(null);
   
   const ecosystem = {
-    center: { name: 'Sutherland Innovation Hub', type: 'hub' },
+    center: { name: 'Comcast AI Innovation Hub', type: 'hub' },
     categories: [
       {
         name: 'Technology Partners',

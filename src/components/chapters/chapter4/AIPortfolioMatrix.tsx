@@ -156,6 +156,7 @@ const categoryColors = {
 export function AIPortfolioMatrix() {
   const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [showLabels, setShowLabels] = useState(true);
 
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -250,7 +251,10 @@ export function AIPortfolioMatrix() {
             <Scatter
               name="AI Use Cases"
               data={useCases}
-              onClick={(data) => setSelectedUseCase(data)}
+              onClick={(data) => {
+                setSelectedUseCase(data);
+                setShowLabels(false);
+              }}
             >
               {useCases.map((entry, index) => (
                 <Cell
@@ -264,6 +268,21 @@ export function AIPortfolioMatrix() {
                 />
               ))}
             </Scatter>
+            {/* Add labels next to dots */}
+            {showLabels && useCases.map((useCase, index) => (
+              <text
+                key={`label-${index}`}
+                x={useCase.complexity + 2}
+                y={useCase.impact - 2}
+                fill={categoryColors[useCase.category as keyof typeof categoryColors]}
+                fontSize="11"
+                fontWeight="500"
+                opacity={!hoveredCategory || hoveredCategory === useCase.category ? 0.9 : 0.2}
+                style={{ pointerEvents: 'none' }}
+              >
+                {useCase.name.length > 20 ? useCase.name.substring(0, 18) + '...' : useCase.name}
+              </text>
+            ))}
           </ScatterChart>
         </ResponsiveContainer>
 
@@ -299,7 +318,10 @@ export function AIPortfolioMatrix() {
                 </div>
               </div>
               <button
-                onClick={() => setSelectedUseCase(null)}
+                onClick={() => {
+                  setSelectedUseCase(null);
+                  setShowLabels(true);
+                }}
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 ✕

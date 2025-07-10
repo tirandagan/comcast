@@ -19,7 +19,7 @@ export const reportChapters: Chapter[] = [
   {
     id: 'chapter-1',
     title: 'Data & AI at Comcast - Current State and Vision',
-    slug: 'data-ai-current-state-vision',
+    slug: 'data-ai-at-comcast-current-state-and-vision',
     order: 1,
     description: 'An executive overview of Comcast\'s data assets, current AI initiatives, and the transformative vision for becoming a data-driven powerhouse generating $2B+ in new revenue streams.',
   },
@@ -47,7 +47,7 @@ export const reportChapters: Chapter[] = [
   {
     id: 'chapter-5',
     title: 'Building the AI-First Organization',
-    slug: 'building-ai-first-organization',
+    slug: 'building-the-ai-first-organization',
     order: 5,
     description: 'Leveraging my proven ISG model from Cognizant to build Comcast\'s AI Center of Excellence, transform culture, and develop 5,000 AI practitioners.',
   },

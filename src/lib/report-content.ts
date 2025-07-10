@@ -55,8 +55,8 @@ export const parseFullReport = cache((): Chapter[] => {
     }
     if (inTableOfContents) continue;
     
-    // Check for chapter headers (# Title)
-    if (line.startsWith('# ') && !line.startsWith('## ')) {
+    // Check for chapter headers (## Chapter X: or ## Executive Summary)
+    if (line.startsWith('## Chapter ') || line === '## Executive Summary') {
       // Save previous chapter if exists
       if (currentChapter) {
         currentChapter.content = currentContent.join('\n').trim();
@@ -65,7 +65,7 @@ export const parseFullReport = cache((): Chapter[] => {
       }
       
       // Start new chapter
-      const title = line.substring(2).trim();
+      const title = line.substring(3).trim(); // Remove ## 
       const slug = generateSlug(title);
       
       
@@ -81,8 +81,8 @@ export const parseFullReport = cache((): Chapter[] => {
       currentContent = [];
       currentSection = null;
     }
-    // Check for section headers (##, ###, ####)
-    else if (line.match(/^#{2,4}\s+/) && currentChapter) {
+    // Check for section headers (###, ####) - skip ## as those are chapters
+    else if (line.match(/^#{3,4}\s+/) && currentChapter) {
       // Save previous section content if exists
       if (currentSection) {
         currentSection.content = currentContent.join('\n').trim();

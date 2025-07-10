@@ -299,27 +299,30 @@ At Cognizant, I built the Industry Solutions Group from concept to $200M revenue
 
 #### 1. Center of Excellence Structure
 **Comcast AI Center of Excellence (ACE)**
-- **Core Team**: 100 AI/ML experts
-- **Federated Model**: 500 embedded practitioners
-- **Community**: 5,000 citizen data scientists
+- **Core Team**: 100 AI/ML experts driving innovation
+- **Revenue Model**: Billable AI practitioners scaling with demand
+- **Partnership Approach**: Strategic vendor relationships for elastic capacity
+- **Enablement Focus**: Teaching clients to leverage our data and platforms
 - **Governance Board**: C-suite sponsorship
 
 #### 2. Talent Transformation Strategy
 
-**Acquire**: Recruit 200 top AI talents
-- Partner with top universities (MIT, Stanford, CMU)
-- Competitive packages (match FAANG compensation)
-- Remote-first flexibility
+**Shift from Volume to Value**: Transform hundreds of data scientists into revenue-generating AI practitioners
+- Focus on high-impact, billable AI consultants
+- Build scalable delivery model through vendor partnerships
+- Enable clients to self-serve with our platforms and data
 
-**Build**: Upskill 5,000 employees
-- Comcast AI Academy (based on my FDU curriculum)
-- Hands-on labs and certifications
-- Career pathways for data roles
+**Strategic Approach**:
+- **Core Excellence**: Maintain elite team of AI architects and solution designers
+- **Elastic Delivery**: Scale through vendor partnerships based on commercial growth
+- **Client Enablement**: "Teach clients to fish" with our data platforms and tools
+- **Revenue Focus**: Every practitioner tied to measurable business outcomes
 
-**Partner**: Strategic relationships
-- Microsoft: Azure AI partnership
-- Google: TensorFlow enterprise
-- OpenAI: Custom model development
+**Partnership Model**:
+- Microsoft: Azure AI partnership for platform scale
+- Strategic vendors: On-demand AI talent pools
+- University partnerships: Innovation pipeline
+- Client co-creation: Joint development teams
 
 ### Cultural Transformation Roadmap
 
@@ -450,7 +453,7 @@ Chief Data & AI Officer (SVP)
 **Q4: Transformation**
 - Full platform deployment
 - 100+ AI applications
-- 5,000 AI practitioners
+- Scalable AI practitioner model proven
 - $600M+ value delivered
 
 ### Investment Requirements & ROI

@@ -370,7 +370,7 @@ export function ISGOperatingModel() {
 
   return (
     <div className="my-8">
-      <h3 className="text-2xl font-bold mb-6">ISG Operating Model for Sutherland</h3>
+      <h3 className="text-2xl font-bold mb-6">ISG Operating Model for Comcast</h3>
       
       {/* Central Hub Visualization */}
       <div className="relative h-[600px] mb-8">
@@ -488,7 +488,7 @@ export function ISGOperatingModel() {
                     </div>
 
                     <div>
-                      <h5 className="font-medium mb-3">Sutherland Application</h5>
+                      <h5 className="font-medium mb-3">Comcast Application</h5>
                       <div className="space-y-2">
                         {component.sutherland.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2">

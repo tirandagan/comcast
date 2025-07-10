@@ -37,7 +37,7 @@ export function InnovationFrameworkDiagram() {
 
   return (
     <div className="my-8">
-      <h3 className="text-2xl font-bold mb-6 text-center">Sutherland Innovation Framework</h3>
+      <h3 className="text-2xl font-bold mb-6 text-center">Comcast AI Innovation Framework</h3>
       <div className="relative">
         {layers.map((layer, index) => {
           const Icon = layer.icon;
@@ -183,7 +183,7 @@ export function MaturityJourneyVisual() {
 // Innovation Ecosystem Visual
 export function InnovationEcosystemVisual() {
   const ecosystem = {
-    core: { name: 'Sutherland Innovation Core', icon: Brain },
+    core: { name: 'Comcast AI Innovation Core', icon: Brain },
     pillars: [
       { name: 'Technology', icon: Zap, color: 'text-blue-400' },
       { name: 'Talent', icon: Users, color: 'text-green-400' },

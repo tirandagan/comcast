@@ -194,7 +194,7 @@ export function EnhancedIndustryVerticalChart() {
     <div className="my-8">
       <div className="mb-6">
         <h3 className="text-3xl font-bold mb-2">Industry Vertical Performance Dashboard</h3>
-        <p className="text-gray-400">Comprehensive view of Sutherland's position across key verticals</p>
+        <p className="text-gray-400">Comprehensive view of Comcast's position across key verticals</p>
       </div>
 
       {/* Control Panel */}
@@ -962,7 +962,7 @@ export function IndustryTreemap() {
                 : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
             }`}
           >
-            Sutherland Revenue
+            Comcast Revenue
           </button>
         </div>
       </div>
@@ -1022,7 +1022,7 @@ export function IndustryTreemap() {
         <div className="mt-4 text-center text-sm text-gray-400">
           {selectedView === 'market' 
             ? 'Total Addressable Market by Industry (in Billions)'
-            : 'Sutherland Revenue Distribution by Industry (in Millions)'}
+            : 'Comcast Revenue Distribution by Industry (in Millions)'}
         </div>
       </div>
     </div>

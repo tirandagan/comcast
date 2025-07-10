@@ -74,7 +74,7 @@ export default function RegisterPage() {
           <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
           <h2 className="text-2xl font-bold mb-4">Registration Submitted!</h2>
           <p className="text-gray-300 mb-6">
-            Thank you for your interest in the Sutherland AI Innovation Roadmap. 
+            Thank you for your interest in the Comcast Data & AI Leadership Report. 
             We'll review your registration and send you an email with access details shortly.
           </p>
           <Link href="/">

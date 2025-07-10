@@ -17,7 +17,7 @@ export function CompetitiveLandscapeMap() {
     { name: 'Genpact', x: 50, y: 40, size: 60, color: '#8B5CF6' },
     { name: 'WNS', x: 60, y: 50, size: 40, color: '#EC4899' },
     { name: 'HCL', x: 80, y: 70, size: 80, color: '#10B981' },
-    { name: 'Sutherland\n(Target)', x: 85, y: 85, size: 90, color: '#22C55E', isTarget: true }
+    { name: 'Comcast\n(Target)', x: 85, y: 85, size: 90, color: '#22C55E', isTarget: true }
   ];
 
   return (
@@ -85,7 +85,7 @@ export function CompetitiveLandscapeMap() {
           <div className="font-semibold mb-2">Bubble Size = Market Scale</div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-green-500" />
-            <span>Sutherland Target Position</span>
+            <span>Comcast Target Position</span>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export function InnovationGapVisual() {
       title: 'Rapid Prototyping',
       icon: Rocket,
       current: 'Industry: 3-6 months',
-      target: 'Sutherland: 2-4 weeks',
+      target: 'Comcast: 2-4 weeks',
       gap: '85% faster',
       color: 'text-blue-400'
     },
@@ -108,7 +108,7 @@ export function InnovationGapVisual() {
       title: 'Client Empowerment',
       icon: Users,
       current: 'Industry: Vendor model',
-      target: 'Sutherland: Partner model',
+      target: 'Comcast: Partner model',
       gap: 'Paradigm shift',
       color: 'text-purple-400'
     },
@@ -116,7 +116,7 @@ export function InnovationGapVisual() {
       title: 'AI Accelerators',
       icon: Zap,
       current: 'Industry: Basic tools',
-      target: 'Sutherland: Full stack',
+      target: 'Comcast: Full stack',
       gap: '10x productivity',
       color: 'text-yellow-400'
     },
@@ -124,7 +124,7 @@ export function InnovationGapVisual() {
       title: 'Innovation Metrics',
       icon: Activity,
       current: 'Industry: Lagging indicators',
-      target: 'Sutherland: Real-time KPIs',
+      target: 'Comcast: Real-time KPIs',
       gap: 'Predictive insights',
       color: 'text-green-400'
     }
@@ -294,7 +294,7 @@ export function SpeedToMarketVisual() {
           >
             <div className="flex items-center justify-between">
               <div className="bg-green-600 text-white px-4 py-2 rounded font-semibold">
-                Sutherland AI-First
+                Comcast AI-First
               </div>
               <div className="flex gap-2">
                 {['Rapid Discovery', 'AI Development', 'Continuous Iteration'].map((phase, i) => (
@@ -355,7 +355,7 @@ export function PartnershipEcosystemVisual() {
         >
           <div className="text-center text-white">
             <Globe className="w-8 h-8 mx-auto mb-1" />
-            <p className="text-xs font-bold">Sutherland Innovation Hub</p>
+            <p className="text-xs font-bold">Comcast AI Innovation Hub</p>
           </div>
         </motion.div>
 

@@ -46,13 +46,7 @@ import {
   SpeedToMarketVisual,
   PartnershipEcosystemVisual
 } from '@/components/report/Chapter3Images';
-import {
-  HeroDashboard,
-  ServiceEcosystem,
-  GlobalPresenceMap as GlobalNetworkMap,
-  IndustryVerticalExplorer,
-  InnovationInfrastructure
-} from '@/components/report/Chapter1Visualizations';
+// Removed old Sutherland Chapter1Visualizations - using new Comcast chapters instead
 import {
   ISGEvolutionTimeline,
   ISGOperatingModel,
@@ -75,7 +69,9 @@ import {
   InnovationLabInfrastructure
 } from '@/components/report/Chapter6Components';
 import { ServicePortfolioChart } from '@/components/report/ServicePortfolioChart';
-import { LeadershipStructure } from '@/components/report/LeadershipStructure';
+// Removed LeadershipStructure - contains Sutherland data
+import { Chapter1 } from '@/components/chapters/Chapter1';
+import { ComcastSWOTAnalysis } from '@/components/report/ComcastSWOTAnalysis';
 import { 
   Chapter3,
   DataPlatformArchitecture,
@@ -90,6 +86,7 @@ import {
   ContentMediaAI,
   ROIProjectionDashboard
 } from '@/components/chapters/Chapter4';
+import { Chapter5 } from '@/components/chapters/Chapter5';
 
 const componentMap = {
   MetricCard,
@@ -125,11 +122,6 @@ const componentMap = {
   CompetitiveAdvantageFramework,
   SpeedToMarketVisual,
   PartnershipEcosystemVisual,
-  HeroDashboard,
-  ServiceEcosystem,
-  GlobalNetworkMap,
-  IndustryVerticalExplorer,
-  InnovationInfrastructure,
   ISGEvolutionTimeline,
   ISGOperatingModel,
   SIIGOrgStructure,
@@ -148,7 +140,8 @@ const componentMap = {
   CitizenDeveloperProgram,
   InnovationLabInfrastructure,
   ServicePortfolioChart,
-  LeadershipStructure,
+  Chapter1,
+  ComcastSWOTAnalysis,
   Chapter3,
   DataPlatformArchitecture,
   DataFlowVisualization,
@@ -159,6 +152,7 @@ const componentMap = {
   NetworkOperationsAI,
   ContentMediaAI,
   ROIProjectionDashboard,
+  Chapter5,
 };
 
 export function renderInteractiveMarkdown(content: string) {
@@ -198,9 +192,13 @@ export function renderInteractiveMarkdown(content: string) {
                 
                 // Parse props
                 const props: any = {};
-                const propMatches = propsString.matchAll(/(\w+)="([^"]+)"/g);
-                for (const match of propMatches) {
-                  props[match[1]] = match[2];
+                if (propsString) {
+                  // Handle both space-separated props and newline-separated content
+                  const propsOnly = propsString.trim();
+                  const propMatches = propsOnly.matchAll(/(\w+)="([^"]+)"/g);
+                  for (const match of propMatches) {
+                    props[match[1]] = match[2];
+                  }
                 }
                 
                 // Get component from map

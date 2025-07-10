@@ -410,7 +410,7 @@ export function DataPlatformArchitecture() {
         </p>
       </div>
 
-      <div className="bg-gray-900 rounded-lg overflow-hidden" style={{ height: '650px' }}>
+      <div className="bg-gray-900 rounded-lg overflow-hidden relative" style={{ height: '650px', position: 'relative' }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -420,7 +420,19 @@ export function DataPlatformArchitecture() {
           nodeTypes={nodeTypes}
           connectionMode={ConnectionMode.Loose}
           fitView
+          fitViewOptions={{ padding: 0.2, maxZoom: 1, includeHiddenNodes: false }}
+          minZoom={0.5}
+          maxZoom={1.5}
+          defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
           className="bg-gray-900"
+          proOptions={{ hideAttribution: true }}
+          attributionPosition="bottom-left"
+          panOnScroll={false}
+          zoomOnScroll={false}
+          preventScrolling={false}
+          nodesDraggable={false}
+          nodesConnectable={false}
+          elementsSelectable={true}
         >
           <Background color="#374151" gap={16} />
           <Controls className="bg-gray-800 border-gray-700" />
