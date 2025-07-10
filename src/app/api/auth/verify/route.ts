@@ -4,9 +4,11 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
 export async function GET(request: NextRequest) {
+  console.log('Magic link verification started');
   try {
     const searchParams = request.nextUrl.searchParams;
     const token = searchParams.get('token');
+    console.log('Token received:', token ? 'yes' : 'no');
     
     if (!token) {
       const redirectUrl = new URL('/signin?error=missing-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
@@ -27,6 +29,7 @@ export async function GET(request: NextRequest) {
         type?: string;
       };
     } catch (error) {
+      console.error('JWT verification error:', error);
       const redirectUrl = new URL('/signin?error=invalid-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
       return NextResponse.redirect(redirectUrl);
     }
@@ -34,7 +37,10 @@ export async function GET(request: NextRequest) {
     // Find user
     let user;
     
-    if (decoded.type === 'approval') {
+    console.log('Looking up user with decoded token:', { userId: decoded.userId, email: decoded.email, type: decoded.type });
+    
+    try {
+      if (decoded.type === 'approval') {
       // For approval tokens, just verify the user exists and is approved
       user = await prisma.user.findFirst({
         where: { 
@@ -50,6 +56,7 @@ export async function GET(request: NextRequest) {
       }
     } else {
       // For standard magic links, verify token matches
+      console.log('Looking for user with verification token');
       user = await prisma.user.findUnique({
         where: { 
           id: decoded.userId,
@@ -58,9 +65,19 @@ export async function GET(request: NextRequest) {
       });
       
       if (!user) {
+        console.log('User not found with token. Checking if user exists without token match...');
+        const userExists = await prisma.user.findUnique({
+          where: { id: decoded.userId }
+        });
+        console.log('User exists?', !!userExists, userExists ? { hasToken: !!userExists.verificationToken } : null);
+        
         const redirectUrl = new URL('/signin?error=invalid-token', process.env.NEXT_PUBLIC_APP_URL || request.url);
         return NextResponse.redirect(redirectUrl);
       }
+    }
+    } catch (dbError) {
+      console.error('Database error during user lookup:', dbError);
+      throw dbError;
     }
     
     // Clear the verification token (only for standard magic links, not approval tokens)
@@ -116,12 +133,13 @@ export async function GET(request: NextRequest) {
     const response = NextResponse.redirect(successUrl);
     
     // Set cookie on the response with all necessary flags
+    const isProduction = process.env.NODE_ENV === 'production';
     response.cookies.set({
       name: 'auth-token',
       value: sessionToken,
       httpOnly: true,
-      secure: true, // Always use secure in production
-      sameSite: 'none', // Required for Safari when secure is true
+      secure: isProduction, // Only use secure in production
+      sameSite: isProduction ? 'lax' : 'lax', // Use 'lax' for better compatibility
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
       domain: undefined // Let the browser handle the domain
@@ -129,6 +147,7 @@ export async function GET(request: NextRequest) {
     
     return response;
   } catch (error) {
+    console.error('Magic link verification error:', error);
     const errorUrl = new URL('/signin?error=verification-failed', process.env.NEXT_PUBLIC_APP_URL || request.url);
     return NextResponse.redirect(errorUrl);
   }
