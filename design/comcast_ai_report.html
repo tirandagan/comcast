@@ -310,132 +310,6 @@
             opacity: 1;
         }
         
-        /* Copy options overlay */
-        .copy-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        
-        .copy-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .copy-modal {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            transition: transform 0.3s;
-        }
-        
-        .copy-overlay.active .copy-modal {
-            transform: translateY(0);
-        }
-        
-        .copy-modal h3 {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        .copy-modal p {
-            color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
-        }
-        
-        .copy-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        
-        .copy-option {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .copy-option:hover {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: var(--primary-color);
-            transform: translateX(4px);
-        }
-        
-        .copy-option-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .copy-option-icon svg {
-            width: 24px;
-            height: 24px;
-            color: var(--accent-color);
-        }
-        
-        .copy-option-content h4 {
-            color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        .copy-option-content p {
-            color: var(--text-tertiary);
-            font-size: 0.75rem;
-            margin: 0;
-            text-align: left;
-        }
-        
-        .copy-modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: transparent;
-            border: none;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            transition: all 0.2s;
-        }
-        
-        .copy-modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-        }
-        
         /* Article content specific */
         article {
             background: transparent !important;
@@ -1421,7 +1295,7 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
     
     <!-- Floating action buttons -->
     <div class="floating-actions">
-        <button class="action-button" onclick="showCopyOptions()" title="Copy content">
+        <button class="action-button" onclick="copyMarkdown()" title="Copy markdown source">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -1434,48 +1308,6 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             </svg>
             <span class="tooltip">Print</span>
         </button>
-    </div>
-    
-    <!-- Copy options overlay -->
-    <div class="copy-overlay" id="copyOverlay" onclick="closeCopyOptions(event)">
-        <div class="copy-modal" onclick="event.stopPropagation()">
-            <button class="copy-modal-close" onclick="closeCopyOptions()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-            <h3>Choose Copy Format</h3>
-            <p>Select how you'd like to copy the content</p>
-            <div class="copy-options">
-                <div class="copy-option" onclick="copyRichText()">
-                    <div class="copy-option-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
-                        </svg>
-                    </div>
-                    <div class="copy-option-content">
-                        <h4>Rich Formatted Text</h4>
-                        <p>Copy with formatting, ready to paste into documents</p>
-                    </div>
-                </div>
-                <div class="copy-option" onclick="copyMarkdown()">
-                    <div class="copy-option-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 18l2-2v-2l-2-2m-8 0l-2 2v2l2 2"/>
-                            <path d="M12 2v20"/>
-                        </svg>
-                    </div>
-                    <div class="copy-option-content">
-                        <h4>Markdown Source</h4>
-                        <p>Copy as raw markdown text for editing</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     
     <script>
@@ -1494,74 +1326,33 @@ span.linenos.special { color: #e6edf3; background-color: #6e7681; padding-left: 
             alert('This document uses a dark theme optimized for readability.');
         }
         
-        // Show copy options overlay
-        function showCopyOptions() {
-            const overlay = document.getElementById('copyOverlay');
-            overlay.classList.add('active');
-        }
-        
-        // Close copy options overlay
-        function closeCopyOptions(event) {
-            if (!event || event.target === event.currentTarget) {
-                const overlay = document.getElementById('copyOverlay');
-                overlay.classList.remove('active');
-            }
-        }
-        
-        // Copy rich formatted text
-        function copyRichText() {
-            const content = document.getElementById('content');
-            const range = document.createRange();
-            range.selectNodeContents(content);
-            
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            
-            try {
-                // Copy the selected content
-                document.execCommand('copy');
-                selection.removeAllRanges();
-                
-                showNotification('Rich text copied to clipboard!', '#10b981');
-                closeCopyOptions();
-            } catch (err) {
-                alert('Failed to copy rich text. Error: ' + err);
-            }
-        }
-        
         // Copy markdown content to clipboard
         function copyMarkdown() {
             navigator.clipboard.writeText(markdownContent).then(() => {
-                showNotification('Markdown copied to clipboard!', '#3b82f6');
-                closeCopyOptions();
+                // Create a temporary notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Markdown copied to clipboard!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(to right, #10b981, #059669);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2000);
             }).catch(err => {
                 alert('Failed to copy markdown content. Error: ' + err);
             });
-        }
-        
-        // Show notification
-        function showNotification(message, color) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${color};
-                color: white;
-                padding: 12px 24px;
-                border-radius: 8px;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-                z-index: 9999;
-                animation: slideIn 0.3s ease-out;
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOut 0.3s ease-out';
-                setTimeout(() => notification.remove(), 300);
-            }, 2000);
         }
         
         // Enhanced search functionality

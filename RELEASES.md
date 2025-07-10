@@ -78,6 +78,86 @@
 
 ---
 
+## Version 1.1.1 - mdtohtml Enhancements (January 10, 2025)
+
+### New Features
+- **Advanced Search Functionality**: 
+  - Real-time search with yellow highlighting
+  - Navigation buttons to move between matches
+  - Match counter showing current position (e.g., "3 / 10")
+  - Keyboard shortcuts: Enter for next match, Shift+Enter for previous, Escape to clear
+  - Clear search button
+  - Case-insensitive search with minimum 2 characters
+
+- **Floating Action Buttons**:
+  - Print and Copy buttons now float at bottom-right of page
+  - Semi-transparent circular design with backdrop blur
+  - Hover tooltips showing "Print" and "Copy"
+  - Smooth hover animations with scale and glow effects
+  - Always visible for easy access
+  - Responsive sizing on mobile devices
+
+### Improvements
+- **Fixed Dark Theme Styling**:
+  - Resolved white background issues in main content area
+  - Fixed table of contents visibility in sidebar
+  - Improved content width by removing restrictive margins
+  - Enhanced dark theme consistency throughout the document
+  - Better contrast for readability
+
+- **Output File Handling**:
+  - Verified output folder functionality works correctly
+  - Can specify custom output directories with -o flag
+
+### UI/UX Updates
+- **Search Navigation UI**:
+  - Compact navigation controls in search box
+  - Previous/Next arrow buttons
+  - Visual distinction between regular and current match (orange highlight)
+  - Smooth scrolling to matches
+
+- **Button Text Simplification**:
+  - Changed "Copy to Clipboard" to "Copy" for cleaner UI
+  - Tooltips provide additional context on hover
+
+### Technical Improvements
+- Enhanced text node traversal for accurate highlighting
+- Improved search performance with proper DOM manipulation
+- Better handling of text normalization after clearing highlights
+- Floating buttons hidden during print for clean output
+
+---
+
+## Version 1.1.2 - Copy Options Enhancement (January 10, 2025)
+
+### New Features
+- **Copy Format Selection Modal**:
+  - Beautiful overlay dialog when clicking copy button
+  - Two copy options: Rich Formatted Text and Markdown Source
+  - Rich text preserves formatting for pasting into documents
+  - Markdown option copies raw source for editing
+  - Smooth animations and backdrop blur effects
+  - Color-coded notifications (green for rich text, blue for markdown)
+
+### Bug Fixes
+- **Removed Duplicate Title**: Fixed issue where the document title appeared twice at the top
+
+### UI/UX Updates
+- **Copy Modal Design**:
+  - Semi-transparent overlay with blur backdrop
+  - Clear icons for each copy option
+  - Descriptive text explaining each format
+  - Close button and click-outside-to-close functionality
+  - Responsive design for mobile devices
+
+### Technical Improvements
+- Uses document.execCommand for rich text copying
+- Maintains selection range for formatted content
+- Improved notification system with dynamic colors
+- Clean modal state management
+
+---
+
 ## Version 1.2.0 - Planned Features
 
 ### Upcoming Features
