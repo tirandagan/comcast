@@ -66,7 +66,7 @@ Transform Comcast into the industry's first truly intelligent network company wh
 - Industry leadership in responsible AI
 
 **Foundation to Build Upon:**
-- 125M U.S. households reached across cable and streaming
+- [125M U.S. households reached across cable and streaming](https://corporate.comcast.com/stories/introducing-comcast-advertisings-media-solutions#:~:text=More%20than%20ever%2C%20our%20solutions,States%20across%20all%20210%20DMAs)
 - Media segment growth of 5.7% (Q4 2023)
 - Global Media Solutions team spanning U.S., UK, and Europe
 - Sky-ITV-Channel 4 unified ad marketplace (launching 2026)
@@ -102,7 +102,7 @@ Against key competitors:
 ### SWOT Analysis for AI Transformation
 
 **Strengths:**
-- Massive proprietary data assets (125M households, 32M+ subscribers)
+- Massive proprietary data assets ([125M households](https://corporate.comcast.com/stories/introducing-comcast-advertisings-media-solutions#:~:text=More%20than%20ever%2C%20our%20solutions,States%20across%20all%20210%20DMAs), 32M+ subscribers)
 - Existing AI initiatives showing ROI (addressable ads growing 18% YoY)
 - Strong technology partnerships (Broadcom, Nokia, Mastercard, PlaceIQ)
 - Integrated content and distribution (NBCU, Sky, Xfinity)
