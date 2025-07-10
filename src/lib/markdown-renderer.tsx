@@ -76,6 +76,20 @@ import {
 } from '@/components/report/Chapter6Components';
 import { ServicePortfolioChart } from '@/components/report/ServicePortfolioChart';
 import { LeadershipStructure } from '@/components/report/LeadershipStructure';
+import { 
+  Chapter3,
+  DataPlatformArchitecture,
+  DataFlowVisualization,
+  TechnologyStackDiagram
+} from '@/components/chapters/chapter3';
+import {
+  Chapter4,
+  AIPortfolioMatrix,
+  CustomerExperienceAI,
+  NetworkOperationsAI,
+  ContentMediaAI,
+  ROIProjectionDashboard
+} from '@/components/chapters/Chapter4';
 
 const componentMap = {
   MetricCard,
@@ -135,6 +149,16 @@ const componentMap = {
   InnovationLabInfrastructure,
   ServicePortfolioChart,
   LeadershipStructure,
+  Chapter3,
+  DataPlatformArchitecture,
+  DataFlowVisualization,
+  TechnologyStackDiagram,
+  Chapter4,
+  AIPortfolioMatrix,
+  CustomerExperienceAI,
+  NetworkOperationsAI,
+  ContentMediaAI,
+  ROIProjectionDashboard,
 };
 
 export function renderInteractiveMarkdown(content: string) {

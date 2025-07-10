@@ -21,7 +21,13 @@
     "type": "git",
     "url": "git+https://github.com/tirandagan/comcast.git"
   },
-  "keywords": ["comcast", "ai", "data", "leadership", "vision"],
+  "keywords": [
+    "comcast",
+    "ai",
+    "data",
+    "leadership",
+    "vision"
+  ],
   "author": "Tiran Dagan",
   "license": "ISC",
   "bugs": {
@@ -78,6 +84,7 @@
     "react-image-gallery": "^1.4.0",
     "react-markdown": "^10.1.0",
     "react-player": "^3.1.0",
+    "reactflow": "^11.11.4",
     "recharts": "^3.0.2",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^3.4.17",

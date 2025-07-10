@@ -282,43 +282,42 @@ Sutherland's innovation journey requires a fundamental shift from fragmented eff
       }
     }
 
-    // For Competitive Landscape chapter - Chapter 3
-    if (chapter.slug === 'competitive-landscape-ai-innovation-gaps') {
-      const competitiveSection = `
+    // For Strategic Data Platform Architecture chapter - Chapter 3
+    if (chapter.slug === 'strategic-data-platform-architecture' || chapter.slug === 'competitive-landscape-ai-innovation-gaps') {
+      const dataArchitectureSection = `
 
-<CompetitiveLandscapeMap />
-
-<CompetitorIntelligenceDashboard />
-
-<MarketPositioningPlot />
-
-<InnovationGapVisual />
-
-<StrategicGapRadar />
-
-<DevelopmentSpeedComparison />
-
-<CompetitiveAdvantageFramework />
-
-<TriplePlayStrategy />
-
-<SpeedToMarketVisual />
-
-<PartnershipEcosystemVisual />
+<Chapter3 />
 
 `;
-      // Replace the text-heavy competitor analysis sections
-      const competitorStart = content.indexOf('### 1. Teleperformance');
-      const strategyStart = content.indexOf('## The Triple Play');
-      
-      if (competitorStart > -1 && strategyStart > -1) {
-        // Keep intro and conclusion, replace middle with visualizations
-        content = content.slice(0, competitorStart) + competitiveSection + content.slice(strategyStart + 500);
+      // Replace content after introduction with the comprehensive Chapter3 component
+      const insertPoint = content.indexOf('## ');
+      if (insertPoint > -1) {
+        content = content.slice(0, insertPoint) + dataArchitectureSection;
       } else {
-        // Fallback: insert after introduction
-        const insertPoint = content.indexOf('## ');
-        if (insertPoint > -1) {
-          content = content.slice(0, insertPoint) + competitiveSection + content.slice(insertPoint);
+        // If no ## found, replace everything after first paragraph
+        const firstParagraphEnd = content.indexOf('\n\n');
+        if (firstParagraphEnd > -1) {
+          content = content.slice(0, firstParagraphEnd + 2) + dataArchitectureSection;
+        }
+      }
+    }
+
+    // For Chapter 4 - AI Innovation Portfolio & Roadmap
+    if (chapter.slug === 'ai-innovation-portfolio-roadmap') {
+      const aiPortfolioSection = `
+
+<Chapter4 />
+
+`;
+      // Replace content after introduction with the comprehensive Chapter4 component
+      const insertPoint = content.indexOf('## ');
+      if (insertPoint > -1) {
+        content = content.slice(0, insertPoint) + aiPortfolioSection;
+      } else {
+        // If no ## found, replace everything after first paragraph
+        const firstParagraphEnd = content.indexOf('\n\n');
+        if (firstParagraphEnd > -1) {
+          content = content.slice(0, firstParagraphEnd + 2) + aiPortfolioSection;
         }
       }
     }

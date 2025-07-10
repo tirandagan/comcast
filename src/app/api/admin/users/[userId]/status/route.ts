@@ -14,18 +14,27 @@ export async function PATCH(
   try {
     const params = await context.params;
     
-    // Verify authentication
+    // Get token from either Authorization header or cookie
     const authHeader = request.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const cookieToken = request.cookies.get('auth-token')?.value;
+    
+    let token: string | undefined;
+    
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.substring(7);
+    } else if (cookieToken) {
+      token = cookieToken;
+    }
+    
+    if (!token) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
 
-    const token = authHeader.substring(7);
+    // Verify token
     let decoded: any;
-    
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
     } catch (error) {
@@ -35,17 +44,23 @@ export async function PATCH(
       );
     }
 
-    // Verify user is admin
-    const admin = await prisma.user.findUnique({
-      where: { id: decoded.userId },
+    // Verify session exists and user is admin
+    const session = await prisma.session.findFirst({
+      where: {
+        sessionToken: token,
+        expires: { gt: new Date() },
+      },
+      include: { user: true },
     });
 
-    if (!admin || admin.role !== 'ADMIN') {
+    if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json(
         { error: 'Forbidden' },
         { status: 403 }
       );
     }
+
+    const admin = session.user;
 
     // Parse request body
     const body = await request.json();

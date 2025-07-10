@@ -4,16 +4,24 @@ import jwt from 'jsonwebtoken';
 
 export async function GET(request: NextRequest) {
   try {
-    // Verify authentication
+    // Get token from either Authorization header or cookie
     const authHeader = request.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const cookieToken = request.cookies.get('auth-token')?.value;
+    
+    let token: string | undefined;
+    
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.substring(7);
+    } else if (cookieToken) {
+      token = cookieToken;
+    }
+    
+    if (!token) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
       );
     }
-
-    const token = authHeader.substring(7);
     let decoded: any;
     
     try {
@@ -25,7 +33,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Verify user is admin
+    // Verify user exists and is admin
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
     });
@@ -34,6 +42,23 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         { error: 'Forbidden' },
         { status: 403 }
+      );
+    }
+    
+    // Optionally verify session exists
+    const session = await prisma.session.findFirst({
+      where: {
+        userId: decoded.userId,
+        expires: {
+          gt: new Date(),
+        },
+      },
+    });
+    
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Session expired' },
+        { status: 401 }
       );
     }
 

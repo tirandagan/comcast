@@ -9,26 +9,45 @@ export async function DELETE(
   try {
     const { userId } = await params;
     
-    // Verify admin authentication
+    // Get token from either Authorization header or cookie
     const authHeader = request.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    const cookieToken = request.cookies.get('auth-token')?.value;
+    
+    let token: string | undefined;
+    
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      token = authHeader.substring(7);
+    } else if (cookieToken) {
+      token = cookieToken;
+    }
+    
+    if (!token) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const token = authHeader.substring(7);
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key') as any;
-    
-    // Check if user is admin
-    const adminUser = await prisma.user.findUnique({
-      where: { id: decoded.userId },
+    // Verify token
+    let decoded: any;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    } catch (error) {
+      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+    }
+
+    // Verify session exists and user is admin
+    const session = await prisma.session.findFirst({
+      where: {
+        sessionToken: token,
+        expires: { gt: new Date() },
+      },
+      include: { user: true },
     });
 
-    if (!adminUser || adminUser.role !== 'ADMIN') {
+    if (!session || session.user.role !== 'ADMIN') {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     // Prevent admin from deleting themselves
-    if (userId === decoded.userId) {
+    if (userId === session.user.id) {
       return NextResponse.json(
         { error: 'Cannot delete your own account' },
         { status: 400 }
