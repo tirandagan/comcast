@@ -41,6 +41,8 @@ services:
         value: false
       - key: ENABLE_ANALYTICS
         value: false
+      - key: NEXT_PUBLIC_IGNORE_DNT
+        value: false
 
 # If you want to use PostgreSQL instead of SQLite (recommended for production)
 # databases:

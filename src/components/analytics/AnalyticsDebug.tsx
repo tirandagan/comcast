@@ -20,11 +20,16 @@ export function AnalyticsDebug() {
 
     setDebugInfo(info);
 
-    // Test tracking
-    console.log('Analytics Debug Info:', info);
+    // Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Analytics Debug Info:', info);
+    }
     
-    // Try to track a test event
-    if (info.mixpanelInitialized) {
+    // Try to track a test event (only if DNT is not enabled)
+    const dnt = navigator.doNotTrack || (window as any).doNotTrack || (navigator as any).msDoNotTrack;
+    const isDNTEnabled = dnt === '1' || dnt === 'yes' || dnt === true;
+    
+    if (info.mixpanelInitialized && !isDNTEnabled) {
       try {
         mixpanel.track('Analytics Debug Test', {
           debug: true,

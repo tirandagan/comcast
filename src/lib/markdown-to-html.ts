@@ -3,7 +3,6 @@ import path from 'path';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
-import remarkToc from 'remark-toc';
 
 export async function convertMarkdownToHtml(
   markdownPath: string,
@@ -17,11 +16,6 @@ export async function convertMarkdownToHtml(
     // Process markdown to HTML
     const result = await remark()
       .use(remarkGfm) // Support GitHub Flavored Markdown
-      .use(remarkToc, { 
-        heading: 'Table of Contents',
-        maxDepth: tocDepth,
-        tight: true 
-      })
       .use(remarkHtml, { sanitize: false })
       .process(markdown);
     
