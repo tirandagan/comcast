@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import { readFile } from 'fs/promises';
 import path from 'path';
+import { initializeSecureFiles } from '@/lib/init-secure-files';
 
 export async function GET(request: NextRequest) {
   try {
@@ -61,6 +62,9 @@ export async function GET(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Ensure secure files exist (for production deployments)
+    await initializeSecureFiles();
 
     // Read the file from a secure location (not public)
     const fileName = `comcast_ai_report.${fileType}`;
