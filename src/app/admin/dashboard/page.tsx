@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { LogOut, Users, CheckCircle, XCircle, Clock, Book, Ban, Trash2, ShieldOff, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+import { UserAwareAnalytics } from '@/components/analytics/UserAwareAnalytics';
 
 interface User {
   id: string;
@@ -433,6 +434,9 @@ export default function AdminDashboard() {
           </table>
         </div>
       </div>
+      
+      {/* User Analytics Identification */}
+      <UserAwareAnalytics />
     </div>
   );
 }

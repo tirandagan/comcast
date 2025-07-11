@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { reportChapters } from '@/lib/report-data';
 import { AboutModal } from '@/components/AboutModal';
+import { UserAwareAnalytics } from '@/components/analytics/UserAwareAnalytics';
 
 export default function ReportLayout({
   children,
@@ -225,6 +226,9 @@ export default function ReportLayout({
       
       {/* About Modal */}
       <AboutModal isOpen={aboutModalOpen} onClose={() => setAboutModalOpen(false)} />
+      
+      {/* User Analytics Identification */}
+      <UserAwareAnalytics />
     </div>
   );
 }
