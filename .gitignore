@@ -3,9 +3,6 @@ node_modules/
 .pnp
 .pnp.js
 
-# Secure content - do not commit
-src/content/secure/
-
 # Testing
 coverage/
 .nyc_output
