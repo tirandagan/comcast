@@ -40,6 +40,7 @@ export function UserAwareAnalytics() {
               user_email: user.email,
               user_name: user.name,
               user_role: user.role,
+              site_name: 'Comcast',
             });
             
             setIsIdentified(true);

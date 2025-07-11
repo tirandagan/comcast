@@ -53,6 +53,11 @@ export function AnalyticsProvider({ children, userId, userEmail }: AnalyticsProv
       // Set ignore_dnt to true to suppress warnings, but we'll still respect DNT
       ignore_dnt: true,
     });
+    
+    // Set site_name as a super property for all events
+    mixpanel.register({
+      site_name: 'Comcast',
+    });
 
     // If DNT is enabled and we're not ignoring it, disable tracking
     if (shouldRespectDNT) {
